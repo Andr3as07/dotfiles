@@ -34,3 +34,5 @@ export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
 export WGETRC="$XDG_CONFIG_HOME"/wgetrc
 alias wget="wget --hsts-file=\"$XDG_CACHE_HOME/wget-hsts\""
 
+# Start gui on tty1 if not already running.
+[ "$(tty)" = "/dev/tty1" ] && ! ps -e | prep -qw Xorg && exec startx
