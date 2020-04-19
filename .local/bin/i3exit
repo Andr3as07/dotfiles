@@ -1,0 +1,33 @@
+#!/bin/sh
+lock() {
+  i3lock
+}
+
+case "$1" in
+    lock)
+	i3lock -i ~/.config/i3exit/lock.png
+	;;
+    logout)
+	i3-msg exit
+	;;
+    suspend)
+	i3exit lock && systemctrl suspend
+	;;
+    hibernate)
+	i3exit lock && systemctrl hibernate
+	;;
+    reboot)
+	#systemctrl reboot
+	reboot
+	;;
+    shutdown)
+	#systemctrl poweroff
+	shutdown now
+	;;
+    *)
+	echo "Usage: $0 {lock|logout|suspend|hibernate|reboot|shutdown}"
+	exit 2
+esac
+
+exit 0
+	      

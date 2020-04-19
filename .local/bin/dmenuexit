@@ -1,0 +1,16 @@
+#!/bin/sh
+
+bg="#d64937"
+bar="#2d2d2d"
+text="#dedede"
+
+#str="lock\nlogout\nsuspend\nhibernate\nreboot\nshutdown"
+str="lock\nlogout\nreboot\nshutdown"
+
+choice=$(echo $str | dmenu -nb $bar -sb $bg -nf $text -sf $text)
+
+if [ "$choice" = "" ]; then
+  exit 1
+else
+  i3exit $choice
+fi

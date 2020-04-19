@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Gives a dmenu prompt to search DuckDuckGo.
+# Without input, will open DuckDuckGo.com.
+# URLs will be directly handed to the browser
+# Anything else, it searches it.
+
+browser="sensible-browser"
+
+choice=$(echo "Duck?" | dmenu -i -p "Search DuckDuckGo")
+
+if [ "$choice" = "Duck?" ]; then
+    $browser "https://duckduckgo.com"
+else
+    if [[ "$choice" =~ ^(http:\/\/|https:\/\/)?[a-zA-Z]+(/)?.*$ ]]; then
+	$browser "$choice"
+    else
+	if [[ "$choice" =~ "" ]]; then
+	    $browser "https://duckduckgo.com/?q=$choice"
+	fi
+    fi
+fi

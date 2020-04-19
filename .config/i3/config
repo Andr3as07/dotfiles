@@ -1,0 +1,153 @@
+# Required Packages
+# ranger, htop, dmenu
+
+# =================================================================
+# Colors
+# =================================================================
+
+set $bg			#d64937
+set $bg-inactive	#333333
+set $bg-urgent		#383a3b
+set $text		#dedede
+set $text-inactive	#dedede
+set $text-urgent	#ee0000
+
+set $bar		#2d2d2d
+set $separator		#424242
+set $statusline		#dedede
+
+#			border		background	text		indicator
+client.focused		$bg		$bg		$text		$bar
+client.unfocused	$bg-inactive	$bg-inactive	$text-inactive	$bar
+client.focused_inactive	$bg-inactive	$bg-inactive	$text-inactive	$bar
+client.urgent		$bg-urgent	$bg-urgent	$text-urgent	$bar
+
+# =================================================================
+# Applications
+# =================================================================
+
+set $term i3-sensible-terminal
+set $files i3-sensible-terminal -e ranger
+set $top i3-sensible-terminal -e htop
+set $editor sensible-editor
+
+# Set Mod-Key to the 'Super' key.
+set $mod Mod4
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:monospace 8
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# =================================================================
+# Keybinds
+# =================================================================
+
+# i3wm commands
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# quit session
+bindsym $mod+Escape exec dmenuexit
+
+# start a terminal
+bindsym $mod+Return exec $term
+
+# kill focused window
+bindsym $mod+q kill
+
+# dmenu
+bindsym $mod+d exec i3-dmenu-desktop --dmenu="dmenu -nb '$bar' -sb '$bg' -nf '$text' -sf '$text'"
+
+# change focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+bindsym $mod+Prior focus parent
+bindsym $mod+Next focus child
+
+# move focused window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# resize focused window
+bindsym $mod+Ctrl+Left resize shrink width 10 px or 10 ppt
+bindsym $mod+Ctrl+Down resize grow height 10 px or 10 ppt
+bindsym $mod+Ctrl+Up resize shrink height 10 px or 10 ppt
+bindsym $mod+Ctrl+Right resize grow width 10 px or 10 ppt
+
+# split in horizontal orientation
+bindsym $mod+h split h
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+  status_command i3status
+  position top
+  binding_mode_indicator yes
+
+  # auto hide
+  #mode hide
+  #hidden_state hide
+  #modifier $mod
+
+  colors {
+    background		$bar
+    separator		$separator
+    statusline		$statusline
+    active_workspace	$bg		$bg		$text
+    focused_workspace	$bg-urgent	$bg		$text
+    inactive_workspace	$separator	$separator	$text
+    urgent_workspace	$bg-urgent	$bg-urgent	$text-urgent
+  }
+}
+
+# set keyboard layout to german
+exec setxkeymap de

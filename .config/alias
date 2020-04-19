@@ -1,0 +1,75 @@
+# Created by Andr3as07 <andr3as06@gmail.com>
+
+# =================================================================
+# Alias
+# =================================================================
+
+# ls
+alias ls="ls -T 0 --color=auto"
+alias ll="ls -AhlF"
+alias lv="ls -lhF"
+alias lh="ls -lAhFd .[^.]*"
+
+# ps
+alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
+
+# python
+alias py="python3"
+
+# grep
+alias grep="grep --color=auto"
+alias fgrep="fgrep --color=auto"
+alias egrep="egrep --color=auto"
+
+# make
+alias m="make"
+alias mr="make run"
+alias mc="make clean"
+alias mb="make build"
+alias md="make debug"
+alias mp="make production"
+alias mi="make install"
+
+# title
+title() { printf "\033]0;$*\007"; }
+
+# cd
+alias cd..="cd .."
+alias -- ..="cd .."
+
+# mkdir
+alias mkdir="mkdir -pv"
+alias mkcd="foo() { mkdir -p "$1"; cd "$1" }: foo"
+
+# mv
+alias mv="mv -iv"
+
+# chmod & chown
+alias chmod="chmod -c"
+alias -- +r="chmod -c +r"
+alias -- -r="chmod -c -r"
+alias -- +x="chmod -c +x"
+alias -- -x="chmod -c -x"
+
+alias chown="chown -c"
+
+# pstree
+alias pstree="pstree -A"
+
+# jobs
+alias j="jobs -l"
+
+# find
+function f { find $1 -name '*'$2'*' | sort; }
+function fh { find . -name '*'$1'*' | sort; }
+
+# get ip address
+alias myip="curl https://ipecho.net/plain; echo"
+
+# wget
+alias wget="wget -c"
+
+# Dotfile management
+# credit: DistroTube [https://youtube.com/watch?v=tBoLDpTWVOM]
+alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
+config config --local status.showUntrackedFiles no
