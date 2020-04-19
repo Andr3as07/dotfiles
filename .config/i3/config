@@ -30,22 +30,28 @@ set $term i3-sensible-terminal
 set $files i3-sensible-terminal -e ranger
 set $top i3-sensible-terminal -e htop
 set $editor sensible-editor
+set $browser firefox
 
-# Set Mod-Key to the 'Super' key.
-set $mod Mod4
+# =================================================================
+# Font
+# =================================================================
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 font pango:monospace 8
 
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
-
 # =================================================================
 # Keybinds
 # =================================================================
 
+# Set Mod-Key to the 'Super' key.
+set $mod Mod4
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
 # i3wm commands
+bindsym $mod+i exec i3-input
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
@@ -53,14 +59,18 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 # quit session
 bindsym $mod+Escape exec dmenuexit
 
-# start a terminal
-bindsym $mod+Return exec $term
-
 # kill focused window
 bindsym $mod+q kill
 
 # dmenu
 bindsym $mod+d exec i3-dmenu-desktop --dmenu="dmenu -nb '$bar' -sb '$bg' -nf '$text' -sf '$text'"
+
+# quick access
+bindsym $mod+Return exec $term
+bindsym $mod+t exec $top
+bindsym $mod+f exec $files
+bindsym $mod+b exec $browser
+bindsym $mod+e exec $editor
 
 # change focus
 bindsym $mod+Left focus left
@@ -89,12 +99,12 @@ bindsym $mod+h split h
 bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $mod+Ctrl+space fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+a layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -126,6 +136,15 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
+# Move container to output
+bindsym $mod+y move container to output left
+bindsym $mod+x move container to output right
+
+# Move workspace to output
+bindsym $mod+Shift+y move workspace to output left
+bindsym $mod+Shift+x move workspace to output right
+
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
@@ -148,6 +167,3 @@ bar {
     urgent_workspace	$bg-urgent	$bg-urgent	$text-urgent
   }
 }
-
-# set keyboard layout to german
-exec setxkeymap de
