@@ -72,4 +72,3 @@ alias wget="wget -c"
 # Dotfile management
 # credit: DistroTube [https://youtube.com/watch?v=tBoLDpTWVOM]
 alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
-config config --local status.showUntrackedFiles no
