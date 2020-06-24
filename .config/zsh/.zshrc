@@ -7,7 +7,7 @@ export TERM=xterm-256color
 autoload -U colors && colors
 
 # Prompt
-export PROMPT="%F{cyan}%n%F{white}@%F{yellow}%m%f:%~ # "
+source $XDG_CONFIG_HOME/zsh/prompt
 
 # Alias
 source $XDG_CONFIG_HOME/alias
