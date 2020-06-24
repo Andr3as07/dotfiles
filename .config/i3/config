@@ -30,7 +30,7 @@ set $term i3-sensible-terminal
 set $files i3-sensible-terminal -e ranger
 set $top i3-sensible-terminal -e htop
 set $editor sensible-editor
-set $browser firefox
+set $browser sensible-browser
 
 # =================================================================
 # Font
@@ -63,6 +63,7 @@ bindsym $mod+Escape exec dmenuexit
 bindsym $mod+q kill
 
 # dmenu
+bindsym $mod+Shift+d exec dmenu_run -nb '$bar' -sb '$bg' -nf '$text' -sf '$text'
 bindsym $mod+d exec i3-dmenu-desktop --dmenu="dmenu -nb '$bar' -sb '$bg' -nf '$text' -sf '$text'"
 
 # quick access
@@ -144,6 +145,9 @@ bindsym $mod+x move container to output right
 bindsym $mod+Shift+y move workspace to output left
 bindsym $mod+Shift+x move workspace to output right
 
+# Function buttons
+bindsym $mod+F1 exec $term -e "cat ${XDG_DATA_HOME:-$HOME/.local/share}/andr3as07-dotfiles/readme.md | less"
+bindsym $mod+F2 exec ducksearch
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
