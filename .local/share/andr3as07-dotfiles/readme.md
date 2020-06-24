@@ -18,9 +18,9 @@
 | Mod+F			| Files		|
 
 ## Window Management
-| Keymap		| Action	|
-|-----------------------|--------------:|
-| Mod+Q			| Close Window	|
+| Keymap		| Action                 |
+|-----------------------|-----------------------:|
+| Mod+Q			| Close Window           |
 
 ## Focus
 | Keymap		| Action			|

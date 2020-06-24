@@ -5,14 +5,18 @@
 # URLs will be directly handed to the browser
 # Anything else, it searches it.
 
+bg="#d64937"
+bar="#2d2d2d"
+text="#dedede"
+
 browser="sensible-browser"
 
-choice=$(echo "Duck?" | dmenu -i -p "Search DuckDuckGo")
+choice=$(echo "Duck?" | dmenu -i -p "Search DuckDuckGo"  -nb $bar -sb $bg -nf $text -sf $text)
 
 if [ "$choice" = "Duck?" ]; then
     $browser "https://duckduckgo.com"
 else
-    if [[ "$choice" =~ ^(http:\/\/|https:\/\/)?[a-zA-Z]+(/)?.*$ ]]; then
+    if [[ "$choice" =~ ^(http:\/\/|https:\/\/)?[a-zA-Z0-9]+\.[a-zA-Z]+(/)?.*$ ]]; then
 	$browser "$choice"
     else
 	if [[ "$choice" =~ "" ]]; then
