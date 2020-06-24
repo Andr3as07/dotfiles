@@ -1,0 +1,36 @@
+#!/bin/bash
+#     _              _     _____            ___ ______
+#    / \   _ __   __| |_ _|___ /  __ _ ___ / _ \  ___/
+#   / _ \ | '_ \ / _` | '__||_ \ / _` / __/ | | \ \   
+#  / ___ \| | | | (_| | |  ___) | (_| \__ \ |_| |\ \  
+# /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\ 
+# https://github.com/Andr3as07
+#
+# A dmenu based launcher for ssh connections
+
+cache_path=~/.cache/ssh-connect.history
+term="i3-sensible-terminal"
+
+entries=""
+
+if [[ -f $cache_path ]]; then
+   entries=`cat $cache_path`
+   choice=$(echo "$entries" | dmenu -p "ssh connect")
+else
+   choice=$(echo "No recent connections" | dmenu -p "ssh connect")
+fi
+
+if [[ $choice = "No recent connections" ]]; then
+   exit 1
+fi
+
+if [[ ! $choice = "" ]]; then
+   if [[ ! $entries = *$choice* ]]; then
+      echo "$choice" >> $cache_path
+   fi
+
+   $term -e "ssh $choice"
+
+   # TODO: Find a way to get the status code of the ssh connection
+   # and only store the connection if it was a success.
+fi

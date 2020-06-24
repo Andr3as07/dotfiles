@@ -87,3 +87,11 @@
 | Mod+Shift+r		| Reload i3			|
 | Mod+Shift+e		| Exit i3			|
 | Mod+Esc		| Lock/Logout/Shutdown/Reboot	|
+
+## Action Keys
+| Keymap		| Action			|
+|-----------------------|------------------------------:|
+| Mod+F1		| Open this help document	|
+| Mod+F2		| Search DuckDuckGo		|
+| Mod+F3		| Search Manpages		|
+| Mod+F4		| Connect via ssh		|
