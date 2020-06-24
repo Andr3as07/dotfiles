@@ -1,0 +1,37 @@
+#!/bin/bash
+#     _              _     _____            ___ ______
+#    / \   _ __   __| |_ _|___ /  __ _ ___ / _ \  ___/
+#   / _ \ | '_ \ / _` | '__||_ \ / _` / __/ | | \ \   
+#  / ___ \| | | | (_| | |  ___) | (_| \__ \ |_| |\ \  
+# /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\ 
+# https://github.com/Andr3as07
+# 
+# Dmenu script for searching through manpages.
+# Also allows picking a manpage at random.
+
+bg="#d64937"
+bar="#2d2d2d"
+text="#dedede"
+
+term="i3-sensible-terminal"
+
+declare options=("Random
+Search
+Quit")
+
+choice=$(echo "${options[@]}" | dmenu -i -p 'Manpages: ' -nb $bar -sb $bg -nf $text -sf $text)
+
+case "$choice" in
+     Quit)
+	echo "Program terminated." && exit 1
+     ;;
+     Random)
+	apropos . | awk '{print $1}' | shuf | head -1 | xargs $term -e man
+     ;;
+     Search)
+	apropos . | awk '{print $1}' | dmenu -i -p 'Search Manpages: ' -nb $bar -sb $bg -nf $text -sf $text | xargs $term -e man
+     ;;
+     "")
+     ;;
+     *) echo $choice | xargs $term -e man;;
+esac
