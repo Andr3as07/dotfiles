@@ -1,7 +1,6 @@
 #!/bin/sh
-lock() {
-  i3lock
-}
+
+THIS=${0##*/}
 
 case "$1" in
     lock)
@@ -25,7 +24,7 @@ case "$1" in
 	shutdown now
 	;;
     *)
-	echo "Usage: $0 {lock|logout|suspend|hibernate|reboot|shutdown}"
+	echo "Usage: $THIS {lock|logout|suspend|hibernate|reboot|shutdown}"
 	exit 2
 esac
 
