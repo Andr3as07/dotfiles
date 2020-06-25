@@ -7,12 +7,16 @@
 # https://github.com/Andr3as07
 #
 # A very simple wrapper around systemctrl and i3lock for shutting down / rebooting / locking the system
+#
+# Requires: feh, systemctrl
 
 THIS=${0##*/}
 
+background=$HOME/.cache/current-wallpaper.blur.png
+
 case "$1" in
     lock)
-	i3lock -i ~/.config/i3exit/lock.png
+	i3lock -i $background -e
 	;;
     logout)
 	i3-msg exit

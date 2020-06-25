@@ -203,3 +203,10 @@ bar {
     urgent_workspace	$bg-urgent	$bg-urgent	$text-urgent
   }
 }
+
+# =================================================================
+# Startup
+# =================================================================
+
+# Wallpaper
+exec --no-startup-id i3wp
