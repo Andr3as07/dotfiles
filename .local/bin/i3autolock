@@ -1,0 +1,3 @@
+#!/bin/sh
+
+xautolock -detectsleep -time 10 -locker "i3exit lock"

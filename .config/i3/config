@@ -210,3 +210,6 @@ bar {
 
 # Wallpaper
 exec --no-startup-id i3wp
+
+# Autolock screen
+exec --no-startup-id i3autolock

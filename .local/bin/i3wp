@@ -42,7 +42,7 @@ convert -resize "$size" "${dir}/${RandomFile}" "$cachepath"
 convert "$cachepath" "$cachepath.png"
 
 # Create blur version
-convert -blur 0x8 "$cachepath.png" "$cachepath.blur.png"
+convert -blur 0x20 "$cachepath.png" "$cachepath.blur.png"
 
 # Write wallpaper info file
 echo "${dir}/${RandomFile}" > "$cachepath.info"
@@ -52,6 +52,6 @@ feh --bg-fill "$cachepath"
 }
 
 while true; do
-    sleep $interval
     SetBG
+    sleep $interval
 done
