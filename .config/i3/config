@@ -41,6 +41,35 @@ set $browser sensible-browser
 font pango:monospace 8
 
 # =================================================================
+# Workspace behaviour
+# =================================================================
+
+workspace_auto_back_and_forth yes
+focus_on_window_activation urgent
+show_marks yes
+
+# =================================================================
+# Window behaviour
+# =================================================================
+
+# Window style
+new_window pixel 2
+new_float pixel 2
+#default_border pixel 2
+#default_floating_border normal 2
+#default_orientation auto
+
+# Gaps
+#gaps outer 0
+#gaps inner 20
+
+# Assign floating windows
+for_window [window_role="^conversation$"] floating enable
+for_window [window_role="messages"] floating enable
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+
+# =================================================================
 # Keybinds
 # =================================================================
 
@@ -155,6 +184,7 @@ bindsym $mod+F4 exec dmenussh
 # finds out, if available)
 bar {
   status_command i3status
+  #status_command i3blocks
   position top
   binding_mode_indicator yes
 
