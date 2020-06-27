@@ -26,7 +26,7 @@ export XDG_DATA_HOME=$HOME/.local/share
 
 export WAKATIME_HOME="$XDG_CONFIG_HOME/wakatime"
 export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
-export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
+#export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export HISTFILE="$XDG_DATA_HOME"/sh/history
