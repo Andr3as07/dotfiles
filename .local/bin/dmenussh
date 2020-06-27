@@ -15,9 +15,9 @@ entries=""
 
 if [[ -f $cache_path ]]; then
    entries=`cat $cache_path`
-   choice=$(echo "$entries" | dmenu -p "ssh connect")
+   choice=$(echo "$entries" | dmenushow -p "ssh connect")
 else
-   choice=$(echo "No recent connections" | dmenu -p "ssh connect")
+   choice=$(echo "No recent connections" | dmenushow -p "ssh connect")
 fi
 
 if [[ $choice = "No recent connections" ]]; then

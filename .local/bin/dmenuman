@@ -9,17 +9,13 @@
 # Dmenu script for searching through manpages.
 # Also allows picking a manpage at random.
 
-bg="#d64937"
-bar="#2d2d2d"
-text="#dedede"
-
 term="i3-sensible-terminal"
 
 declare options=("Random
 Search
 Quit")
 
-choice=$(echo "${options[@]}" | dmenu -i -p 'Manpages: ' -nb $bar -sb $bg -nf $text -sf $text)
+choice=$(echo "${options[@]}" | dmenushow -i -p 'Manpages: ')
 
 case "$choice" in
      Quit)

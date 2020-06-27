@@ -8,17 +8,17 @@
 #
 # Provides a dmenu wrapper for the i3exit script
 
-bg="#d64937"
-bar="#2d2d2d"
-text="#dedede"
-
 #str="lock\nlogout\nsuspend\nhibernate\nreboot\nshutdown"
 str="lock\nlogout\nreboot\nshutdown"
 
-choice=$(echo $str | dmenu -nb $bar -sb $bg -nf $text -sf $text)
+choice=$(echo $str | dmenushow -i)
 
 if [ "$choice" = "" ]; then
-  exit 1
+    exit 1
 else
-  i3exit $choice
+    if [ "$choice" = "shutdown" ] || [ "$choice" = "reboot" ]; then
+	dmenuprompt "Are you shure you want to do this?" "i3exit $choice"
+    else
+	i3exit $choice
+    fi
 fi

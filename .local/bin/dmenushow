@@ -1,0 +1,22 @@
+#!/bin/bash
+#     _              _     _____            ___ ______
+#    / \   _ __   __| |_ _|___ /  __ _ ___ / _ \  ___/
+#   / _ \ | '_ \ / _` | '__||_ \ / _` / __/ | | \ \   
+#  / ___ \| | | | (_| | |  ___) | (_| \__ \ |_| |\ \  
+# /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\ 
+# https://github.com/Andr3as07
+#
+# Displays dmenu as normal but with all colors set.
+
+bg="#d64937"
+bar="#2d2d2d"
+text="#dedede"
+
+# Gets std input
+if [[ -p /proc/self/fd/0 ]]; then
+    PIPE=$(cat -)
+else
+    exit 1
+fi
+
+echo "$PIPE" | dmenu "$@" -nb $bar -sb $bg -nf $text -sf $text

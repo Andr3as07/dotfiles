@@ -17,7 +17,7 @@ text="#dedede"
 
 browser="sensible-browser"
 
-choice=$(echo "Duck?" | dmenu -i -p "Search DuckDuckGo"  -nb $bar -sb $bg -nf $text -sf $text)
+choice=$(echo "Duck?" | dmenushow -p "Search DuckDuckGo")
 
 if [ "$choice" = "Duck?" ]; then
     $browser "https://duckduckgo.com"
