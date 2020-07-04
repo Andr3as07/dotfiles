@@ -1,0 +1,38 @@
+#!/bin/bash
+#     _              _     _____            ___ ______
+#    / \   _ __   __| |_ _|___ /  __ _ ___ / _ \  ___/
+#   / _ \ | '_ \ / _` | '__||_ \ / _` / __/ | | \ \   
+#  / ___ \| | | | (_| | |  ___) | (_| \__ \ |_| |\ \  
+# /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\ 
+# https://github.com/Andr3as07
+#
+# This block displays the ethernet and wifi status
+#
+# Requires: emoji support
+
+# CONFIG
+
+symbol_wifi_up="📶"
+symbol_wifi_down="📡"
+symbol_eth_up="🌐"
+symbol_eth_down="❎"
+
+# END CONFIG
+
+case $BLOCK_BUTTON in
+    # 1) ;; # Left click
+    3) notify-send "Internet module" "$symbol_wifi_down: no wifi connection
+$symbol_wifi_up: wifi connection with quality
+$symbol_eth_down: no ethernet
+$symbol_eth_up: ethernet working" ;; # Right click
+    2) $EDITOR "$0" ;; # Middle click
+esac
+
+case "$(cat /sys/class/net/w*/operstate 2>/dev/null)" in
+	down) wifiicon="$symbol_wifi_down " ;;
+	up) wifiicon="$symbol_wifi_up $(awk '/^\s*w/ { print int($3 * 100 / 70) "%" }' /proc/net/wireless)" ;;
+esac
+
+eth=$(sed "s/down/$symbol_eth_down/;s/up/$symbol_eth_up/" /sys/class/net/e*/operstate 2>/dev/null)
+
+echo "$wifiicon" "$eth"

@@ -1,0 +1,52 @@
+#!/bin/bash
+#     _              _     _____            ___ ______
+#    / \   _ __   __| |_ _|___ /  __ _ ___ / _ \  ___/
+#   / _ \ | '_ \ / _` | '__||_ \ / _` / __/ | | \ \   
+#  / ___ \| | | | (_| | |  ___) | (_| \__ \ |_| |\ \  
+# /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\ 
+# https://github.com/Andr3as07
+#
+# This block displays current master vaolume
+#
+# Requires: emoji support, amixer, alsamixer
+
+# CONFIG
+
+symbol_vol_max="🔊"
+symbol_vol_min="🔈"
+symbol_vol="🔉"
+symbol_mute="🔇"
+
+threshold_max="90"
+threshold_min="50"
+
+# END CONFIG
+
+# Handle mouse clicks
+case $BLOCK_BUTTON in
+    1) i3-sensible-terminal -e alsamixer;; # Left click
+    3) notify-send "Volume module" "\- Shows volume $symbol_vol, $symbol_mute if muted.
+- Left click to open mixer." ;; # Right click
+    2) $EDITOR "$0" ;; # Middle click
+esac
+
+mute=$(amixer -c 0 get Master | grep "Mono:" | awk '{print $6}')
+if [ "$mute" = "[on]" ]; then
+    vol=$(amixer -c 0 get Master | grep "Mono:" | awk '{print $4}')
+    vol=${vol:1:-2}
+
+    symbol=$symbol_vol
+    if [ "$vol" -lt "$threshold_min" ]; then
+	symbol=$symbol_vol_min
+    elif [ "$vol" -gt "$threshold_max" ]; then
+	symbol=$symbol_vol_max
+    fi
+
+    echo $symbol $vol%
+    echo ""
+    echo ""
+else
+    echo "$symbol_mute"
+    echo ""
+    echo "#FFFF00"
+fi
