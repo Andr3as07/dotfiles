@@ -11,10 +11,6 @@
 # URLs will be directly handed to the browser
 # Anything else, it searches it.
 
-bg="#d64937"
-bar="#2d2d2d"
-text="#dedede"
-
 browser="sensible-browser"
 
 choice=$(echo "Duck?" | dmenushow -p "Search DuckDuckGo")

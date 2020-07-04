@@ -11,11 +11,11 @@
 
 term="i3-sensible-terminal"
 
-declare options=("Random
+options="Random
 Search
-Quit")
+Quit"
 
-choice=$(echo "${options[@]}" | dmenushow -i -p 'Manpages: ')
+choice=$(echo "$options" | dmenushow -i -p 'Manpages')
 
 case "$choice" in
      Quit)
@@ -25,7 +25,7 @@ case "$choice" in
 	apropos . | awk '{print $1}' | shuf | head -1 | xargs $term -e man
      ;;
      Search)
-	apropos . | awk '{print $1}' | dmenu -i -p 'Search Manpages: ' -nb $bar -sb $bg -nf $text -sf $text | xargs $term -e man
+	apropos . | awk '{print $1}' | dmenushow -i -p 'Search Manpages' | xargs $term -e man
      ;;
      "")
      ;;

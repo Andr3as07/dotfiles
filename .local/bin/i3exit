@@ -9,13 +9,25 @@
 # A very simple wrapper around systemctrl and i3lock for shutting down / rebooting / locking the system
 #
 # Requires: feh, systemctrl
+# Optional: scrot, imagemagic
 
 THIS=${0##*/}
 
-background=$HOME/.cache/current-wallpaper.blur.png
+background_fallback=$HOME/.cache/current-wallpaper.blur.png
+background_cache_location=$HOME/.cache/lock-background
 
 case "$1" in
     lock)
+	background=$background_fallback
+	if command -v scrot > /dev/null; then
+	    scrot -o "$background_cache_location.jpg"
+	 
+	    # Create blur version
+	    convert -blur 0x20 "$background_cache_location.jpg" "$background_cache_location.blur.png"
+
+	    background="$background_cache_location.blur.png"
+	fi
+	
 	i3lock -i $background -e
 	;;
     logout)
