@@ -179,6 +179,7 @@ bindsym $mod+F1 exec $term -e "cat ${XDG_DATA_HOME:-$HOME/.local/share}/andr3as0
 bindsym $mod+F2 exec ducksearch
 bindsym $mod+F3 exec dmenuman
 bindsym $mod+F4 exec dmenussh
+bindsym $mod+F5 exec passmenu -n -m -i -p "Password Menu" -l 10
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)

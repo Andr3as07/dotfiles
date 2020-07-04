@@ -24,6 +24,7 @@ export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
 
+export PASSWORD_STORE_DIR="${XDG_DATA_HOME:-$HOME/.local/share}"/pass
 export WAKATIME_HOME="$XDG_CONFIG_HOME/wakatime"
 export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
 #export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
@@ -38,3 +39,7 @@ alias wget="wget --hsts-file=\"$XDG_CACHE_HOME/wget-hsts\""
 
 # Start gui on tty1 if not already running.
 [ "$(tty)" = "/dev/tty1" ] && ! ps -e | prep -qw Xorg && exec startx
+
+# Setup askpass
+export SUDO_ASKPASS=$HOME/.local/bin/dmenupass
+export GPG_TTY=$(tty)
