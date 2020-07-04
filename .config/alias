@@ -69,6 +69,21 @@ alias myip="curl https://ipecho.net/plain; echo"
 # wget
 alias wget="wget -c"
 
+# Auto Tex
+function autotex() {
+  while inotifywait -e close_write $1; do pdflatex $1; done
+}
+
 # Dotfile management
 # credit: DistroTube [https://youtube.com/watch?v=tBoLDpTWVOM]
 alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
+
+# Window swallowing
+if command -v devour > /dev/null; then
+   alias mpv="devour mpv"
+   alias vlc="devour vlc"
+   alias emacs="devour emacs"
+   alias sxiv="devour sxiv"
+   alias feh="devour feh"
+   alias zathura="devour zathura"
+fi
