@@ -23,4 +23,4 @@ source $XDG_CONFIG_HOME/sh/alias
 source $XDG_CONFIG_HOME/sh/color
 
 # Display colorscript
-colorscript.sh -r
+#colorscript.sh -r
