@@ -17,10 +17,10 @@ set $separator		#424242
 set $statusline		#dedede
 
 #			border		background	text		indicator
-client.focused		$bg		$bg		$text		$bar
-client.unfocused	$bg-inactive	$bg-inactive	$text-inactive	$bar
-client.focused_inactive	$bg-inactive	$bg-inactive	$text-inactive	$bar
-client.urgent		$bg-urgent	$bg-urgent	$text-urgent	$bar
+client.focused		$bg		$bg		$text		$bg
+client.unfocused	$bg-inactive	$bg-inactive	$text-inactive	$bg-inactive
+client.focused_inactive	$bg-inactive	$bg-inactive	$text-inactive	$bg-inactive
+client.urgent		$bg-urgent	$bg-urgent	$text-urgent	$bg-urgent
 
 # =================================================================
 # Applications
@@ -53,15 +53,15 @@ show_marks yes
 # =================================================================
 
 # Window style
-new_window pixel 2
-new_float pixel 2
-#default_border pixel 2
-#default_floating_border normal 2
-#default_orientation auto
+#new_window pixel 2
+#new_float pixel 2
+default_border pixel 2
+default_floating_border normal 2
+default_orientation auto
 
 # Gaps
-#gaps outer 0
-#gaps inner 20
+gaps outer 0
+gaps inner 20
 
 # Assign floating windows
 for_window [window_role="^conversation$"] floating enable
@@ -141,6 +141,9 @@ bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
+
+# toggle sticky
+bindsym $mod+Shift+s sticky toggle
 
 # switch to workspace
 bindsym $mod+1 workspace 1
