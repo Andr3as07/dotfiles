@@ -5,7 +5,9 @@
 # /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\ 
 # https://github.com/Andr3as07
 #
-# Placeholder file, the real .zshrc is in .config/zsh/.zshrc
+# Displays the number of running background jobs
 
-source ~/.profile
-source ~/.config/zsh/.zshrc
+njobs=$(jobs | wc -l)
+if [ $njobs -gt 0 ]; then
+   prompt=$prompt"$color_jobs $njobs"$color_default
+fi

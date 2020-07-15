@@ -1,0 +1,83 @@
+#!/bin/zsh
+# NOTE: Currently no support for bold text
+export TERMINAL="zsh"
+
+source ~/.config/sh/errstr
+
+color_white="%F{white}"
+color_red="%F{red}"
+color_cyan="%F{cyan}"
+color_yellow="%F{yellow}"
+color_green="%F{green}"
+color_blue="%F{blue}"
+
+esc_name="%n"
+esc_host="%m"
+
+source ~/.config/sh/promptsettings
+
+# Prompt
+prompt_preexec() {
+    preexec_called=1
+}
+
+prompt_precmd() {
+    # Error
+    get_error_str $?
+
+    if [[ $preexec_called = 1 ]]; then
+	preexec_called=0
+    else
+	unset errstr
+    fi
+
+    p=`pwd`
+
+    # Readonly
+    ro=0
+    if [ ! -w "$p" ]; then
+	ro=1
+    fi
+
+    if [ $ro = 0 ]; then
+	prompt=$color_default"["
+    else
+	prompt=$color_ro"["$color_default
+    fi
+
+    # User
+    source ~/.config/sh/promptuser
+
+    # Only show hostname on ssh
+    source ~/.config/sh/prompthost
+
+    prompt=$prompt":"
+
+    # PWD
+    source ~/.config/sh/promptpwd
+
+    # Readonly
+    if [ $ro = 0 ]; then
+	prompt=$prompt$color_default"]"
+    else
+	prompt=$prompt$color_ro"]"$color_default
+    fi
+
+    # Git
+    source ~/.config/sh/promptgit
+
+    # Error
+    if [[ -n $errstr ]]; then
+	prompt=$prompt$color_error"["$errstr"]"
+    fi
+
+    # Count running jobs
+    source ~/.config/sh/promptjobs
+ 
+    # Export
+    export PS1="$prompt$color_default $prompt_tip "
+    export PS2="$prompt_tip "
+}
+
+precmd_functions+=(prompt_precmd)
+preexec_functions+=(prompt_preexec)

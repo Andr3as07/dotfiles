@@ -1,0 +1,18 @@
+#!/bin/zsh
+
+# Terminal color definitions
+if [ -f $XDG_CONFIG_HOME/sh/colorscheme ]; then
+    (cat $XDG_CONFIG_HOME/sh/colorscheme &)
+fi
+
+# Dircolors
+if command -v dircolors > /dev/null; then
+    if [ -r $XDG_CONFIG_HOME/sh/dircolors ]; then
+	eval $(dircolors -b $XDG_CONFIG_HOME/sh/dircolors)
+    fi
+fi
+
+# Termcolors
+if [ -f $XDG_CONFIG_HOME/sh/termcolors ]; then
+    . $XDG_CONFIG_HOME/sh/termcolors
+fi

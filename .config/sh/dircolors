@@ -1,0 +1,280 @@
+# Configuration file for the color ls utility
+
+# COLOR needs one of these arguments: 'tty' colorizes output to ttys, but not
+# pipes. 'all' adds color characters to all output. 'none' shuts colorization
+# off.
+COLOR tty
+
+# Below, there should be one TERM entry for each termtype that is colorizable.
+# Taken from  dircolors --print-database
+TERM Eterm
+TERM ansi
+TERM *color*
+TERM con[0-9]*x[0-9]*
+TERM cons25
+TERM console
+TERM cygwin
+TERM dtterm
+TERM gnome
+TERM hurd
+TERM jfbterm
+TERM konsole
+TERM kterm
+TERM linux
+TERM linux-c
+TERM mlterm
+TERM putty
+TERM rxvt*
+TERM screen*
+TERM st
+TERM terminator
+TERM tmux*
+TERM vt100
+TERM xterm*
+
+######### List of colors:
+# Black       0;30     Dark Gray     1;30
+# Blue        0;34     Light Blue    1;34
+# Green       0;32     Light Green   1;32
+# Cyan        0;36     Light Cyan    1;36
+# Red         0;31     Light Red     1;31
+# Purple      0;35     Light Purple  1;35
+# Brown       0;33     Yellow        1;33
+# Light Gray  0;37     White         1;37
+#########
+
+# Below are the color init strings for the basic file types. A color init
+# string consists of one or more of the following numeric codes:
+# Attribute codes:
+# 00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed
+# Text color codes:
+# 30=black 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 37=white
+# Background color codes:
+# 40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white
+NORMAL 00  	  # global default, although everything should be something.
+FILE 00		  # regular file
+RESET 0		  # reset to "normal" color
+DIR 01;34	  # directory
+LINK 01;36	  # symbolic link. (If you set this to 'target' instead of a
+     		  # numerical value, the color is as for the file pointed to.)
+#MULTIHARDLINK 00 # regular file with more than one link
+FIFO 40;33     	  # pipe
+SOCK 01;35	  # socket
+DOOR 01;35	  # door
+BLK 40;33;01	  # block device driver
+CHR 40;33;01	  # character device driver
+ORPHAN 40;31;01	  # symlink to nonexistent file, or non-stat'able file ...
+MISSING 00	  # ... and the files they point to
+#SETUID 37;41	  # file that is setuid (u+s)
+#SETGID 30;43	  # file that is setgid (g+s)
+#CAPABILITY 30;41 # file with capability
+#STICKY_OTHER_WRITABLE 30;42 # dir that is sticky and other-writable (+t,o+w)
+#OTHER_WRITABLE 34;42 # dir that is other-writable (o+w) and not sticky
+#STICKY 37;44	  # dir with the sticky bit set (+t) and not other-writable
+
+# This is for files with execute permission:
+EXEC 01;32
+
+# List any file extensions like '.gz' or '.tar' that you would like ls
+# to colorize below. Put the extension, a space, and the color init string.
+# (and any comments you want to add after a '#')
+
+# archives or compressed (red)
+.tar 00;31
+.tgz 00;31
+.arc 00;31
+.arj 00;31
+.taz 00;31
+.lha 00;31
+.lz4 00;31
+.lzh 00;31
+.lzma 00;31
+.tlz 00;31
+.txz 00;31
+.tzo 00;31
+.t7z 00;31
+.zip 00;31
+.z 00;31
+.dz 00;31
+.gz 00;31
+.lrz 00;31
+.lz 00;31
+.lzo 00;31
+.xz 00;31
+.zst 00;31
+.tzst 00;31
+.bz2 00;31
+.bz 00;31
+.tbz 00;31
+.tbz2 00;31
+.tz 00;31
+.deb 00;31
+.rpm 00;31
+.jar 00;31
+.war 00;31
+.ear 00;31
+.sar 00;31
+.rar 00;31
+.alz 00;31
+.ace 00;31
+.zoo 00;31
+.cpio 00;31
+.7z 00;31
+.rz 00;31
+.cab 00;31
+.wim 00;31
+.swm 00;31
+.dwm 00;31
+.esd 00;31
+
+# image formats (magenta)
+.jpg 00;35
+.jpeg 00;35
+.mjpg 00;35
+.mjpeg 00;35
+.gif 00;35
+.bmp 00;35
+.pbm 00;35
+.pgm 00;35
+.ppm 00;35
+.tga 00;35
+.xbm 00;35
+.xpm 00;35
+.tif 00;35
+.tiff 00;35
+.png 00;35
+.svg 00;35
+.svgz 00;35
+.mng 00;35
+.pcx 00;35
+.vob 00;35
+.qt 00;35
+.nuv 00;35
+.wmv 00;35
+.asf 00;35
+.rm 00;35
+.rmvb 00;35
+.flc 00;35
+.fli 00;35
+.gl 00;35
+.dl 00;35
+.xcf 00;35
+.psd 00;35
+.xwd 00;35
+.yuv 00;35
+.cgm 00;35
+.emf 00;35
+.ico 00;35
+# https://wiki.xiph.org/MIME_Types_and_File_Extensions
+.ogv 01;35
+.ogx 01;35
+
+# audio formats (cyan)
+.aac 00;36
+.au 00;36
+.flac 00;36
+.m4a 00;36
+.mid 00;36
+.midi 00;36
+.mka 00;36
+.mp3 00;36
+.mpc 00;36
+.ogg 00;36
+.ra 00;36
+.wav 00;36
+# https://wiki.xiph.org/MIME_Types_and_File_Extensions
+.oga 00;36
+.opus 00;36
+.spx 00;36
+.xspf 00;36
+
+# video formats (blue)
+.mpeg 00;34
+.mpg 00;34
+.mp4 00;34
+.mng 00;34
+.avi 00;34
+.fli 00;34
+.mov 00;34
+.divx 00;34
+.m4v 00;34
+.mpg 00;35
+.mpeg 00;35
+.m2v 00;35
+.mkv 00;35
+.webm 00;35
+.ogm 00;35
+.mp4 00;35
+.m4v 00;35
+.mp4v 00;35
+.avi 00;35
+.flv 00;35
+
+# text files (green)
+.txt 00;32
+.tex 00;32
+.ptx 00;32 # plain tex
+.tei 00;32 # tex include
+.readme 00;32
+.README 00;32
+.me 00;32 # read.me
+.1st 00;32 # readme.1st
+.info 00;32
+.nfo 00;32
+.texi 00;32
+.txi 00;32
+.dif 00;32
+.diff 00;32
+.html 00;32
+.htm 00;32
+.xhtm 00;32
+.xhtml 00;32
+.xml 00;32
+.json 00;32
+.cfg 00;32
+.conf 00;32
+.md 00;32 # markdown
+
+# text formats that need a viewer (light green)
+.dvi 01;32
+.pdf 01;32
+.PDF 01;32
+.ps 01;32
+.eps 01;32
+.djvu 01;32
+.chm 01;32
+.epub 01;32
+.rtf 01;32
+.odt 01;32
+.ods 01;32
+.ppt 01;32
+.pptx 01;32
+.xls 01;32
+.xlsx 01;32
+.doc 01;32
+.docx 01;32
+.docm 01;32
+.dot 01;32
+.dotx 01;32
+
+# code (bright/bold)
+.f 01
+.for 01
+.el 01
+.c 01
+.cc 01
+.cpp 01
+.cxx 01
+.cs 01
+.h 01
+.hh 01
+.hpp 01
+.hxx 01
+.pas 01
+.java 01
+.maple 01
+.sh 01
+.zsh 01
+.pl 01 # perl
+.rb 01 # ruby
+.py 01 # python

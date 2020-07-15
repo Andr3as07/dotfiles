@@ -1,4 +1,11 @@
-# Created by Andr3as07 <andr3as06@gmail.com>
+#     _              _     _____            ___ ______
+#    / \   _ __   __| |_ _|___ /  __ _ ___ / _ \  ___/
+#   / _ \ | '_ \ / _` | '__||_ \ / _` / __/ | | \ \   
+#  / ___ \| | | | (_| | |  ___) | (_| \__ \ |_| |\ \  
+# /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\ 
+# https://github.com/Andr3as07
+#
+# Zsh configuration file
 
 compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
 
@@ -10,4 +17,10 @@ autoload -U colors && colors
 source $XDG_CONFIG_HOME/zsh/prompt
 
 # Alias
-source $XDG_CONFIG_HOME/alias
+source $XDG_CONFIG_HOME/sh/alias
+
+# Colors
+source $XDG_CONFIG_HOME/sh/color
+
+# Display colorscript
+colorscript.sh -r

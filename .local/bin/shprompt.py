@@ -9,11 +9,33 @@
 
 import sys
 
+terminal = "bash"
+
+def get_color(name):
+    if terminal == "zsh":
+        return "%F{" + name + "}"
+    else: # Assume bash
+        if name == "red":
+            return "\[\033[31m\]"
+        elif name == "cyan":
+            return "\[\033[36m\]"
+        elif name == "yellow":
+            return "\[\033[33m\]"
+        elif name == "green":
+            return "\[\033[32m\]"
+        elif name == "blue":
+            return "\[\033[34m\]"
+        else:
+            return "\[\033[37m\]"
+
 color_named = "blue"
 color_series = "green"
 
 def colored(color, string):
-    return "%F{" + str(color) + "}" + str(string) + "%f"
+    if terminal == "bash":
+        return get_color(color) + str(string) + get_color("white")
+    elif terminal == "zsh":
+        return get_color(color) + str(string) + "%f"
 
 def build_path(starts_from_home, folders):
     s = ""
@@ -30,7 +52,7 @@ def build_path(starts_from_home, folders):
            index = index - 1
         elif has_series_name(folder):
             folder = colored(color_series, folder)
-        s = s + "/" + folder + "%f"
+        s = s + "/" + folder + get_color("white")
         index = index + 1
 
     return s
@@ -77,6 +99,7 @@ def has_series_name(folder):
 
 pwd = sys.argv[1]
 home = sys.argv[2]
+terminal = sys.argv[3]
 sfh = False
 
 if pwd.startswith(home):

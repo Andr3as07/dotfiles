@@ -80,7 +80,7 @@ alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 
 # Window swallowing
 if command -v devour > /dev/null; then
-   alias mpv="devour mpv"
+   #alias mpv="devour mpv"
    alias vlc="devour vlc"
    alias emacs="devour emacs"
    alias sxiv="devour sxiv"

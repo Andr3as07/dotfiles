@@ -1,0 +1,33 @@
+errstr=""
+function get_error_str() {
+    case "$1" in
+	'0') errstr="";;
+	'1') errstr="ERROR";;
+	'2') errstr="USAGE";;
+	'126') errstr="NO PERM";;
+	'127') errstr="NOT FOUND";;
+	'129') errstr="SIGHUP";;
+	'130') errstr="SIGINT";;
+	'131') errstr="SIGQUIT";;
+	'132') errstr="SIGILL";;
+	'133') errstr="SIGTRAP";;
+	'134') errstr="SIGIOT";;
+	'135') errstr="SIGBUS";;
+	'136') errstr="SIGFPE";;
+	'137') errstr="SIGKILL";;
+	'138') errstr="SIGUSR1";;
+	'139') errstr="SIGSEGV";;
+	'140') errstr="SIGUSR2";;
+	'141') errstr="SIGPIPE";;
+	'142') errstr="SIGALARM";;
+	'143') errstr="SIGTERM";;
+	'144') errstr="SIGSTKFLT";;
+	'145') errstr="SIGSIGCHLD";;
+	'146') errstr="SIGCONT";;
+	'147') errstr="SIGSTOP";;
+	'148') errstr="SIGTSTP";;
+	'149') errstr="SIGTTIN";;
+	'150') errstr="SIGTUOU";;
+	*) errstr=#$1;;
+    esac
+}

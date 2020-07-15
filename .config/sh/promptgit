@@ -1,0 +1,53 @@
+#     _              _     _____            ___ ______
+#    / \   _ __   __| |_ _|___ /  __ _ ___ / _ \  ___/
+#   / _ \ | '_ \ / _` | '__||_ \ / _` / __/ | | \ \   
+#  / ___ \| | | | (_| | |  ___) | (_| \__ \ |_| |\ \  
+# /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\ 
+# https://github.com/Andr3as07
+#
+# Displays the current state of the git repo.
+#
+# Requires: git
+# Credits: u/cpbills - https://www.reddit.com/r/commandline/comments/2hw9dm/dynamic_bash_prompt_a_quick_guide/ckwwzg5
+
+branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+if [[ -n "$branch" ]]; then
+    if [[ "$branch" == 'HEAD' ]]; then
+	branch=$(git rev-parse --short HEAD 2>/dev/null)
+    fi
+    git_status=$(git status 2> /dev/null)
+    # If nothing changes the color, we can spot unhandled cases.
+    color=$color_git_unknown
+    if [[ $git_status =~ 'Untracked files' ]]; then
+	color=$color_git_untracked
+	branch="${branch}?"
+    fi
+    if git stash show &>/dev/null; then
+	color=$color_git_stash
+	branch="${branch}+"
+    fi
+    if [[ $git_status =~ 'working directory clean' ]]; then
+	color=$color_git_clean
+    fi
+    if [[ $git_status =~ 'Your branch is ahead' ]]; then
+	color=$color_git_ahead
+	branch="${branch}>"
+    fi
+    if [[ $git_status =~ 'Your branch is behind' ]]; then
+	color=$color_git_behind
+	branch="${branch}<"
+    fi
+    if [[ $git_status =~ 'Changes to be committed' ]]; then
+	color=$color_git_staged
+    fi
+    if [[ $git_status =~ 'Changed but not updated' ||
+              $git_status =~ 'Changes not staged'      ||
+              $git_status =~ 'Unmerged paths' ]]; then
+	color=$color_git_dirty
+    fi
+    if [[ $git_status =~ 'Your branch'.+diverged ]]; then
+	color=$color_git_diverged
+	branch="${branch}!"
+    fi
+    prompt=$prompt$color"["$branch"]"$color_default
+fi

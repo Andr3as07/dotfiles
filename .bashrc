@@ -5,7 +5,7 @@
 # /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\ 
 # https://github.com/Andr3as07
 #
-# Placeholder file, the real .zshrc is in .config/zsh/.zshrc
+# Placeholder file, the real .bashrc is in .config/bash/.bashrc
 
 source ~/.profile
-source ~/.config/zsh/.zshrc
+source ~/.config/bash/.bashrc

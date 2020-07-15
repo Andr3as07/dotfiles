@@ -5,7 +5,19 @@
 # /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\ 
 # https://github.com/Andr3as07
 #
-# Placeholder file, the real .zshrc is in .config/zsh/.zshrc
+# Bash configuration file
 
-source ~/.profile
-source ~/.config/zsh/.zshrc
+export CLICOLOR=1
+export TERM=xterm-256color
+
+# Prompt
+source $XDG_CONFIG_HOME/bash/prompt
+
+# Alias
+source $XDG_CONFIG_HOME/sh/alias
+
+# Colors
+source $XDG_CONFIG_HOME/sh/color
+
+# Display colorscript
+colorscript.sh -r

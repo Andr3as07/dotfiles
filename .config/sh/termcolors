@@ -1,0 +1,42 @@
+if [ "$1" = "unset" ];
+then
+    #
+    # unset all:
+    #
+    unset BLACK RED GREEN YELLOW BLUE MAGENTA CYAN WHITE
+    unset BGBLACK BGRED BGGREEN BGYELLOW BGBLUE BGMAGENTA BGCYAN BGWHITE
+    unset BRIGHT NORMAL REVERSE BLINK UNDERSCORE
+else
+    #
+    # foreground colors:
+    #
+    BLACK='^[30m'
+    RED='^[31m'
+    GREEN='^[32m'
+    YELLOW='ESC[33m'
+    BLUE='^[34m'
+    MAGENTA='^[35m'
+    CYAN='^[36m'
+    WHITE='^[37m'
+
+    #
+    # background colors:
+    #
+    BGBLACK='^[40m'
+    BGRED='^[41m'
+    BGGREEN='^[42m'
+    BGYELLOW='^[43m'
+    BGBLUE='^[44m'
+    BGMAGENTA='^[45m'
+    BGCYAN='^[46m'
+    BGWHITE='^[47m'
+
+    #
+    # attributes:
+    #
+    BRIGHT='^[01m'
+    NORMAL='^[00m'
+    REVERSE='^[07m'
+    BLINK='^[05m'      # doesn't work in xterms
+    UNDERSCORE='^[04m' # only works in xterms
+fi

@@ -1,0 +1,31 @@
+#     _              _     _____            ___ ______
+#    / \   _ __   __| |_ _|___ /  __ _ ___ / _ \  ___/
+#   / _ \ | '_ \ / _` | '__||_ \ / _` / __/ | | \ \   
+#  / ___ \| | | | (_| | |  ___) | (_| \__ \ |_| |\ \  
+# /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\ 
+# https://github.com/Andr3as07
+#
+# Configuration file for the shell prompt.
+
+# Colors
+color_default="$color_white"
+color_error="$color_red"
+color_ro="$color_red"
+color_jobs="$color_default"
+color_host="$color_yellow"
+
+color_user_root="$color_red"
+color_user_sudo="$color_cyan"
+
+color_git_unknown="$color_blue"
+color_git_untracked="$color_green"
+color_git_stash="$color_green"
+color_git_clean="$color_green"
+color_git_ahead="$color_yellow"
+color_git_behind="$color_yellow"
+color_git_staged="$color_cyan"
+color_git_dirty="$color_red"
+color_git_diverged="$color_red"
+
+# Settings
+prompt_tip="#"
