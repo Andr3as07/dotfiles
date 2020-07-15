@@ -79,6 +79,16 @@ interval=10
 [internet]
 interval=5
 
+[tasks]
+interval=5
+
+# News and feeds
+[news]
+interval=300
+
+[corona]
+interval=-1
+
 # Package management
 [aptupdates]
 interval=-1
