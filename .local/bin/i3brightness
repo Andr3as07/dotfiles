@@ -1,0 +1,51 @@
+#!/bin/bash
+#     _              _     _____            ___ ______
+#    / \   _ __   __| |_ _|___ /  __ _ ___ / _ \  ___/
+#   / _ \ | '_ \ / _` | '__||_ \ / _` / __/ | | \ \   
+#  / ___ \| | | | (_| | |  ___) | (_| \__ \ |_| |\ \  
+# /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\ 
+# https://github.com/Andr3as07
+#
+# A xbacklight wrapper to allow for changing the display brightness as non root
+#
+# Requires: xbacklight
+
+THIS=${0##*/}
+
+function help() {
+    echo "Usage: $THIS [inc|dec|low|conservative|medium|high|max|<number from 0 to 100>]"
+    exit 2
+}
+
+function beep() {
+    play -q -n synth 0.05 sin 440
+}
+
+case "$1" in
+    "low"          | "l") xbacklight -set 20 ;;
+    "conservative" | "c") xbacklight -set 40 ;;
+    "medium"       | "m") xbacklight -set 60 ;;
+    "performance"  | "p" | "high" | "h") xbacklight -set 80 ;;
+    "max"          | "x") xbacklight -set 100;;
+    "inc"          | "i")
+	[ $("$0" "get") -ge 100 ] && beep && exit
+	xbacklight -inc 20
+	;;
+    "dec"          | "d")
+	[ $("$0" "get") -le 0 ] && beep && exit
+	xbacklight -dec 20
+	;;
+    "get"          | "g") xbacklight -get | awk -F'.' {'print $1'} ;;
+    "" | "help"    | "--help")
+	help
+	;;
+    *)
+	# Allow for numbers (percent) to be enterd instead of just the predefined leves
+	if [[ $1 == ?(-)+([0-9]) ]] && [ "$1" -ge 0 ] && [ "$1" -le 100 ]; then
+	    xbacklight -set "$1"
+	else
+	    help
+	fi
+esac
+
+exit 0

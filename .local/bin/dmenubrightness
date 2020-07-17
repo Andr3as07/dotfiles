@@ -1,0 +1,42 @@
+#!/bin/bash
+#     _              _     _____            ___ ______
+#    / \   _ __   __| |_ _|___ /  __ _ ___ / _ \  ___/
+#   / _ \ | '_ \ / _` | '__||_ \ / _` / __/ | | \ \   
+#  / ___ \| | | | (_| | |  ___) | (_| \__ \ |_| |\ \  
+# /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\ 
+# https://github.com/Andr3as07
+# 
+# Dmenu script that allows for changing the display brightness
+#
+# Requires: i3brightness
+# Soft: notify-send
+
+
+options="increment
+decrement
+low
+conservative
+medium
+high
+max"
+
+choice=$(echo "$options" | dmenushow -i -p 'Brightness')
+
+case "$choice" in
+    "increment") choice="inc" ;;
+     "decrement") choice="dec" ;;
+     "") exit 0 ;;
+esac
+
+i3brightness "$choice"
+e=$?
+
+if [ "$e" != 0 ]; then
+    if command -v notify-send > /dev/null; then
+	notify-send "Unable to set brightness level: $choice" "Please use one of:
+$options
+or any percentage"
+    fi
+fi
+
+exit 0
