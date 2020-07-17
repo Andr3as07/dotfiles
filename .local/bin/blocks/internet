@@ -16,6 +16,7 @@ symbol_wifi_up="📶"
 symbol_wifi_down="📡"
 symbol_eth_up="🌐"
 symbol_eth_down="❎"
+symbol_rfkill="📵"
 
 # END CONFIG
 
@@ -23,15 +24,34 @@ case $BLOCK_BUTTON in
     # 1) ;; # Left click
     3) notify-send "Internet module" "$symbol_wifi_down: no wifi connection
 $symbol_wifi_up: wifi connection with quality
+$symbol_rfkill: rfkill active
 $symbol_eth_down: no ethernet
 $symbol_eth_up: ethernet working" ;; # Right click
     2) $EDITOR "$0" ;; # Middle click
 esac
 
-case "$(cat /sys/class/net/w*/operstate 2>/dev/null)" in
+rfkicon=""
+rfkill=0
+for rfk in /sys/class/rfkill/rfkill?; do
+    rfkt=`cat $rfk/type`
+    if [ ! "$rfkt" = "wlan" ]; then
+	continue
+    fi
+    rfks=`cat $rfk/state`
+    if [ "$rfks" = 0 ]; then
+	rfkill=1
+	break
+    fi
+done
+
+if [ $rfkill -eq 0 ]; then
+    case "$(cat /sys/class/net/w*/operstate 2>/dev/null)" in
 	down) wifiicon="$symbol_wifi_down " ;;
 	up) wifiicon="$symbol_wifi_up $(awk '/^\s*w/ { print int($3 * 100 / 70) "%" }' /proc/net/wireless)" ;;
-esac
+    esac
+else
+    wifiicon="$symbol_rfkill"
+fi
 
 eth=$(sed "s/down/$symbol_eth_down/;s/up/$symbol_eth_up/" /sys/class/net/e*/operstate 2>/dev/null)
 
