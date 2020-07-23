@@ -1,0 +1,13 @@
+
+## Quote the whole line in '$( )':
+bindkey -s '\ex' '^e)^a $(^a'
+
+## make alt-left and alt-right jump over words:
+bindkey '\e[1;3D' backward-word
+bindkey '\e[1;3C' forward-word
+
+## make del-key work for stupid systems:
+bindkey '\e[3~' delete-char
+
+autoload edit-command-line; zle -N edit-command-line
+bindkey '^e' edit-command-line
