@@ -69,6 +69,11 @@ alias myip="curl https://ipecho.net/plain; echo"
 # wget
 alias wget="wget -c"
 
+# history
+function h { history -20; }
+function hh { history -70; }
+function hhh { history 0; }
+
 # Auto Tex
 function autotex() {
   while inotifywait -e close_write $1; do pdflatex $1; done
