@@ -47,7 +47,7 @@ convert -blur 0x20 "$cachepath.png" "$cachepath.blur.png"
 echo "${dir}/${RandomFile}" > "$cachepath.info"
 
 # Set wallpaper
-feh --bg-fill "$cachepath"
+feh --bg-fill "$cachepath.jpg"
 }
 
 while true; do
