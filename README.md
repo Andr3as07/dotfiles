@@ -20,10 +20,10 @@ These dotfiles are currently tested on Ubuntu 19.10 and Ubuntu 20.04.
   * All configs that can be in `~/.config` are.
 
 ## Requirements
-**Base**: i3-gaps dmenu
-**Prompt**: python3
-**Scripts**: feh xautolock xbacklight xdpyinfo imagemagick python3 pass
-**Statusbar**: apt notify-send upower curl newsboat tsp alsamixer git
+* **Base**: i3-gaps dmenu
+* **Prompt**: python3
+* **Scripts**: feh xautolock xbacklight xdpyinfo imagemagick python3 pass
+* **Statusbar**: apt notify-send upower curl newsboat tsp alsamixer git
 
 ## Installation
 **Warning:** If you want to give these dotfiles a try, you should first fork this repository, review the code, and remove things you don’t want or need. Don’t blindly use my settings unless you know what that entails. Use at your own risk!
