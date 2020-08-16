@@ -5,22 +5,18 @@
 # Colors
 # =================================================================
 
-set $bg			#d64937
-set $bg-inactive	#333333
-set $bg-urgent		#383a3b
-set $text		#dedede
-set $text-inactive	#dedede
+set $accent		#6272a4
+set $bg			#282a36
+set $bg-inactive	#282a36
+set $text		#f8f8f2
+set $text-inactive	#6272a4
 set $text-urgent	#ee0000
 
-set $bar		#2d2d2d
-set $separator		#424242
-set $statusline		#dedede
-
 #			border		background	text		indicator
-client.focused		$bg		$bg		$text		$bg
-client.unfocused	$bg-inactive	$bg-inactive	$text-inactive	$bg-inactive
-client.focused_inactive	$bg-inactive	$bg-inactive	$text-inactive	$bg-inactive
-client.urgent		$bg-urgent	$bg-urgent	$text-urgent	$bg-urgent
+client.focused		$accent		$accent		$text		$accent
+client.unfocused	$bg		$bg		$text-inactive	$bg
+client.focused_inactive	$bg		$bg		$text-inactive	$bg
+client.urgent		$bg		$bg		$text-urgent	$bg
 
 # =================================================================
 # Applications
@@ -353,13 +349,13 @@ bar {
   #modifier $mod
 
   colors {
-    background		$bar
-    separator		$separator
-    statusline		$statusline
-    active_workspace	$bg		$bg		$text
-    focused_workspace	$bg-urgent	$bg		$text
-    inactive_workspace	$separator	$separator	$text
-    urgent_workspace	$bg-urgent	$bg-urgent	$text-urgent
+    background		$bg
+    separator		$bg
+    statusline		$text
+    active_workspace	$accent		$accent		$text
+    focused_workspace	$accent		$accent		$text
+    inactive_workspace	$bg		$bg		$text
+    urgent_workspace	$bg		$accent		$text-urgent
   }
 }
 

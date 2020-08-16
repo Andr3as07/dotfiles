@@ -8,9 +8,9 @@
 #
 # Displays dmenu as normal but with all colors set.
 
-bg="#d64937"
-bar="#2d2d2d"
-text="#dedede"
+accent="#6272a4"
+bar="#282a36"
+text="#f8f8f2"
 
 # Gets std input
 if [[ -p /proc/self/fd/0 ]]; then
@@ -19,4 +19,4 @@ else
     exit 1
 fi
 
-echo "$PIPE" | dmenu "$@" -nb $bar -sb $bg -nf $text -sf $text
+echo "$PIPE" | dmenu "$@" -nb $bar -sb $accent -nf $text -sf $text

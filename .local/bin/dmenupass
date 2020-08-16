@@ -1,7 +1,7 @@
 #!/bin/sh
 
-bg="#d64937"
-bar="#2d2d2d"
-text="#dedede"
+accent="#6272a4"
+bar="#282a36"
+text="#f8f8f2"
 
-dmenu -p "$1" -nb $bar -sb $bg -nf $bar -sf $text <&- && echo
+dmenu -p "$1" -nb $bar -sb $accent -nf $bar -sf $text <&- && echo
