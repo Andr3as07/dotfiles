@@ -90,8 +90,8 @@ bindsym $mod+Escape exec dmenuexit
 bindsym $mod+q kill
 
 # dmenu
-bindsym $mod+Shift+d exec dmenu_run -nb '$bar' -sb '$bg' -nf '$text' -sf '$text'
-bindsym $mod+d exec i3-dmenu-desktop --dmenu="dmenu -nb '$bar' -sb '$bg' -nf '$text' -sf '$text'"
+bindsym $mod+Shift+d exec dmenu_run -nb '$bg' -sb '$accent' -nf '$text' -sf '$text'
+bindsym $mod+d exec i3-dmenu-desktop --dmenu="dmenu -nb '$bg' -sb '$accent' -nf '$text' -sf '$text'"
 
 # quick access
 bindsym $mod+Return exec $term
@@ -333,7 +333,7 @@ bindsym XF86WWW			exec $browser
 #XF86Xfer
 #XF86ZoomIn
 #XF86ZoomOut
-#XF86iTouch 
+#XF86iTouch
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
