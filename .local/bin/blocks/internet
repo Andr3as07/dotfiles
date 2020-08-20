@@ -1,9 +1,9 @@
 #!/bin/bash
 #     _              _     _____            ___ ______
 #    / \   _ __   __| |_ _|___ /  __ _ ___ / _ \  ___/
-#   / _ \ | '_ \ / _` | '__||_ \ / _` / __/ | | \ \   
-#  / ___ \| | | | (_| | |  ___) | (_| \__ \ |_| |\ \  
-# /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\ 
+#   / _ \ | '_ \ / _` | '__||_ \ / _` / __/ | | \ \
+#  / ___ \| | | | (_| | |  ___) | (_| \__ \ |_| |\ \
+# /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\
 # https://github.com/Andr3as07
 #
 # This block displays the ethernet and wifi status
@@ -12,11 +12,16 @@
 
 # CONFIG
 
-symbol_wifi_up="📶"
-symbol_wifi_down="📡"
-symbol_eth_up="🌐"
-symbol_eth_down="❎"
-symbol_rfkill="📵"
+# symbol_wifi_up="📶"
+# symbol_wifi_down="📡"
+# symbol_eth_up="🌐"
+# symbol_eth_down="❎"
+# symbol_rfkill="📵"
+symbol_wifi_up="WIFI"
+symbol_wifi_down="WIFI-DOWN"
+symbol_eth_up="ETH"
+symbol_eth_down="ETH-DOWN"
+symbol_rfkill="RFKILL"
 
 # END CONFIG
 

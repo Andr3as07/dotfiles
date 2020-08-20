@@ -1,9 +1,9 @@
 #!/bin/bash
 #     _              _     _____            ___ ______
 #    / \   _ __   __| |_ _|___ /  __ _ ___ / _ \  ___/
-#   / _ \ | '_ \ / _` | '__||_ \ / _` / __/ | | \ \   
-#  / ___ \| | | | (_| | |  ___) | (_| \__ \ |_| |\ \  
-# /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\ 
+#   / _ \ | '_ \ / _` | '__||_ \ / _` / __/ | | \ \
+#  / ___ \| | | | (_| | |  ___) | (_| \__ \ |_| |\ \
+# /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\
 # https://github.com/Andr3as07
 #
 # This block displays the battery charge and status
@@ -12,12 +12,18 @@
 
 # CONFIG
 
-symbol_charging="🔌"
-symbol_discharging="🔋"
-symbol_notcharging="🛑"
-symbol_full="⚡"
-symbol_low="❗"
-symbol_unknown="♻"
+# symbol_charging="🔌"
+# symbol_discharging="🔋"
+# symbol_notcharging="🛑"
+# symbol_full="⚡"
+# symbol_low="❗"
+# symbol_unknown="♻"
+symbol_charging="CHR"
+symbol_discharging="DIS"
+symbol_notcharging="NCHR"
+symbol_full="FULL"
+symbol_low="LOW"
+symbol_unknown="UNK"
 
 color_full="#00FF00"
 color_changing="#FFFF00"
@@ -75,5 +81,3 @@ for battery in /sys/class/power_supply/BAT?; do
     echo $color
 
 done
-
-

@@ -1,9 +1,9 @@
 #!/bin/sh
 #     _              _     _____            ___ ______
 #    / \   _ __   __| |_ _|___ /  __ _ ___ / _ \  ___/
-#   / _ \ | '_ \ / _` | '__||_ \ / _` / __/ | | \ \   
-#  / ___ \| | | | (_| | |  ___) | (_| \__ \ |_| |\ \  
-# /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\ 
+#   / _ \ | '_ \ / _` | '__||_ \ / _` / __/ | | \ \
+#  / ___ \| | | | (_| | |  ___) | (_| \__ \ |_| |\ \
+# /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\
 # https://github.com/Andr3as07
 #
 # This block displays the ethernet and wifi status
@@ -12,9 +12,13 @@
 
 # CONFIG
 
-symbol_ill="😷"
-symbol_dead="🤢"
-symbol_country="🇩🇪"
+# symbol_ill="😷"
+# symbol_dead="🤢"
+# symbol_country="🇩🇪"
+symbol_ill="ACT"
+symbol_dead="DEAD"
+symbol_country="GER"
+
 name_country="Germany"
 
 # END CONFIG

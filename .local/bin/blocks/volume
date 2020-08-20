@@ -1,21 +1,25 @@
 #!/bin/bash
 #     _              _     _____            ___ ______
 #    / \   _ __   __| |_ _|___ /  __ _ ___ / _ \  ___/
-#   / _ \ | '_ \ / _` | '__||_ \ / _` / __/ | | \ \   
-#  / ___ \| | | | (_| | |  ___) | (_| \__ \ |_| |\ \  
-# /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\ 
+#   / _ \ | '_ \ / _` | '__||_ \ / _` / __/ | | \ \
+#  / ___ \| | | | (_| | |  ___) | (_| \__ \ |_| |\ \
+# /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\
 # https://github.com/Andr3as07
 #
-# This block displays current master vaolume
+# This block displays current master volume
 #
 # Requires: emoji support, amixer, alsamixer
 
 # CONFIG
 
-symbol_vol_max="🔊"
-symbol_vol_min="🔈"
-symbol_vol="🔉"
-symbol_mute="🔇"
+# symbol_vol_max="🔊"
+# symbol_vol_min="🔈"
+# symbol_vol="🔉"
+# symbol_mute="🔇"
+symbol_vol_max="VOL"
+symbol_vol_min="VOL"
+symbol_vol="VOL"
+symbol_mute="MUTE"
 
 threshold_max="90"
 threshold_min="50"
