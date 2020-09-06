@@ -24,17 +24,30 @@ export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
 
+# Taskwarrior
+export TASKDATA="${XDG_DATA_HOME:-$HOME/.local/share}"/task
+export TASKRC="${XDG_CONFIG_HOME:-$HOME/.config}"/task/taskrc
+# Pass
 export PASSWORD_STORE_DIR="${XDG_DATA_HOME:-$HOME/.local/share}"/pass
-export WAKATIME_HOME="$XDG_CONFIG_HOME/wakatime"
-export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
+# WakaTime
+export WAKATIME_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"/wakatime
+# Wine
+export WINEPREFIX="${XDG_DATA_HOME:-$HOME/.local/share}"/wineprefixes/default
+# XAuthority
 #export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
-export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
-export GNUPGHOME="$XDG_DATA_HOME"/gnupg
-export HISTFILE="$XDG_DATA_HOME"/sh/history
-export LESSKEY="$XDG_DATA_HOME"/less/lesskey
+# Java
+export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="${XDG_CONFIG_HOME:-$HOME/.config}"/java
+# GPG
+export GNUPGHOME="${XDG_DATA_HOME:-$HOME/.local/share}"/gnupg
+# SH
+export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}"/sh/history
+# Less
+export LESSKEY="${XDG_DATA_HOME:-$HOME/.local/share}"/less/lesskey
 export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
-export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
-export WGETRC="$XDG_CONFIG_HOME"/wgetrc
+# ZSH
+export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}"/zsh
+# Wget
+export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}"/wgetrc
 alias wget="wget --hsts-file=\"$XDG_CACHE_HOME/wget-hsts\""
 
 # Start gui on tty1 if not already running.
