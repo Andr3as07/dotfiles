@@ -1,3 +1,6 @@
+;; append current dir to load-path
+(setq load-path (append load-path '("~/.emacs.d/config")))
+
 ;; Disable GNU Emacs startup screen and clear the scratch buffer.
 (setq inhibit-startup-screen t)
 (setq initial-scratch-message nil)
@@ -33,7 +36,7 @@
 (global-auto-revert-mode t)
 
 ;; Highlight the current line.
-(global-hl-line-mode)
+;;(global-hl-line-mode)
 
 ;; Prevent Extraneous Tabs
 (setq-default indent-tabs-mode nil)
@@ -59,15 +62,6 @@ there's no active region."
     (comment-or-uncomment-region beg end)))
 (global-set-key (kbd "C-#") 'comment-or-uncomment-region-or-line)
 
-;; Make <home> and <end> move point to the beginning and end of the line, respectively.
-(global-set-key (kbd "<home>") 'move-beginning-of-line)
-(global-set-key (kbd "<end>") 'move-end-of-line)
-
-;; Bind C-+ and C-- to increase and decrease text size, respectively.
-(define-key global-map (kbd "C-+") 'text-scale-increase)
-(define-key global-map (kbd "C-=") 'text-scale-increase)
-(define-key global-map (kbd "C-_") 'text-scale-decrease)
-(define-key global-map (kbd "C--") 'text-scale-decrease)
 
 ;; When you double-click on a file in the Mac Finder open it as a
 ;; buffer in the existing Emacs frame, rather than creating a new
@@ -153,3 +147,68 @@ there's no active region."
 ;; Load theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (load-theme 'dracula t)
+
+;; Use MELPA plugin support
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(package-initialize)
+
+;; Packages
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (markdown-mode org-noter emmet-mode indent-guide color-identifiers-mode focus beacon god-mode ace-popup-menu rainbow-delimiters auto-complete emojify php-mode))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+;; God mode means god mode
+(setq god-exempt-major-modes nil)
+(setq god-exempt-predicates nil)
+
+(require 'god-mode-isearch)
+(define-key isearch-mode-map (kbd "<escape>") #'god-mode-isearch-activate)
+(define-key god-mode-isearch-map (kbd "<escape>") #'god-mode-isearch-disable)
+
+;; Automaticly enable indent guide
+(indent-guide-global-mode)
+
+;; Enable color identify for all supported files
+;;(add-hook 'after-init-hook 'global-color-identifiers-mode)
+
+;; Only color identify variables
+(defun myfunc-color-identifiers-mode-hook ()
+  (let ((faces '(font-lock-comment-face font-lock-comment-delimiter-face font-lock-constant-face font-lock-type-face font-lock-function-name-face font-lock-variable-name-face font-lock-keyword-face font-lock-string-face font-lock-builtin-face font-lock-preprocessor-face font-lock-warning-face font-lock-doc-face font-lock-negation-char-face font-lock-regexp-grouping-construct font-lock-regexp-grouping-backslash)))
+    (dolist (face faces)
+      (face-remap-add-relative face '((:foreground "" :weight normal :slant normal)))))
+  (face-remap-add-relative 'font-lock-keyword-face '((:weight bold)))
+  (face-remap-add-relative 'font-lock-comment-face '((:slant italic)))
+  (face-remap-add-relative 'font-lock-builtin-face '((:weight bold)))
+  (face-remap-add-relative 'font-lock-preprocessor-face '((:weight bold)))
+  (face-remap-add-relative 'font-lock-function-name-face '((:slant italic)))
+  (face-remap-add-relative 'font-lock-string-face '((:slant italic)))
+  (face-remap-add-relative 'font-lock-constant-face '((:weight bold))))
+(add-hook 'color-identifiers-mode-hook 'myfunc-color-identifiers-mode-hook)
+
+;; Enable emmet on all html and css files
+(add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+(add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
+
+;; Remove ugly popup window
+(ace-popup-menu-mode 1)
+
+;; Load own files only after loading packages:
+(load "keys.el")
+
+;; Enable emoji at startup
+(add-hook 'after-init-hook #'global-emojify-mode)
+
+;; Enable autocomplete at startup
+(ac-config-default)
