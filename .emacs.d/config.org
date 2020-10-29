@@ -82,14 +82,6 @@ Use full-path-name for the window title
     (abbreviate-file-name (buffer-file-name))
       "%b"))))
 #+END_SRC
-*** Line Numbers
-Switch line numbers on by default in all buffers
-
-#+BEGIN_SRC emacs-lisp
-(when (version<= "26.0.50" emacs-version )
-  (global-display-line-numbers-mode))
-#+END_SRC
-
 *** Colum Numbers
 Show the current column
 
@@ -130,6 +122,10 @@ Move cursor by camelCase
 
 #+BEGIN_SRC emacs-lisp
 (global-subword-mode 1) ; 1 for on, 0 for off
+
+; Hide in statusline
+(with-eval-after-load 'subword
+  (blackout 'subword-mode))
 #+END_SRC
 *** Text Size
 Bind C-+ and C-- to increase and decrease text size, respectively.
@@ -152,6 +148,15 @@ Don't assume that sentences should have two spaces after periods. This ain't a t
 
 #+BEGIN_SRC emacs-lisp
 (setq sentence-end-double-space nil)
+#+END_SRC
+
+*** Text Encoding
+Use UTF-8 for everything
+
+#+BEGIN_SRC emacs-lisp
+(prefer-coding-system 'utf-8)
+(when (display-graphic-p)
+  (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
 #+END_SRC
 *** Revert File
 Revert buffer without any fuss
@@ -223,6 +228,19 @@ If you save a file that doesn't end with a newline, automatically append one.
 #+BEGIN_SRC emacs-lisp
 (setq require-final-newline t)
 #+END_SRC
+*** Undo/Redo
+This lets you use C-x u (undo-tree-visualize) to visually walk through the changes you've made,
+undo back to a certain point (or redo), and go down different branches.
+#+BEGIN_SRC emacs-lisp
+(use-package undo-tree
+  :blackout t
+  :diminish undo-tree-mode
+  :config
+  (progn
+    (global-undo-tree-mode)
+    (setq undo-tree-visualizer-timestamps t)
+    (setq undo-tree-visualizer-diff t)))
+#+END_SRC
 ** Themes
 *** Install Themes from Repos
 List of themes to install
@@ -244,6 +262,22 @@ List of themes to install
 #+END_SRC
 
 ** Window Management
+** Gutter
+*** Line Numbers
+Switch line numbers on by default in all buffers
+
+#+BEGIN_SRC emacs-lisp
+(when (version<= "26.0.50" emacs-version )
+  (global-display-line-numbers-mode))
+#+END_SRC
+
+*** Git-Gutter
+#+BEGIN_SRC emacs-lisp
+(global-git-gutter-mode t)
+
+(custom-set-variables
+  '(git-gutter:update-interval 2))
+#+END_SRC
 * Components
 ** Icomplete
 Minibuffer enhanced completion
@@ -338,6 +372,12 @@ More sensible indentation (2 instead of 8 spaces).
 (setq-default tab-width 2)
 #+END_SRC
 
+I almost always want to go to the right indentation on the next line.
+
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "RET") 'newline-and-indent)
+#+END_SRC
+
 ** Brackets
 Auto insert closing brackets
 
@@ -383,6 +423,16 @@ Setup YAML mode for editing configs
 ** Html
 ** CSS
 ** Make
+* Other
+** Ledger
+#+BEGIN_SRC emacs-lisp
+(use-package ledger-mode
+  :ensure t
+  :init
+  (setq ledger-clear-whole-transactions 1)
+
+  :mode "\.dat$")
+#+END_SRC
 * Helper Functions
 ** Zoom-Window
 Saves the current state of the buffers, and then zooms the current
@@ -409,4 +459,25 @@ And the keybinding
 
 #+BEGIN_SRC emacs-lisp
 (global-set-key (kbd "C-x z") 'zoom-window)
+#+END_SRC
+** Filename to clipboard
+Copy the filename of the file open in the current buffer to the clipboard
+
+#+BEGIN_SRC emacs-lisp
+(defun prelude-copy-file-name-to-clipboard ()
+  "Copy the current buffer file name to the clipboard."
+  (interactive)
+  (let ((filename (if (equal major-mode 'dired-mode)
+                      default-directory
+                    (buffer-file-name))))
+    (when filename
+      (kill-new filename)
+      (message "Copied buffer file name '%s' to the clipboard." filename))))
+#+END_SRC
+
+
+And the keybinding
+
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-x w") 'prelude-copy-file-name-to-clipboard)
 #+END_SRC
