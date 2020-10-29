@@ -8,6 +8,8 @@ These dotfiles are currently tested on Ubuntu 19.10 and Ubuntu 20.04.
   * bash & zsh (shell)
   * i3-gaps (window manager)
   * i3blocks (statusbar)
+  * newsboat (RSS reader)
+  * emacs (text editor)
 * Custom statusbar blocks
 * Dynamic shell prompt
   * username (Changes color depending on the a bility to perform sudo or being root)
@@ -29,7 +31,7 @@ These dotfiles are currently tested on Ubuntu 19.10 and Ubuntu 20.04.
 **Warning:** If you want to give these dotfiles a try, you should first fork this repository, review the code, and remove things you don’t want or need. Don’t blindly use my settings unless you know what that entails. Use at your own risk!
 **Make a backup of your all your important data.**
 
-### Using-Git Bare Repository 
+### Using-Git Bare Repository
 Run this:
 
 ```sh
