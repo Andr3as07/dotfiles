@@ -101,6 +101,7 @@ bindsym $mod+b exec $browser
 bindsym $mod+e exec $editor
 bindsym $mod+m exec $mail
 bindsym $mod+n exec $news
+bindsym $mod+o exec libreoffice
 
 # change focus
 bindsym $mod+Left focus left

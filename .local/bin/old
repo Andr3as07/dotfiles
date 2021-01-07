@@ -1,0 +1,143 @@
+#!/bin/bash
+#     _              _     _____            ___ ______
+#    / \   _ __   __| |_ _|___ /  __ _ ___ / _ \  ___/
+#   / _ \ | '_ \ / _` | '__||_ \ / _` / __/ | | \ \
+#  / ___ \| | | | (_| | |  ___) | (_| \__ \ |_| |\ \
+# /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\
+# https://github.com/Andr3as07
+#
+# Gives a dmenu prompt to restore i3 workspace layouts.
+
+THIS=${0##*/}
+
+function usage {
+cat <<EOF
+Usage: $THIS [OPTION] FILE1 [FILE2] ...
+move or copy files to a date-tagged names:
+  e.g. foo.txt --> foo.txt-2021.01.29
+  where the date part is the date of the last file modification
+
+OPTION(s) must precede any other arguments.
+  -v Verbose: output actions.
+  -d Dry-run mode (no nothing)
+  -t appends date and Time
+       e.g. foo.txt --> foo.txt-2021.01.29-16.46.32
+  -n Now: use current date/time (instead for last modification date/time)
+  -e keep Extenstion at the end
+       e.g. foo.txt --> foo-2021.01.29-16.46.32.txt
+  -c Copy file (instead of moving it)
+
+Exit status:
+ 0 if OK,
+ 1 if argument problem,
+ 2 if serious trouble.
+EOF
+# -a <dir> Archive: move to directory.
+# -z compress (using gZip)
+}
+
+VERBOSE=0
+DRYRUN=0
+TIME=0
+NOW=0
+EXT=
+COPY=0
+#ARCHIVE=
+#ZIP=0
+
+# Handle help
+if [ "$1" = "--help" ]; then usage; exit 0; fi
+if [ "$1" = "-help" ];  then usage; exit 0; fi
+
+# handle no arguments
+if [ -z "$*" ];  then usage; exit 1; fi
+
+while getopts :hvdtnzc\?e: OPT; do
+    case $OPT in
+        h)
+            usage
+            exit 0;
+            ;;
+        v)
+            VERBOSE=1; ;;
+        d)
+            DRYRUN=1; ;;
+        t)
+            TIME=1; ;;
+        n)
+            NOW=1; ;;
+        c)
+            COPY=1; ;;
+        e)
+            EXT=$OPTARG; ;;
+        *)
+            usage
+            exit 1;
+    esac
+done
+
+# Get to the files/directories
+shift $[ OPTIND - 1 ]
+
+
+# Activate verbose mode automaticly in dry-run mode
+if [ $DRYRUN = 1 ]; then VERBOSE=1; fi
+
+for f in $*; do
+    echo $f;
+
+    # File not found
+    if [ ! -e $f ]; then
+        echo "$f: no such file or directory"
+        continue; # Maybe we want to exit out of the script
+    fi
+
+    # Time mode
+    if [ $TIME = 1 ]; then
+        FORMAT='%Y.%m.%d-%H.%M.%S';
+    else
+        FORMAT='%Y.%m.%d';
+    fi
+
+    # "Now" mode
+    if [ $NOW = 1 ]; then
+        DATE=$(date +$FORMAT); # date = now
+    else
+        DATE=$(date -r $f +$FORMAT); # date = file modification time
+    fi
+
+    # Extension mode
+    if [ -n "$EXT" ]; then
+        NEW=${f%${EXT}}-$DATE$EXT; # foo.txt --> foo-YYYY-MM-DD.txt
+    else
+        NEW=$f-$DATE; # foo.txt --> foo.txt-YYYY-MM-DD
+    fi
+
+    # Handle file exists
+    NUM=1
+    while [ -e $NEW ]; do # loop as long as a file with new new name exists
+        if [ -n "$EXT" ]; then
+            if [ $VERBOSE = 1 ]; then
+                echo "$NEW already exists";
+            fi
+
+            NEW=${f%${EXT}}-$DATE-$NUM$EXT;
+        else
+            NEW=$f-$DATE-$NUM;
+        fi
+        let NUM=$NUM+1
+    done
+
+    if [ $VERBOSE = 1 ]; then echo "$f --> $NEW"; fi
+
+    if [ $DRYRUN = 1 ]; then continue; fi # Do nothing. Output is handled by verbose mode.
+
+    # Copy or Move file
+    if [ $COPY = 1 ]; then
+        cp -a $f $NEW
+    else
+        mv $f $NEW
+    fi
+done
+
+exit 0;
