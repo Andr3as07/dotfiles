@@ -6,7 +6,7 @@
 # /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\
 # https://github.com/Andr3as07
 #
-# Gives a dmenu prompt to restore i3 workspace layouts.
+# Move/copy one or more files/dirs to date-tagged names.
 
 THIS=${0##*/}
 
@@ -26,14 +26,13 @@ OPTION(s) must precede any other arguments.
   -e keep Extenstion at the end
        e.g. foo.txt --> foo-2021.01.29-16.46.32.txt
   -c Copy file (instead of moving it)
+  -z compress (using gZip)
 
 Exit status:
  0 if OK,
  1 if argument problem,
  2 if serious trouble.
 EOF
-# -a <dir> Archive: move to directory.
-# -z compress (using gZip)
 }
 
 VERBOSE=0
@@ -42,8 +41,7 @@ TIME=0
 NOW=0
 EXT=
 COPY=0
-#ARCHIVE=
-#ZIP=0
+ZIP=0
 
 # Handle help
 if [ "$1" = "--help" ]; then usage; exit 0; fi
@@ -68,6 +66,8 @@ while getopts :hvdtnzc\?e: OPT; do
             NOW=1; ;;
         c)
             COPY=1; ;;
+        z)
+            ZIP=1; ;;
         e)
             EXT=$OPTARG; ;;
         *)
@@ -79,13 +79,10 @@ done
 # Get to the files/directories
 shift $[ OPTIND - 1 ]
 
-
 # Activate verbose mode automaticly in dry-run mode
 if [ $DRYRUN = 1 ]; then VERBOSE=1; fi
 
 for f in $*; do
-    echo $f;
-
     # File not found
     if [ ! -e $f ]; then
         echo "$f: no such file or directory"
@@ -137,6 +134,43 @@ for f in $*; do
         cp -a $f $NEW
     else
         mv $f $NEW
+    fi
+
+    # Put into a (.tar).gz file
+    if [ $ZIP = 1 ]; then
+        ISDIR=0
+        if [ -d "$NEW" ]; then # Is the "thing" we archive a directory.
+            ZNEW=$DATE.tar.gz
+            ISDIR=1
+        else
+            ZNEW=$DATE.gz
+        fi
+
+        NUM=1
+        while [ -e $ZNEW ]; do # loop as long as a file with new new name exists
+            if [ $VERBOSE = 1 ]; then
+                echo "$ZNEW already exists";
+            fi
+
+            if [ $ISDIR = 1 ]; then
+                ZNEW=$DATE-$NUM.tar.gz
+            else
+                ZNEW=$DATE-$NUM.gz
+            fi
+
+            let NUM=$NUM+1
+        done
+
+        if [ $VERBOSE = 1 ]; then
+            echo " --> $ZNEW";
+        fi
+
+        if [ $ISDIR = 1 ]; then
+            tar cf $ZNEW $NEW
+            rm -rf $NEW
+        else
+            gzip -9 $NEW
+        fi
     fi
 done
 
