@@ -1,0 +1,7 @@
+cfg:${XDG_CONFIG_HOME:-$HOME/.config}
+D:${XDG_DOWNLOAD_DIR:-$HOME/Downloads}
+d:${XDG_DOCUMENTS_DIR:-$HOME/Documents}
+h:$HOME
+mnt:/mnt
+lb:$HOME/.local/bin
+ls:$HOME/.local/share

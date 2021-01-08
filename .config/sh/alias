@@ -100,3 +100,31 @@ alias ledger="ledger -f $HOME/.local/share/ledger/finance.dat"
 alias gst='git status'
 alias gch='git checkout'
 alias gtree='git log --graph --oneline --all'
+
+# bookmark system
+function b() {
+    fpath="${XDG_CONFIG_HOME:-$HOME/.config}/sh/bookmarks.txt";
+
+    RED='\033[0;31m'
+    NC='\033[0m' # No Color
+
+    # Rad file and handle env variables
+    file=$(eval "echo \"$(cat "$fpath")\"");
+    line=$(echo $file | grep "^$1:");
+
+    if [ ! "$line" ]; then
+        echo "${RED}No bookmark with the name $1 found!${NC}";
+        return 1;
+    fi
+
+    if (( $(grep -c . <<<"$line") > 1 )); then
+        # line has more than one line
+        echo "${RED}Multiple bookmarks with the $1 name found!${NC}";
+        return 1;
+    fi
+
+    dir=$(echo "$line" | tr -d '\n' | awk -F: '{ print $2 }');
+
+    # Actualy cd
+    cd "$dir";
+}
