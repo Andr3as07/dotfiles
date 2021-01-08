@@ -38,7 +38,7 @@ function prompt_cmd() {
     source ~/.config/sh/prompthost
 
     prompt=$prompt":"
-    
+
     # PWD
     source ~/.config/sh/promptpwd
 
@@ -51,6 +51,10 @@ function prompt_cmd() {
 
     # Git
     source ~/.config/sh/promptgit
+
+    # Development environment
+    source ~/.config/sh/promptpy
+    source ~/.config/sh/promptjava
 
     # Count running jobs
     source ~/.config/sh/promptjobs

@@ -1,0 +1,21 @@
+#     _              _     _____            ___ ______
+#    / \   _ __   __| |_ _|___ /  __ _ ___ / _ \  ___/
+#   / _ \ | '_ \ / _` | '__||_ \ / _` / __/ | | \ \
+#  / ___ \| | | | (_| | |  ___) | (_| \__ \ |_| |\ \
+# /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\
+# https://github.com/Andr3as07
+#
+# Displays the current java version.
+#
+# Requires: java
+
+# Test if java is installed
+if command -v java > /dev/null; then
+   match=$(ls -1 | grep ".java$\|.class$\|.gradle$\|.jar$\|.clj$\|.cljc$\|^pom.xml$\|^build.gradle.kts$\|^build.sbt$\|^.java-version$\|^.deps.edn$\|^project.clj$\|^build.boot$" | wc -l)
+
+   if [ $match -gt 0 ]; then
+       jversion=$(java --version 2>/dev/null | head -n 1 | awk -F' ' '{ print $2 }' | tr -d '\n');
+       prompt=$prompt$color_java"[☕ $jversion]"$color_default;
+   fi
+
+fi

@@ -66,14 +66,18 @@ prompt_precmd() {
     # Git
     source ~/.config/sh/promptgit
 
+    # Development environment
+    source ~/.config/sh/promptpy
+    source ~/.config/sh/promptjava
+
     # Error
     if [[ -n $errstr ]]; then
-	prompt=$prompt$color_error"["$errstr"]"
+        prompt=$prompt$color_error"["$errstr"]"
     fi
 
     # Count running jobs
     source ~/.config/sh/promptjobs
- 
+
     # Export
     export PS1="$prompt$color_default $prompt_tip "
     export PS2="$prompt_tip "
