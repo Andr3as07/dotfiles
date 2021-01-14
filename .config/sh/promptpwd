@@ -1,13 +1,28 @@
 #     _              _     _____            ___ ______
 #    / \   _ __   __| |_ _|___ /  __ _ ___ / _ \  ___/
-#   / _ \ | '_ \ / _` | '__||_ \ / _` / __/ | | \ \   
-#  / ___ \| | | | (_| | |  ___) | (_| \__ \ |_| |\ \  
-# /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\ 
+#   / _ \ | '_ \ / _` | '__||_ \ / _` / __/ | | \ \
+#  / ___ \| | | | (_| | |  ___) | (_| \__ \ |_| |\ \
+# /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\
 # https://github.com/Andr3as07
 #
 # Displays the current cwd
-#
-# Requires: python3
 
-pv=`python3 ~/.local/bin/shprompt.py "$p" "$HOME" $TERMINAL`
-prompt=$prompt$color_default"$pv$color_default"
+p=`pwd`
+
+if [ $pwd_mode = 1 ]; then
+    pv="$p"
+    if [[ "$p" = $HOME* ]]; then
+        lhome=${#HOME}
+        pv="~${p:$lhome}"
+    fi
+elif [ $pwd_mode = 2 ]; then
+    pv=`basename $p`
+else
+    pv="$p"
+fi
+
+if [ ! -w "$p" ]; then
+   prompt=$prompt$pwd_color_ro$pv$color_default
+else
+   prompt=$prompt$pwd_color$pv$color_default
+fi

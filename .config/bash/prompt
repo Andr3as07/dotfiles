@@ -1,7 +1,15 @@
 #!/bin/bash
+#     _              _     _____            ___ ______
+#    / \   _ __   __| |_ _|___ /  __ _ ___ / _ \  ___/
+#   / _ \ | '_ \ / _` | '__||_ \ / _` / __/ | | \ \
+#  / ___ \| | | | (_| | |  ___) | (_| \__ \ |_| |\ \
+# /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\
+# https://github.com/Andr3as07
+#
+# Displays the shell prompt for bash
+
 # NOTE: Currently no support for bold text
 # NOTE: Currently no support for displaying error codes
-
 export TERMINAL="bash"
 
 color_white="\[\033[37m\]"
@@ -17,19 +25,8 @@ esc_host="\h"
 source ~/.config/sh/promptsettings
 
 function prompt_cmd() {
-    p=`pwd`
-
-    # Readonly
-    ro=0
-    if [ ! -w "$p" ]; then
-	ro=1
-    fi
-
-    if [ $ro = 0 ]; then
-	prompt="$color_default["
-    else
-	prompt=$color_ro"["$color_default
-    fi
+    # Open Brace
+    prompt=$color_default$default_prefix
 
     # User
     source ~/.config/sh/promptuser
@@ -42,12 +39,8 @@ function prompt_cmd() {
     # PWD
     source ~/.config/sh/promptpwd
 
-    # Readonly
-    if [ $ro = 0 ]; then
-	prompt=$prompt$color_default"]"
-    else
-	prompt=$prompt$color_ro"]"$color_default
-    fi
+    # Close Brace
+	  prompt=$prompt$color_default$default_suffix
 
     # Git
     source ~/.config/sh/promptgit
@@ -55,6 +48,7 @@ function prompt_cmd() {
     # Development environment
     source ~/.config/sh/promptpy
     source ~/.config/sh/promptjava
+    source ~/.config/sh/promptphp
 
     # Count running jobs
     source ~/.config/sh/promptjobs

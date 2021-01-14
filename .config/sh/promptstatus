@@ -1,0 +1,21 @@
+#     _              _     _____            ___ ______
+#    / \   _ __   __| |_ _|___ /  __ _ ___ / _ \  ___/
+#   / _ \ | '_ \ / _` | '__||_ \ / _` / __/ | | \ \
+#  / ___ \| | | | (_| | |  ___) | (_| \__ \ |_| |\ \
+# /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\
+# https://github.com/Andr3as07
+#
+# Displays the last status code.
+
+# Only do something if the last command was not empty
+if [ ! $emptycmd = 1 ]; then
+    # handle success
+    if [ $error_show_success = 1 ] && [ $iserror = 0 ]; then
+        prompt=$prompt$error_color_success$error_text_success$color_default
+    fi
+
+    # handle error
+    if [[ -n $errstr ]] && [ $iserror = 1 ]; then
+        prompt=$prompt$error_color$error_prefix$errstr$error_suffix$color_default
+    fi
+fi

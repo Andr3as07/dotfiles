@@ -7,28 +7,79 @@
 #
 # Configuration file for the shell prompt.
 
-# Colors
-color_default="$color_white"
-color_error="$color_red"
-color_ro="$color_red"
-color_jobs="$color_default"
-color_host="$color_yellow"
-
-color_user_root="$color_red"
-color_user_sudo="$color_cyan"
-
-color_git_unknown="$color_blue"
-color_git_untracked="$color_green"
-color_git_stash="$color_green"
-color_git_clean="$color_green"
-color_git_ahead="$color_yellow"
-color_git_behind="$color_yellow"
-color_git_staged="$color_cyan"
-color_git_dirty="$color_red"
-color_git_diverged="$color_red"
-
-color_python="$color_green"
-color_java="$color_green"
-
 # Settings
 prompt_tip="#"
+color_default="$color_white"
+default_prefix="["
+default_suffix="]"
+
+# User
+user_color_root="$color_red"
+user_color_sudo="$color_cyan"
+
+# Hostname
+# 0: Remote only
+# 1: Always
+host_mode=0
+host_color_local="$color_default"
+host_color_remote="$color_yellow"
+host_prefix="$color_default@"
+host_suffix=""
+
+# Pwd
+# 0: Absolute => /home/andr3as07/Documents
+# 1: Home     => ~/Documents
+# 2: Dirname  => Documents
+pwd_mode=1
+pwd_color="$color_default"
+pwd_color_ro="$color_red"
+
+# Git
+git_color_unknown="$color_blue"
+git_color_untracked="$color_green"
+git_color_stash="$color_green"
+git_color_clean="$color_green"
+git_color_ahead="$color_yellow"
+git_color_behind="$color_yellow"
+git_color_staged="$color_cyan"
+git_color_dirty="$color_red"
+git_color_diverged="$color_red"
+git_prefix="$default_prefix "
+git_suffix="$default_suffix"
+
+# Python
+python_color="$color_green"
+python_prefix="$default_prefix🐍 "
+pytohn_suffix="$default_suffix"
+
+# Java
+java_color="$color_green"
+java_prefix="$default_prefix☕ "
+java_suffix="$default_suffix"
+
+# PHP
+php_color="$color_green"
+php_prefix="$default_prefix🐘 "
+php_suffix="$default_suffix"
+
+# Duration
+duration_minimum=2 # in s
+duration_color="$color_cyan"
+duration_prefix="$default_prefix"
+duration_suffix="$default_suffix"
+
+# Error (status)
+error_show_success=0
+error_resolve_name=1
+error_number_prefix="#"
+error_color="$color_red"
+error_prefix="$default_prefix✘ "
+error_suffix="$default_suffix"
+error_color_success="$color_green"
+error_text_success="$default_prefix$default_suffix"
+
+# Jobs
+jobs_minimum=1
+jobs_color="$color_yellow"
+jobs_prefix="$default_prefix✦ "
+jobs_suffix="$default_suffix"

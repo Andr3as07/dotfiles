@@ -1,13 +1,13 @@
 #     _              _     _____            ___ ______
 #    / \   _ __   __| |_ _|___ /  __ _ ___ / _ \  ___/
-#   / _ \ | '_ \ / _` | '__||_ \ / _` / __/ | | \ \   
-#  / ___ \| | | | (_| | |  ___) | (_| \__ \ |_| |\ \  
-# /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\ 
+#   / _ \ | '_ \ / _` | '__||_ \ / _` / __/ | | \ \
+#  / ___ \| | | | (_| | |  ___) | (_| \__ \ |_| |\ \
+# /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\
 # https://github.com/Andr3as07
 #
 # Displays the number of running background jobs
 
 njobs=$(jobs | wc -l)
-if [ $njobs -gt 0 ]; then
-   prompt=$prompt"$color_jobs $njobs"$color_default
+if [[ $njobs -ge $jobs_minimum ]]; then
+   prompt=$prompt"$jobs_color$jobs_prefix$njobs$jobs_suffix"$color_default
 fi

@@ -1,0 +1,23 @@
+#     _              _     _____            ___ ______
+#    / \   _ __   __| |_ _|___ /  __ _ ___ / _ \  ___/
+#   / _ \ | '_ \ / _` | '__||_ \ / _` / __/ | | \ \
+#  / ___ \| | | | (_| | |  ___) | (_| \__ \ |_| |\ \
+# /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\
+# https://github.com/Andr3as07
+#
+# Displays the execution time of the last command.
+
+# Only do something if the last command was not empty
+if [ ! $emptycmd = 1 ]; then
+    if [ -n "$last_cmd_start" ]; then
+        last_cmd_duration="$(( $prompt_epoch - $last_cmd_start ))"
+        last_cmd_duration_str="$(printf %.3f "$last_cmd_duration")s"
+    else
+        last_cmd_duration_str="unknown time"
+        last_cmd_duration=-1
+    fi
+
+    if [[ $last_cmd_duration -gt $duration_minimum ]]; then
+        prompt=$prompt$duration_color$duration_prefix$last_cmd_duration_str$duration_suffix$color_default
+    fi
+fi

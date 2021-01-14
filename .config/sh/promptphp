@@ -1,0 +1,20 @@
+#     _              _     _____            ___ ______
+#    / \   _ __   __| |_ _|___ /  __ _ ___ / _ \  ___/
+#   / _ \ | '_ \ / _` | '__||_ \ / _` / __/ | | \ \
+#  / ___ \| | | | (_| | |  ___) | (_| \__ \ |_| |\ \
+# /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\
+# https://github.com/Andr3as07
+#
+# Displays the current php version.
+#
+# Requires: php
+
+# Test if php is installed
+if command -v php > /dev/null && [ -r "." ]; then
+   match=$(ls -1 | grep ".php$\|^composer.json$" | wc -l)
+
+   if [ $match -gt 0 ]; then
+       phpversion=$(php --version 2>/dev/null | head -n 1 | awk -F' ' '{ print $2 }' | tr -d '\n');
+       prompt=$prompt$php_color$php_prefix$phpversion$php_suffix$color_default;
+   fi
+fi

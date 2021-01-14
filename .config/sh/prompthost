@@ -1,14 +1,28 @@
 #     _              _     _____            ___ ______
 #    / \   _ __   __| |_ _|___ /  __ _ ___ / _ \  ___/
-#   / _ \ | '_ \ / _` | '__||_ \ / _` / __/ | | \ \   
-#  / ___ \| | | | (_| | |  ___) | (_| \__ \ |_| |\ \  
-# /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\ 
+#   / _ \ | '_ \ / _` | '__||_ \ / _` / __/ | | \ \
+#  / ___ \| | | | (_| | |  ___) | (_| \__ \ |_| |\ \
+# /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\
 # https://github.com/Andr3as07
 #
 # Displays the hostname of the machine if
 # the terminal is over a ssh connection.
 
 # Only show hostname on ssh
+host_remote=0
+host_color="$host_color_local"
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-   prompt=$prompt$color_default"@"$color_host$esc_host
+    host_remote=1;
+    host_color="$host_color_remote"
+fi
+
+host_show=0
+if [ $host_mode = 1 ]; then
+    host_show=1
+elif [ $host_mode = 0 ] && [ $host_remote = 1 ]; then
+    host_show=1
+fi
+
+if [ $host_show = 1 ]; then
+    prompt=$prompt$host_prefix$host_color$esc_host$host_suffix$color_default
 fi

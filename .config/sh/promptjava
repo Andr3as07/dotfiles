@@ -10,12 +10,11 @@
 # Requires: java
 
 # Test if java is installed
-if command -v java > /dev/null; then
+if command -v java > /dev/null && [ -r "." ]; then
    match=$(ls -1 | grep ".java$\|.class$\|.gradle$\|.jar$\|.clj$\|.cljc$\|^pom.xml$\|^build.gradle.kts$\|^build.sbt$\|^.java-version$\|^.deps.edn$\|^project.clj$\|^build.boot$" | wc -l)
 
    if [ $match -gt 0 ]; then
        jversion=$(java --version 2>/dev/null | head -n 1 | awk -F' ' '{ print $2 }' | tr -d '\n');
-       prompt=$prompt$color_java"[☕ $jversion]"$color_default;
+       prompt=$prompt$java_color$java_prefix$jversion$java_suffix$color_default;
    fi
-
 fi

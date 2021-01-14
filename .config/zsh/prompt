@@ -1,49 +1,84 @@
 #!/bin/zsh
+#     _              _     _____            ___ ______
+#    / \   _ __   __| |_ _|___ /  __ _ ___ / _ \  ___/
+#   / _ \ | '_ \ / _` | '__||_ \ / _` / __/ | | \ \
+#  / ___ \| | | | (_| | |  ___) | (_| \__ \ |_| |\ \
+# /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\
+# https://github.com/Andr3as07
+#
+# Displays the shell prompt for zsh
+
 # NOTE: Currently no support for bold text
 export TERMINAL="zsh"
 
+# Enable color array support
+autoload -U colors && colors
+
+# Error
 source ~/.config/sh/errstr
 
-color_white="%F{white}"
-color_red="%F{red}"
-color_cyan="%F{cyan}"
-color_yellow="%F{yellow}"
-color_green="%F{green}"
-color_blue="%F{blue}"
+color_white="$fg[white]"
+color_black="$fg[black]"
+color_blue="$fg[blue]"
+color_red="$fg[red]"
+color_cyan="$fg[cyan]"
+color_yellow="$fg[yellow]"
+color_green="$fg[green]"
+
+# color_bg_white="$bg[white]"
+# color_bg_black="$bg[black]"
+# color_bg_blue="$bg[blue]"
+# color_bg_red="$bg[red]"
+# color_bg_cyan="$bg[cyan]"
+# color_bg_yellow="$bg[yellow]"
+# color_bg_green="$bg[green]"
 
 esc_name="%n"
 esc_host="%m"
 
 source ~/.config/sh/promptsettings
 
-# Prompt
+# Error & Duration
+emptycmd=1
+function prompt_enter() {    # from https://superuser.com/a/625663
+  if [[ -n $BUFFER ]]
+    then emptycmd=0;         # Enter was pressed on an empty line
+    else emptycmd=1;         # The line was NOT empty when Enter was pressed
+  fi
+  zle accept-line            # still perform the standard binding for Enter
+}
+zle -N prompt_enter          # define magic-enter as a widget
+bindkey "^M" prompt_enter    # Backup: use ^J
+
 prompt_preexec() {
+    # Error
     preexec_called=1
+
+    # Duration
+    last_cmd_start="$(print -Pn '%D{%s.%.}')"
+    last_cmd_start="${last_cmd_start%.}"        # zsh <= 5.1.1 makes %. a literal dot
+    last_cmd_start="${last_cmd_start%[%]}"      # zsh <= 4.3.11 makes %. literal
 }
 
 prompt_precmd() {
     # Error
     get_error_str $?
 
+    # Duration
+    prompt_epoch="$(print -Pn '%D{%s.%.}')"  # nanoseconds, like date +%s.%N
+    prompt_epoch="${prompt_epoch%.}"    # zsh <= 5.1.1 makes %. a literal dot
+    prompt_epoch="${prompt_epoch%[%]}"  # zsh <= 4.3.11 makes %. a literal %.
+
+    # Error
     if [[ $preexec_called = 1 ]]; then
-	preexec_called=0
+	      preexec_called=0
     else
-	unset errstr
+	      unset errstr
+        iserror=0
     fi
 
-    p=`pwd`
-
-    # Readonly
-    ro=0
-    if [ ! -w "$p" ]; then
-	ro=1
-    fi
-
-    if [ $ro = 0 ]; then
-	prompt=$color_default"["
-    else
-	prompt=$color_ro"["$color_default
-    fi
+    # Open Brace
+    prompt=$color_default$default_prefix
 
     # User
     source ~/.config/sh/promptuser
@@ -56,12 +91,8 @@ prompt_precmd() {
     # PWD
     source ~/.config/sh/promptpwd
 
-    # Readonly
-    if [ $ro = 0 ]; then
-	prompt=$prompt$color_default"]"
-    else
-	prompt=$prompt$color_ro"]"$color_default
-    fi
+    # Close Brace
+	  prompt=$prompt$color_default$default_suffix
 
     # Git
     source ~/.config/sh/promptgit
@@ -69,11 +100,13 @@ prompt_precmd() {
     # Development environment
     source ~/.config/sh/promptpy
     source ~/.config/sh/promptjava
+    source ~/.config/sh/promptphp
+
+    # Duration
+    source ~/.config/sh/promptduration
 
     # Error
-    if [[ -n $errstr ]]; then
-        prompt=$prompt$color_error"["$errstr"]"
-    fi
+    source ~/.config/sh/promptstatus
 
     # Count running jobs
     source ~/.config/sh/promptjobs

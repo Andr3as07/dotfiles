@@ -13,41 +13,42 @@
 branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
 if [[ -n "$branch" ]]; then
     if [[ "$branch" == 'HEAD' ]]; then
-	branch=$(git rev-parse --short HEAD 2>/dev/null)
+        branch=$(git rev-parse --short HEAD 2>/dev/null)
     fi
     git_status=$(git status 2> /dev/null)
+
     # If nothing changes the color, we can spot unhandled cases.
-    color=$color_git_unknown
+    color=$git_color_unknown
     if [[ $git_status =~ 'Untracked files' ]]; then
-	color=$color_git_untracked
-	branch="${branch}?"
+	      color=$git_color_untracked
+	      branch="${branch}?"
     fi
     if git stash show &>/dev/null; then
-	color=$color_git_stash
-	branch="${branch}+"
+	      color=$git_color_stash
+	      branch="${branch}+"
     fi
     if [[ $git_status =~ 'working directory clean' ]]; then
-	color=$color_git_clean
+	      color=$git_color_clean
     fi
     if [[ $git_status =~ 'Your branch is ahead' ]]; then
-	color=$color_git_ahead
-	branch="${branch}>"
+	      color=$git_color_ahead
+	      branch="${branch}>"
     fi
     if [[ $git_status =~ 'Your branch is behind' ]]; then
-	color=$color_git_behind
-	branch="${branch}<"
+	      color=$git_color_behind
+	      branch="${branch}<"
     fi
     if [[ $git_status =~ 'Changes to be committed' ]]; then
-	color=$color_git_staged
+	      color=$git_color_staged
     fi
     if [[ $git_status =~ 'Changed but not updated' ||
-              $git_status =~ 'Changes not staged'      ||
-              $git_status =~ 'Unmerged paths' ]]; then
-	color=$color_git_dirty
+        $git_status =~ 'Changes not staged'      ||
+        $git_status =~ 'Unmerged paths' ]]; then
+	      color=$git_color_dirty
     fi
     if [[ $git_status =~ 'Your branch'.+diverged ]]; then
-	color=$color_git_diverged
-	branch="${branch}!"
+	      color=$git_color_diverged
+	      branch="${branch}!"
     fi
-    prompt=$prompt$color"[ "$branch"]"$color_default
+    prompt=$prompt$color$git_prefix$branch$git_suffix$color_default
 fi
