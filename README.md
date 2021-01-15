@@ -12,20 +12,24 @@ These dotfiles are currently tested on Ubuntu 19.10 and Ubuntu 20.04.
   * emacs (text editor)
 * Custom statusbar blocks
 * Dynamic shell prompt
-  * username (Changes color depending on the a bility to perform sudo or being root)
+  * username (Changes color depending on the ability to perform sudo or being root)
   * hostname (On ssh only)
   * rw (cwd is read only)
   * number of background jobs
   * status of current git repository
+  * currently installed python, php, java
+  * execution duration of the last shell command (if greater than a specified time)
   * exit code of the last command (zsh only)
 * I try to minimize what's directly in `~` so:
   * All configs that can be in `~/.config` are.
 
 ## Requirements
-* **Base**: i3-gaps dmenu htop
-* **Prompt**: python3 git
-* **Scripts**: feh dmenu xautolock xbacklight xdpyinfo imagemagick python3 pass
-* **Statusbar**: i3blocks apt libnotify upower curl newsboat tsp alsamixer
+These packages are required to run these dotfiles, make shure they are present before installing the dotfiles.
+Requirements in braces are optional dependencies which allow for extended functionality.
+* **Base**: i3-gaps, dmenu, htop
+* **Prompt**: Nerd Fonts compatible font, (python3, git, php, java)
+* **Scripts**: feh, dmenu, xautolock, xbacklight, xdpyinfo, imagemagick, pass
+* **Statusbar**: i3blocks, apt, libnotify, upower, curl, newsboat, tsp, alsamixer
 
 ## Installation
 **Warning:** If you want to give these dotfiles a try, you should first fork this repository, review the code, and remove things you don’t want or need. Don’t blindly use my settings unless you know what that entails. Use at your own risk!
