@@ -29,29 +29,29 @@ function prompt_cmd() {
     prompt=$color_default$default_prefix
 
     # User
-    source ~/.config/sh/promptuser
+    source ~/.local/bin/prompt/user
 
     # Only show hostname on ssh
-    source ~/.config/sh/prompthost
+    source ~/.local/bin/prompt/host
 
     prompt=$prompt":"
 
     # PWD
-    source ~/.config/sh/promptpwd
+    source ~/.local/bin/prompt/pwd
 
     # Close Brace
 	  prompt=$prompt$color_default$default_suffix
 
     # Git
-    source ~/.config/sh/promptgit
+    source ~/.local/bin/prompt/git
 
     # Development environment
-    source ~/.config/sh/promptpy
-    source ~/.config/sh/promptjava
-    source ~/.config/sh/promptphp
+    source ~/.local/bin/prompt/python
+    source ~/.local/bin/prompt/java
+    source ~/.local/bin/prompt/php
 
     # Count running jobs
-    source ~/.config/sh/promptjobs
+    source ~/.local/bin/prompt/jobs
 
     # Export
     export PS1="$prompt$color_default $prompt_tip "
