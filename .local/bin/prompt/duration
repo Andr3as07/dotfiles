@@ -11,7 +11,27 @@
 if [ ! $emptycmd = 1 ]; then
     if [ -n "$last_cmd_start" ]; then
         last_cmd_duration="$(( $prompt_epoch - $last_cmd_start ))"
-        last_cmd_duration_str="$(printf %.3f "$last_cmd_duration")s"
+
+        sec=last_cmd_duration
+
+        h=$((sec / 3600))
+        h=${h/.*}
+        sec=$((sec % 3600))
+        sec=${sec/.*}
+
+        min=$((sec / 60))
+        min=${min/.*}
+        sec=$((sec % 60))
+        sec=${sec/.*}
+
+        if [ ! $h -eq "0" ]; then
+            last_cmd_duration_str="${h}h ${min}min ${sec}s"
+        elif [ ! "$min" -eq "0" ]; then
+            last_cmd_duration_str="${min}min ${sec}s"
+        else
+            last_cmd_duration_str="${sec}s"
+        fi
+
     else
         last_cmd_duration_str="unknown time"
         last_cmd_duration=-1
