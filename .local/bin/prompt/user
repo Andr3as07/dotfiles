@@ -8,15 +8,18 @@
 # Displays the current user name.
 # The name can appear in different colors depending on the users permissions.
 # (the user is root or can use the sudo command)
+#
+# Requires: groups
 
 prompt="$prompt$color_default"
 if [[ $EUID -eq 0 ]]; then # is root
    prompt="$prompt$user_color_root"
 else
-   gs=`groups`
-
-   if [[ "$gs" == *"sudo"* ]]; then # can use sudo
-      prompt="$prompt$user_color_sudo"
+   if command -v groups &> /dev/null; then
+      gs=`groups`
+      if [[ "$gs" == *"sudo"* ]]; then # can use sudo
+         prompt="$prompt$user_color_sudo"
+      fi
    fi
 fi
 prompt="$prompt$esc_name$color_default"
