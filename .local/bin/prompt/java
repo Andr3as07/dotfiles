@@ -11,7 +11,7 @@
 
 # Test if java is installed
 if command -v java > /dev/null && [ -r "." ]; then
-   match=$(ls -1 | grep ".java$\|.class$\|.gradle$\|.jar$\|.clj$\|.cljc$\|^pom.xml$\|^build.gradle.kts$\|^build.sbt$\|^.java-version$\|^.deps.edn$\|^project.clj$\|^build.boot$" | wc -l)
+   match=$(ls -1 | grep -c "\.java$\|\.class$\|\.gradle$\|\.jar$\|\.clj$\|\.cljc$\|^pom.xml$\|^build.gradle.kts$\|^build.sbt$\|^.java-version$\|^.deps.edn$\|^project.clj$\|^build.boot$")
 
    if [ $match -gt 0 ]; then
        jversion=$(java --version 2>/dev/null | head -n 1 | awk -F' ' '{ print $2 }' | tr -d '\n');

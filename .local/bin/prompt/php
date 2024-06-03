@@ -11,7 +11,7 @@
 
 # Test if php is installed
 if command -v php > /dev/null && [ -r "." ]; then
-   match=$(ls -1 | grep ".php$\|^composer.json$" | wc -l)
+   match=$(ls -1 | grep -c 1 "\.php$\|^composer.json$")
 
    if [ $match -gt 0 ]; then
        phpversion=$(php --version 2>/dev/null | head -n 1 | awk -F' ' '{ print $2 }' | tr -d '\n');
