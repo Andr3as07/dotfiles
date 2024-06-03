@@ -13,9 +13,13 @@
 if command -v python3 > /dev/null && [ -r "." ]; then
    match=$(ls -1 | grep -c "\.py$\|\.pyc$\|^requirements.txt$\|^.python-version$\|^pyproject.toml$\|^Pipfile$\|^tox.ini$")
 
-   if [ $match -gt 0 ]; then
+   if [[ -n "$VIRTUAL_ENV" ]] || [ $match -gt 0 ]; then
+       venv=""
+       if [[ -n "$VIRTUAL_ENV" ]]; then
+          venv=$(basename $VIRTUAL_ENV)" "
+       fi
        pversion=$(python3 -V | awk -F' ' '{ print $2 }' | tr -d '\n');
-       prompt=$prompt$python_color$python_prefix$pversion$python_suffix$color_default;
+       prompt=$prompt$python_color$python_prefix$venv$pversion$python_suffix$color_default;
    fi
 
 fi
