@@ -50,7 +50,7 @@ git_suffix="$default_suffix"
 # Python
 python_color="$color_green"
 python_prefix="$default_prefix🐍 "
-pytohn_suffix="$default_suffix"
+python_suffix="$default_suffix"
 
 # Java
 java_color="$color_green"

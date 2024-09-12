@@ -105,8 +105,8 @@ alias gtree='git log --graph --oneline --all'
 function b() {
     fpath="${XDG_CONFIG_HOME:-$HOME/.config}/sh/bookmarks.txt";
 
-    RED='\033[0;31m'
-    NC='\033[0m' # No Color
+    RED='\e[31m'
+    NC='\e[0m' # No Color
 
     # Rad file and handle env variables
     file=$(eval "echo \"$(cat "$fpath")\"");
