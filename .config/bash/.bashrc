@@ -20,5 +20,14 @@ source $XDG_CONFIG_HOME/sh/alias
 # Colors
 source $XDG_CONFIG_HOME/sh/color
 
+# Blesh
+source ~/.local/share/blesh/ble.sh
+
+bleopt exec_elapsed_mark=
+bleopt exec_exit_mark=
+bleopt exec_errexit_mark=
+bleopt edit_marker=
+bleopt edit_marker_error=
+
 # Display colorscript
 #colorscript.sh -r
