@@ -142,6 +142,10 @@ alias dco="docker-compose"
 # SystemD
 alias sc='systemctl'
 
+# Shell
+alias :q='exit'
+alias :wq='exit'
+
 # bookmark system
 function b() {
     fpath="${XDG_CONFIG_HOME:-$HOME/.config}/sh/bookmarks.txt";
