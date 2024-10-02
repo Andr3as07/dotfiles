@@ -8,7 +8,7 @@
 # Configuration file for the shell prompt.
 
 # Settings
-prompt_tip="#"
+prompt_tip="$"
 color_default="$color_white"
 default_prefix="["
 default_suffix="]"
