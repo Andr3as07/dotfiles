@@ -175,6 +175,7 @@ function shai() {
   echo -e "\e[31m- AI RESPONSE: ALWAYS VERIFY BEFORE RUNNING ----------------------------"
   echo "$AI_RESPONSE"
   echo -e "- PRESS Ctrl+K TO RUN --------------------------------------------------\e[0m"
+  AI_RESPONSE=$(printf "%q" "$AI_RESPONSE")
   bind "\"\C-k\": \"$AI_RESPONSE\""
 }
 
