@@ -20,6 +20,7 @@ threshold = 30
 style = 'bold yellow'
 
 [localip]
+format = 'on [$localipv4]($style) '
 ssh_only = true
 disabled = false
 
@@ -137,3 +138,10 @@ symbol = "ﯣ "
 format = "via [ Node.js $version](bold green) "
 detect_files = ["package.json", ".node-version"]
 detect_folders = ["node_modules"]
+
+[custom.distro]
+command = 'starship-distro.sh'
+format = 'on [$output]($style) '
+when = true
+style = "yellow"
+description = "The icon of the current OS or distribution"
