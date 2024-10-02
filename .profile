@@ -13,13 +13,14 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-export XEDITOR="/usr/bin/emacs -no-site-file"
-export EDITOR="/usr/bin/emacs -no-site-file"
-export VISUAL="/usr/bin/emacs -no-site-file"
-export TEXEDIT="/usr/bin/emacs -no-site-file +%d %s"
-export MPEDIT="/usr/bin/emacs -no-site-file +%d %s"
+#export XEDITOR="/usr/bin/emacs -no-site-file"
+#export EDITOR="/usr/bin/emacs -no-site-file"
+#export VISUAL="/usr/bin/emacs -no-site-file"
+#export TEXEDIT="/usr/bin/emacs -no-site-file +%d %s"
+#export MPEDIT="/usr/bin/emacs -no-site-file +%d %s"
 
 # Cleanup
+
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
@@ -47,12 +48,12 @@ export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
 # ZSH
 export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}"/zsh
 # Wget
-export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}"/wgetrc
+#export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}"/wgetrc
 alias wget="wget --hsts-file=\"$XDG_CACHE_HOME/wget-hsts\""
 
 # Start gui on tty1 if not already running.
-[ "$(tty)" = "/dev/tty1" ] && ! ps -e | prep -qw Xorg && exec startx
+# [ "$(tty)" = "/dev/tty1" ] && ! ps -e | prep -qw Xorg && exec startx
 
 # Setup askpass
-export SUDO_ASKPASS=$HOME/.local/bin/dmenupass
-export GPG_TTY=$(tty)
+#export SUDO_ASKPASS=$HOME/.local/bin/dmenupass
+#export GPG_TTY=$(tty)

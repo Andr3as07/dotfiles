@@ -69,11 +69,6 @@ alias myip="curl https://ipecho.net/plain; echo"
 # wget
 alias wget="wget -c"
 
-# history
-function h { history -20; }
-function hh { history -70; }
-function hhh { history 0; }
-
 # Auto Tex
 function autotex() {
   while inotifywait -e close_write $1; do pdflatex $1; done
@@ -97,9 +92,55 @@ fi
 alias ledger="ledger -f $HOME/.local/share/ledger/finance.dat"
 
 # Git
+alias g='git'
+alias get='git'
+alias gut='git'
+
+alias ga='git add'
+alias gap='git add --patch'
+
+alias gb='git branch'
+alias gba='git branch --all'
+alias gbr='git branch --move'
+
+alias gc='git commit -v'
+alias gcall='git commit -v -all'
+alias gcamd='git commit -v --amend -C HEAD'
+
+alias gcl='git clone'
+
+alias gclean='git clean -fd'
+
+alias ghm='cd "$(git rev-parse --show-toplevel)"' # Git home
+
+alias gd='git diff'
+alias gds='git diff --staged'
+
+alias gg='git log --graph --abbrev-commit --date=relative'
+alias ggf='git log --graph --date=short --pretty=format:'\''%C(auto)%h %Cgreen%an%Creset %Cblue%cd%Creset %C(auto)%d %s'\'''
+alias ggs='gg --stat'
+alias gll='git log --graph --pretty=oneline --abbrev-commit'
+alias gnew='git log HEAD@{1}..HEAD@{0}' # Show commits since last pull, see http://blogs.atlassian.com/2014/10/advanced-git-aliases/
+alias gwc='git whatchanged'
+
+alias gl='git pull'
+
+alias gr='git remote'
+
+alias gsu='git submodule update --init --recursive'
+
+alias gsw='git switch'
+
 alias gst='git status'
 alias gch='git checkout'
 alias gtree='git log --graph --oneline --all'
+
+# Docker
+alias dk='docker'
+alias dco="docker-compose"
+
+# SystemD
+alias sc='systemctl'
 
 # bookmark system
 function b() {
