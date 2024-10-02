@@ -169,3 +169,12 @@ function b() {
     # Actualy cd
     cd "$dir";
 }
+
+function shai() {
+  AI_RESPONSE=$(echo "$@" | ai write_shell_command)
+  echo -e "\e[31m- AI RESPONSE: ALWAYS VERIFY BEFORE RUNNING ----------------------------"
+  echo "$AI_RESPONSE"
+  echo -e "- PRESS Ctrl+K TO RUN --------------------------------------------------\e[0m"
+  bind "\"\C-k\": \"$AI_RESPONSE\""
+}
+
