@@ -1,0 +1,47 @@
+#!/bin/sh
+#     _              _     _____            ___ ______
+#    / \   _ __   __| |_ _|___ /  __ _ ___ / _ \  ___/
+#   / _ \ | '_ \ / _` | '__||_ \ / _` / __/ | | \ \   
+#  / ___ \| | | | (_| | |  ___) | (_| \__ \ |_| |\ \  
+# /_/   \_|_| |_|\__,_|_| |____/ \__,_|___/\___/  \_\ 
+# https://github.com/Andr3as07
+#
+# A very simple wrapper around systemctrl and hyprlock for shutting down / rebooting / locking the system
+#
+# Requires: systemctrl, hyprlock
+
+THIS=${0##*/}
+
+background_fallback=$HOME/.cache/current-wallpaper.blur.png
+background_cache_location=$HOME/.cache/lock-background
+
+case "$1" in
+    lock)
+	hyprlock
+	;;
+    logout)
+	    
+      hyprctl dispatch exit
+	;;
+    suspend)
+      hyprexit lock; systemctl suspend
+	;;
+  #hibernate)
+  #      systemctl hibernate
+  #      hyprexit lock
+	#;;
+    reboot)
+	    #systemctrl reboot
+	    reboot now
+	;;
+    shutdown)
+	    #systemctrl poweroff
+	    shutdown now
+	;;
+    *)
+	echo "Usage: $THIS {lock|logout|suspend|hibernate|reboot|shutdown}"
+	exit 2
+esac
+
+exit 0
+	      

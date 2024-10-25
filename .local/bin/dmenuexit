@@ -8,17 +8,23 @@
 #
 # Provides a dmenu wrapper for the i3exit script
 
-#str="lock\nlogout\nsuspend\nhibernate\nreboot\nshutdown"
-str="lock\nlogout\nreboot\nshutdown"
+EXIT="hyprexit"
+DMENU="wofi --show dmenu"
 
-choice=$(echo $str | dmenushow -i)
+#str="lock\nlogout\nsuspend\nhibernate\nreboot\nshutdown"
+str="lock
+logout
+reboot
+shutdown"
+
+choice=$(echo "$str" | $DMENU)
 
 if [ "$choice" = "" ]; then
     exit 1
 else
     if [ "$choice" = "shutdown" ] || [ "$choice" = "reboot" ]; then
-	dmenuprompt "Are you shure you want to do this?" "i3exit $choice"
+        $DMENU "Are you shure you want to do this?" "$EXIT $choice"
     else
-	i3exit $choice
+	      $EXIT $choice
     fi
 fi
