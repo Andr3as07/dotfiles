@@ -1,6 +1,6 @@
 require("mason").setup()
 require("mason-lspconfig").setup({
-  ensure_installed = { "lua_ls", "intelephense" }
+  ensure_installed = { "csharp_ls", "lua_ls", "intelephense" }
 })
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -22,6 +22,11 @@ lsp.intelephense.setup {
 }
 
 lsp.lua_ls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities
+}
+
+lsp.csharp_ls.setup {
   on_attach = on_attach,
   capabilities = capabilities
 }
