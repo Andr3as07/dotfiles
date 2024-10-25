@@ -28,6 +28,7 @@ bleopt exec_exit_mark=
 bleopt exec_errexit_mark=
 bleopt edit_marker=
 bleopt edit_marker_error=
+bleopt term_index_colors=16
 
 # Display colorscript
 #colorscript.sh -r
