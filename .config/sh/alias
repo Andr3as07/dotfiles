@@ -10,8 +10,20 @@ alias ll="ls -AhlF"
 alias lv="ls -lhF"
 alias lh="ls -lAhFd .[^.]*"
 
+# history
+alias h="history"
+alias hg="history | grep "
+
+# Networking
+alias ports="netstat -tulanp"
+alias myip="curl ifconfig.io"
+alias myip4="curl ifconfig.io -4"
+
 # ps
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
+
+# File Searching
+alias f="find . -type f -iname"
 
 # python
 alias py="python3"
@@ -20,6 +32,17 @@ alias py="python3"
 alias grep="grep --color=auto"
 alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"
+
+# ssh
+function revert_colors_after_ssh() {
+  ssh "$@" 
+  exit_status=$?
+  if [ -f $XDG_CONFIG_HOME/sh/colorscheme ]; then
+    (cat $XDG_CONFIG_HOME/sh/colorscheme &)
+  fi
+  return $exit_status
+}
+alias ssh="revert_colors_after_ssh"
 
 # make
 alias m="make"
@@ -62,9 +85,6 @@ alias j="jobs -l"
 # find
 function f { find $1 -name '*'$2'*' | sort; }
 function fh { find . -name '*'$1'*' | sort; }
-
-# get ip address
-alias myip="curl https://ipecho.net/plain; echo"
 
 # wget
 alias wget="wget -c"
@@ -145,6 +165,10 @@ alias sc='systemctl'
 # Shell
 alias :q='exit'
 alias :wq='exit'
+alias please="sudo"
+alias clear="clear && printf '\e[3J'"
+alias refresh="source ~/.bashrc"
+alias path='echo $PATH | tr ":" "\n"'
 
 # bookmark system
 function b() {
@@ -174,6 +198,12 @@ function b() {
     cd "$dir";
 }
 
+# wikipedia
+function wiki() {
+  curl -s "https://en.wikipedia.org/api/rest_v1/page/summary/$1" | jq -r .extract
+}
+
+# ai-cli
 function shai() {
   AI_RESPONSE=$(echo "$@" | ai write_shell_command)
   echo -e "\e[31m- AI RESPONSE: ALWAYS VERIFY BEFORE RUNNING ----------------------------"
@@ -183,3 +213,4 @@ function shai() {
   bind "\"\C-k\": \"$AI_RESPONSE\""
 }
 
+alias '§'='shai'
