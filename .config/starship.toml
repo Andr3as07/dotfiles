@@ -106,7 +106,7 @@ symbol = " "
 
 [php]
 symbol = " "
-format = 'via [${symbol}php (${version})]($style)'
+format = 'via [${symbol}php (${version})]($style) '
 style = "bold cyan"
 
 [python]
