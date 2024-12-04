@@ -8,4 +8,10 @@
 # Placeholder file, loads .bashrc in the home directory.
 # This fixes the problem with bash as a login shell.
 
-source ~/.bashrc
+if [ ! -z $TMUX ]; then
+  source ~/.bashrc
+fi
+
+# Added by Toolbox App
+export PATH="$PATH:/home/ariess/.local/share/JetBrains/Toolbox/scripts"
+

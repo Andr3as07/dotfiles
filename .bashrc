@@ -9,3 +9,4 @@
 
 source ~/.profile
 source ~/.config/bash/.bashrc
+
