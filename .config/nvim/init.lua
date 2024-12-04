@@ -1,2 +1,3 @@
-require("andr3as07")
-vim.o.shell = "bash -i"
+vim.cmd("colorscheme vim")
+require("config.lazy")
+-- require("config.keymaps")
