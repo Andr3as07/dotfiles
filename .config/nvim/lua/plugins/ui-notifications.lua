@@ -13,7 +13,6 @@ return {
         notify.setup(opts)
         vim.notify = notify
 
-
         local telescope = require("telescope")
         vim.keymap.set("n", "<leader>fn", telescope.extensions.notify.notify, {
             desc = "Show Notifications"
