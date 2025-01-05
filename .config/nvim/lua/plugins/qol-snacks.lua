@@ -2,17 +2,12 @@ return {
     "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
-    keys = {
-        { "<leader>t", function() Snacks.terminal() end, desc = "Toggle Terminal" },
-        { "<leader>gB", function() Snacks.git.blame_line() end, desc = "Git Blame Line" },
-        { "<leader>.", function() Snacks.scratch() end, desc = "Select Scratch Buffer" }
-    },
     opts = {
         scroll = {
             enabled = true
         },
         dim = {
-            enabled = false
+            enabled = true
         },
         input = {
             enabled = true
@@ -47,7 +42,12 @@ return {
                 { pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
                 { pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
                 { section = "startup" },
-            },
+            }
         }
+    },
+    keys = {
+        { "<leader>t", function() Snacks.terminal() end, desc = "Toggle Terminal" },
+        { "<leader>gB", function() Snacks.git.blame_line() end, desc = "Git Blame Line" },
+        { "<leader>.", function() Snacks.scratch() end, desc = "Select Scratch Buffer" }
     }
 }

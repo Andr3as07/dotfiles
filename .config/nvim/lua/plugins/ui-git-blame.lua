@@ -2,17 +2,17 @@ return {
     {
         "f-person/git-blame.nvim",
         event = "VeryLazy",
+        dependenceis = {
+            "folke/snacks.nvim",
+        },
         opts = {
             enabled = true,
             delay = 0,
             date_format = "%r",
             virtual_text_column = 80,
             highlight_group = "Question"
-        }
-    },
-    {
-        "folke/snacks.nvim",
-        config = function(_, _)
+        },
+        config = function(opts, _)
             Snacks.toggle({
                 name = "Git Blame Overlay",
                 get = function()
