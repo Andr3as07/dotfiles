@@ -20,16 +20,42 @@ map("v", ">", ">gv")
 -- Reselect last pasted text
 map("n", "<leader>v", "printf('`[%s`]', getregtype()[0])", { desc = "Reselect last pasted area", expr = true })
 
--- Toggle Spell checking
+
+-- Toggle Scroll
 Snacks.toggle({
-    name = "Spell checking",
+    name = "Scroll Mode",
     get = function()
-        return vim.opt.spell._value
+        return Snacks.scroll.enabled
     end,
     set = function(state)
-        vim.opt.spell = state
+        if state == false then
+            Snacks.scroll.disable()
+        else
+            Snacks.scroll.enable()
+        end
     end
 }):map("<leader>us")
+
+-- Toggle Dim
+Snacks.toggle({
+    name = "Dimmed Mode",
+    get = function()
+        return Snacks.dim.enabled
+    end,
+    set = function(state)
+        if state == false then
+            Snacks.dim.disable()
+        else
+            Snacks.dim.enable()
+        end
+    end
+}):map("<leader>ud")
+
+Snacks.toggle.option("spell", {name = "Spell Checking"}):map("<leader>uS")
+Snacks.toggle.option("wrap", {name = "Wrap"}):map("<leader>uw")
+Snacks.toggle.dim():map("<leader>ud")
+Snacks.toggle.inlay_hints():map("<leader>ug")
+Snacks.toggle.line_number():map("<leader>ul")
 
 -- Change text without putting it into the register
 map("n", "c", '"_c')

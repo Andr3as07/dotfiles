@@ -4,9 +4,12 @@ vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a T
 vim.o.softtabstop = 4 -- Number of spaces inserted instead of a TAB character
 vim.o.shiftwidth = 4 -- Number of spaces inserted when indenting
 
--- NOTE: Fix for https://github.com/epwalsh/obsidian.nvim/issues/286
-vim.o.conceallevel = 2
+-- Enable Visual Scrolling
+Snacks.scroll.enable()
 
 -- Relative line numbers
 vim.o.number = true
 vim.o.relativenumber = true
+
+-- 80 column mark
+vim.o.colorcolumn = "80"

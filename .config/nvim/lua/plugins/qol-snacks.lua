@@ -2,10 +2,21 @@ return {
     "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
+    keys = {
+        { "<leader>t", function() Snacks.terminal() end, desc = "Toggle Terminal" },
+        { "<leader>gB", function() Snacks.git.blame_line() end, desc = "Git Blame Line" },
+        { "<leader>.", function() Snacks.scratch() end, desc = "Select Scratch Buffer" }
+    },
     opts = {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
+        scroll = {
+            enabled = true
+        },
+        dim = {
+            enabled = false
+        },
+        input = {
+            enabled = true
+        },
         bigfile = {
             enabled = true
         },

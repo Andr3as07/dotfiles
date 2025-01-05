@@ -10,5 +10,6 @@ return {
         vim.keymap.set('n', '<leader>fc', builtin.commands, { desc = 'Telescope commands' })
         vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = 'Telescope keymaps' })
         vim.keymap.set('n', '<leader>ft', builtin.treesitter, { desc = 'Telescope treesitter' })
+        vim.keymap.set('n', '<leader>fT', builtin.filetypes, { desc = 'Telescope filetypes' })
     end
 }
