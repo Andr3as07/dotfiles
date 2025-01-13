@@ -46,7 +46,7 @@ return {
         }
     },
     keys = {
-        { "<leader>t", function() Snacks.terminal() end, desc = "Toggle Terminal" },
+        { "<leader>tt", function() Snacks.terminal() end, desc = "Toggle Terminal" },
         { "<leader>gB", function() Snacks.git.blame_line() end, desc = "Git Blame Line" },
         { "<leader>.", function() Snacks.scratch() end, desc = "Select Scratch Buffer" }
     }
