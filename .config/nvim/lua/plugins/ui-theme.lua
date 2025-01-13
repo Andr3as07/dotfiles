@@ -14,7 +14,7 @@ return {
         opts = {
             italic_comment = true
         },
-        config = function(opts, _)
+        config = function(_, opts)
             local theme = require("dracula")
             theme.setup(opts)
             vim.cmd("colorscheme dracula")

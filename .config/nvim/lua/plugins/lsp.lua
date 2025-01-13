@@ -22,7 +22,7 @@ return {{
     "williamboman/mason-lspconfig.nvim",
     dependencies = {"neovim/nvim-lspconfig"},
     opts = {
-        ensure_installed = { "lua_ls", "jsonls", "yamlls", "csharp_ls", "gopls", "pylsp" }
+        ensure_installed = { "lua_ls", "jsonls", "yamlls", "csharp_ls", "gopls", "pylsp", "intelephense", "phpactor" }
     }
 }, {
     "neovim/nvim-lspconfig",
