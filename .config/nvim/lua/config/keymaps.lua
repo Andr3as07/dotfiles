@@ -2,7 +2,7 @@
 local map = vim.keymap.set
 
 -- laxy
-map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
+map("n", "<leader>tL", "<cmd>Lazy<cr>", { desc = "Lazy" })
 
 -- File Management
 map("n", "<leader>fx", "<cmd>Explore<cr>", { desc = "Explore" })

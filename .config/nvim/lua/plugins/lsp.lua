@@ -9,6 +9,9 @@ end
 
 return {{
     "williamboman/mason.nvim",
+    keys = {
+        { "<leader>tM", "<CMD>Mason<CR>", desc = "Mason" }
+    },
     opts = {
         ui = {
             icons = {
