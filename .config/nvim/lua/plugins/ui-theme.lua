@@ -1,27 +1,29 @@
 return {
---  {
---      "folke/tokyonight.nvim",
---      lazy = false,
---      priority = 1000,
---      opts = {},
---      config = function()
---          vim.cmd("colorscheme tokyonight")
---      end
---  },
+    { "folke/tokyonight.nvim" },
     {
-
         "Mofiqul/dracula.nvim",
+        lazy = false,
         opts = {
             italic_comment = true
         },
         config = function(_, opts)
             local theme = require("dracula")
             theme.setup(opts)
-            vim.cmd("colorscheme dracula")
         end
     },
---  {
---      "nyoom-engineering/oxocarbon.nvim",
---      lazy = false
---  }
+    { "rose-pine/neovim", name = "rose-pine" },
+    { "nyoom-engineering/oxocarbon.nvim" },
+    { "catppuccin/nvim", name = "catppuccin" },
+    {
+        'andrew-george/telescope-themes',
+        dependencies = {
+            'nvim-telescope/telescope.nvim'
+        },
+        keys = {
+            { "<leader>uT", "<CMD>Telescope themes<CR>", "Change Theme" }
+        },
+        config = function()
+            require('telescope').load_extension('themes')
+        end
+    }
 }

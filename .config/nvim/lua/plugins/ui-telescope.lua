@@ -2,8 +2,17 @@ return {
     {
         'nvim-telescope/telescope.nvim',
         tag = '0.1.8',
+        opts = {
+            extensions = {
+                themes = {
+                    persist = {
+                        enabled = true
+                    }
+                }
+            }
+        },
         dependencies = { 'nvim-lua/plenary.nvim' },
-        config = function()
+        config = function(_, opts)
             local builtin = require('telescope.builtin')
             vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
             vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
@@ -13,6 +22,8 @@ return {
             vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = 'Telescope keymaps' })
             vim.keymap.set('n', '<leader>ft', builtin.treesitter, { desc = 'Telescope treesitter' })
             vim.keymap.set('n', '<leader>fT', builtin.filetypes, { desc = 'Telescope filetypes' })
+
+            require("telescope").setup(opts)
         end
     },
     {
