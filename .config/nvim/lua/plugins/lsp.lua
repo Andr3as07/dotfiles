@@ -7,35 +7,83 @@ local function on_attach(_, _)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = "Hover"})
 end
 
-return {{
-    "williamboman/mason.nvim",
-    keys = {
-        { "<leader>tM", "<CMD>Mason<CR>", desc = "Mason" }
-    },
-    opts = {
-        ui = {
-            icons = {
-                package_installed = "✓",
-                package_pending = "➜",
-                package_uninstalled = "✗"
+local function tableMerge(t1, t2)
+    if t2 == nil then
+        return t1
+    end
+    for k,v in pairs(t2) do
+        if type(v) == "table" then
+            if type(t1[k] or false) == "table" then
+                tableMerge(t1[k] or {}, t2[k] or {})
+            else
+                t1[k] = v
+            end
+        else
+            t1[k] = v
+        end
+    end
+    return t1
+end
+
+local specific_configurations = {
+    lua_ls = {
+        settings = {
+            Lua = {
+                diagnostics = {
+                    globals = { 'vim' }
+                }
             }
         }
     }
-}, {
-    "williamboman/mason-lspconfig.nvim",
-    dependencies = {"neovim/nvim-lspconfig"},
-    opts = {
-        ensure_installed = { "lua_ls", "jsonls", "yamlls", "csharp_ls", "gopls", "pylsp", "intelephense", "phpactor" }
-    }
-}, {
-    "neovim/nvim-lspconfig",
-    dependencies = {"williamboman/mason-lspconfig.nvim"},
-    config = function()
-        local lspconfig = require("lspconfig")
-        require("mason-lspconfig").setup_handlers({function(server_name)
-            lspconfig[server_name].setup {
+}
+
+return {
+    {
+        "mason-org/mason.nvim",
+        keys = {
+            { "<leader>tM", "<CMD>Mason<CR>", desc = "Mason" }
+        },
+
+        opts = {
+            ui = {
+                icons = {
+                    package_installed = "✓",
+                    package_pending = "➜",
+                    package_uninstalled = "✗"
+                }
+            }
+        }
+    },
+    {
+        "mason-org/mason-lspconfig.nvim",
+        dependencies = {
+            "mason-org/mason.nvim",
+            "mason-org/mason-lspconfig.nvim"
+        },
+        opts = {
+            ensure_installed = {
+                "lua_ls"
+            }
+        }
+    },
+    {
+        "neovim/nvim-lspconfig",
+        config = function()
+            require("mason").setup()
+            require("mason-lspconfig").setup()
+
+            local lspconfig = require("lspconfig")
+            local servers = require("mason-lspconfig").get_installed_servers()
+
+            local general_config = {
                 on_attach = on_attach
             }
-        end})
-    end
-}}
+
+            for _, server in ipairs(servers) do
+                local specific_config = specific_configurations[server]
+                local config = tableMerge(general_config, specific_config)
+                lspconfig[server].setup(config)
+            end
+        end
+    }
+}
