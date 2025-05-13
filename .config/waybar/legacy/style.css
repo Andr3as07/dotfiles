@@ -1,0 +1,155 @@
+* {
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: 'Nerd Font', 'Nerd Font Propo', FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 13px;
+}
+
+window#waybar {
+  background-color: transparent;
+  color: #ffffff;
+}
+
+label.module,
+box.module,
+#privacy {
+  border-radius: 10px;
+  margin: 0 5px;
+  padding: 3px 15px;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+#workspaces {
+  background: transparent;
+  padding: 0;
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+  margin-top: 10px;
+}
+
+.modules-left {
+  margin-left: 20px;
+}
+
+.modules-right {
+  margin-right: 20px;
+}
+
+.modules-left .module:first-child {
+  margin-left: 0;
+}
+
+.modules-right .module:first-child {
+  margin-right: 0;
+}
+
+#workspaces button {
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  margin-right: 5px;
+  border: 0px solid red;
+  box-shadow: none;
+  text-shadow: none;
+  transition: background-color .3s, color .3s;
+}
+
+#workspaces button.focused:hover {
+  border: none;
+  box-shadow: none;
+}
+
+#workspaces button:hover {
+  background: rgba(0, 0, 0, 0.8);
+  border-color: red;
+}
+
+#workspaces button.active {
+  color: white;
+}
+
+#submap.resize {
+  background-color: #f53c3c;
+}
+
+#power-profiles-daemon.performance {
+  background-color: #f53c3c;
+  color: #ffffff;
+}
+/*
+#power-profiles-daemon.balanced {
+  background-color: #2980b9;
+  color: #ffffff;
+}
+*/
+#power-profiles-daemon.power-saver {
+  background-color: #2ecc71;
+  color: #000000;
+}
+
+#idle_inhibitor.activated {
+  background-color: #2ecc71;
+  color: black;
+}
+
+#bluetooth.on {
+  background-color: #2980b9; 
+}
+
+#bluetooth.connected {
+  background-color: #2ecc71;
+  color: black;
+}
+
+#battery.warning {
+  background-color: #FFC000;
+  color: black;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+/* Using steps() instead of linear as a timing function to limit cpu usage */
+#battery.critical:not(.charging) {
+    background-color: #f53c3c;
+    color: #ffffff;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#battery.charging, #battery.plugged {
+  color: #ffffff;
+  background-color: #26A65B;
+}
+
+#privacy {
+  padding: 5px;
+}
+
+#privacy-item {
+    padding: 0 5px;
+    color: white;
+    border-radius: 5px;
+}
+
+#privacy-item.screenshare {
+    background-color: #cf5700;
+}
+
+#privacy-item.audio-in {
+    background-color: #1ca000;
+}
+
+#privacy-item.audio-out {
+    background-color: #0069d4;
+}

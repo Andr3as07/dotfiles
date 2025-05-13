@@ -1,0 +1,132 @@
+{
+  "layer": "top",
+  "height": 28,
+  "modules-left": [
+    "hyprland/submap",
+    "hyprland/workspaces"
+  ],
+  "modules-center": [
+    "hyprland/window"
+  ],
+  "modules-right": [
+    "idle_inhibitor",
+    "power-profiles-daemon",
+    "bluetooth",
+    "network",
+    "wireplumber",
+    "backlight",
+    "privacy",
+    "battery",
+    "clock"
+  ],
+  "hyprland/submap": {
+    "format": "✌️ {}"
+  },
+  "hyprland/workspaces": {
+    "move-to-monitor": true,
+    "format": "{id} {windows}",
+    "window-rewrite-default": "",
+    "window-rewrite-default": "",
+    "window-rewrite": {
+      "class<org.mozilla.firefox>": "",
+      "class<libreoffice-calc>": "󰈜",
+      "class<libreoffice-impress>": "󰈨",
+      "class<libreoffice-writer>": "󰈭",
+      "class<org.gnome.Nautilus>": "",
+      "class<Code>": "󰨞",
+      "class<obsidian>": "󰰥",
+      "alacritty": ""
+    }
+  },
+  "hyprland/window": {
+    "separate-outputs": true,
+    "icon": false,
+    "rewrite": {
+      "(.*) — Mozilla Firefox": " $1",
+      "(.*) — LibreOffice Writer": "󰈭 $1",
+      "(.*) — LibreOffice Impress": "󰈨 $1",
+      "(.*) — LibreOffice Calc": "󰈜 $1",
+      "(.*) - Visual Studio Code": "󰨞  $1"
+    }
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+        "activated": "󰅶 ",
+        "deactivated": " "
+    }
+  },
+  "wireplumber": {
+    "format": "{volume}% {icon}",
+    "format-muted": "",
+    "on-click": "helvum",
+    "format-icons": ["", "", ""]
+  },
+  "network": {
+    "on-click": "nm-connection-editor",
+    "format": "{ifname}",
+    "format-wifi": "{essid} ({signalStrength}%) ",
+    "format-ethernet": "{ipaddr}/{cidr} 󰊗",
+    "format-disconnected": "", //An empty format will hide the module.
+    "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+    "tooltip-format-ethernet": "{ifname} ",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 50
+  },
+  "battery": {
+    "states": {
+        "warning": 30,
+        "critical": 15
+    },
+    "format": "{capacity}% {icon}",
+    "format-icons": [" ", " ", " ", " ", " "],
+  },
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "{percent}% {icon}",
+    "format-icons": ["", ""] 
+
+  },
+  "bluetooth": {
+    "on-click": "blueman-manager",
+	  "format": " {status}",
+	  "format-connected": " {num_connections} connected",
+	  "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+	  "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
+  },
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+    "tooltip": true,
+    "format-icons": {
+      "default": "",
+      "performance": "",
+      "balanced": " ",
+      "power-saver": " "
+    }
+  },
+  "privacy": {
+    "icon-spacing": 3,
+    "icon-size": 14,
+    "transition-duration": 300,
+    "modules": [
+    {
+      "type": "screenshare",
+      "tooltip": true,
+      "tooltip-icon-size": 24
+    },
+    {
+      "type": "audio-out",
+      "tooltip": true,
+      "tooltip-icon-size": 24
+    },
+    {
+      "type": "audio-in",
+      "tooltip": true,
+      "tooltip-icon-size": 24
+    }
+    ]
+  },
+}
