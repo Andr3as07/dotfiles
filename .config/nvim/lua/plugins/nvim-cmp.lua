@@ -1,26 +1,22 @@
 return {
     "hrsh7th/nvim-cmp",
     version = false, -- last release is way too old
-    event = "InsertEnter",
+    event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
         "onsails/lspkind.nvim",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
-        "L3MON4D3/LuaSnip",
+        "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-emoji",
         "hrsh7th/cmp-calc",
         "f3fora/cmp-spell",
+        "lukas-reineke/cmp-rg",
+        "roginfarrer/cmp-css-variables",
+        "pontusk/cmp-sass-variables",
+        "mmolhoek/cmp-scss",
+        -- "kbwo/cmp-yank",
     },
-    -- Not all LSP servers add brackets when completing a function.
-    -- To better deal with this, LazyVim adds a custom option to cmp,
-    -- that you can configure. For example:
-    --
-    -- ```lua
-    -- opts = {
-    --   auto_brackets = { "python" }
-    -- }
-    -- ```
     opts = function()
         -- vim.api.nvim_set_hl(0, "CmpGhostText", {
         --     link = "Comment",
@@ -59,14 +55,24 @@ return {
             Event = "",
             Operator = "󰆕",
             TypeParameter = "󰅲",
-	    Codeium = ""
+	        Codeium = ""
         }
 
         return {
-	    virtual_text = {
-                enabled = true,
-	        manual = false
-	    },
+            window = {
+                -- completion = cmp.config.window.bordered({}),
+                documentation = cmp.config.window.bordered({}),
+            },
+            -- Set view to follow cursor while typing
+            view = {
+                entries = {
+                    follow_cursor = true,
+                },
+            },
+            virtual_text = {
+                    enabled = true,
+                manual = false
+            },
             auto_brackets = {}, -- configure any filetype to auto add brackets
             completion = {
                 completeopt = "menu,menuone,noinsert" .. (auto_select and "" or ",noselect")
@@ -81,55 +87,47 @@ return {
                 ["<C-p>"] = cmp.mapping.select_prev_item({
                     behavior = cmp.SelectBehavior.Insert
                 }),
-                ["<C-Space>"] = cmp.mapping.complete(),
-                -- ["<CR>"] = LazyVim.cmp.confirm({
-                --     select = auto_select
-                -- }),
-                -- ["<C-y>"] = LazyVim.cmp.confirm({
-                --     select = true
-                -- }),
-                -- ["<S-CR>"] = LazyVim.cmp.confirm({
-                --     behavior = cmp.ConfirmBehavior.Replace
-                -- }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-                ["<C-CR>"] = function(fallback)
-                    cmp.abort()
-                    fallback()
-                end,
-                ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-                -- ["<tab>"] = function(fallback)
-                --     return LazyVim.cmp.map({"snippet_forward", "ai_accept"}, fallback)()
-                -- end
+                ['<TAB>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
             }),
             sources = cmp.config.sources({
                 { name = "nvim_lsp" },
 		        -- { name = "codeium" },
-		        { name = "luasnip" },
                 { name = "buffer-lines"},
+                { name = "css-variables" },
+                { name = "scss variables" },
+                { name = "sass-variables" },
+                { name = "obsidian.nvim" },
+		        { name = "luasnip" },
+                -- { name = "cmp-yank" },
+                { name = "rg" },
                 { name = "path" },
                 { name = "buffer" },
                 { name = "bufname" },
-                { name = 'calc' },
+                { name = "calc" },
                 { name = "spell" },
-                { name = 'emoji' }
+                -- { name = 'emoji' },
             }),
 
             formatting = {
+                fields = { "menu", "abbr", "kind" },
                 format = function(entry, vim_item)
                     -- Kind icons
-                    vim_item.kind = (kind_icons[vim_item.kind] or vim_item.kind) -- This will only show the icon if it exists, otherwise it will show the name of the item kind
+                    vim_item.kind = (kind_icons[vim_item.kind] or '') .. " " .. vim_item.kind
                     -- Source
                     vim_item.menu = ({
-                        buffer = "[Buffer]",
-                        nvim_lsp = "[LSP]",
-                        luasnip = "[LuaSnip]",
-                        nvim_lua = "[Lua]",
-                        latex_symbols = "[LaTeX]",
-            			codeium = ""
+                        nvim_lsp = "󰰍",
+                        luasnip = "",
+                        buffer = "",
+                        path = "",
+                        rg = "󰬎",
+            			codeium = "",
+                        spell = "󰊄",
+                        calc = "󰃬"
                     })[entry.source.name] or entry.source.name
                     return vim_item
                 end
             },
-            
+
             experimental = {
                 -- -- only show ghost text when we show ai completions
                 -- ghost_text = vim.g.ai_cmp and {
@@ -142,5 +140,4 @@ return {
             sorting = defaults.sorting
         }
     end,
-    -- main = "lazyvim.util.cmp"
 }
