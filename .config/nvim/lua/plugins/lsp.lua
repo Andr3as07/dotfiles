@@ -1,6 +1,5 @@
 local function on_attach(_, _)
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = "Rename"})
-    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = "Code Action"})
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = "Definition"})
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { desc = "Implementation"})
     vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references, { desc = "References"})
