@@ -53,6 +53,21 @@ alias md="make debug"
 alias mp="make production"
 alias mi="make install"
 
+# tmux
+alias t="tmux"
+alias ta="tmux attach -t "
+alias tl="tmux ls"
+
+tdir() {
+  local session_name
+  session_name=$(basename "$PWD" | tr '[:upper:]' '[:lower:]')
+  if tmux has-session -t "$session_name" 2>/dev/null; then
+    tmux attach-session -t "$session_name"
+  else
+    tmux new-session -s "$session_name"
+  fi
+}
+
 # title
 title() { printf "\033]0;$*\007"; }
 
@@ -62,7 +77,6 @@ alias -- ..="cd .."
 
 # mkdir
 alias mkdir="mkdir -pv"
-alias mkcd="foo() { mkdir -p "$1"; cd "$1" }: foo"
 
 # mv
 alias mv="mv -iv"
@@ -159,11 +173,22 @@ alias git-list-untracked='git fetch --prune && git branch -r | awk "{print \$1}"
 alias git-remove-untracked='git fetch --prune && git branch -r | awk "{print \$1}" | grep -E -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk "{print \$1}" | xargs git branch -d'
 
 # Docker
-alias dk='docker'
-alias dco="docker-compose"
+alias d='docker'
+alias dps="docker ps"
+alias dex="docker exec -it"
+
+if docker compose version >/dev/null 2>&1; then
+  alias dc='docker compose'
+else
+  alias dc='docker-compose'
+fi
+
+alias dcd="dc down"
+alias dcu="dc up"
 
 # SystemD
 alias sc='systemctl'
+alias sysctl='systemctl'
 
 # Shell
 alias :q='exit'
