@@ -18,7 +18,7 @@ eval "$(starship init bash)"
 source $XDG_CONFIG_HOME/sh/alias
 
 # Colors
-source $XDG_CONFIG_HOME/sh/color
+# source $XDG_CONFIG_HOME/sh/color
 
 # Blesh
 source ~/.local/share/blesh/ble.sh
