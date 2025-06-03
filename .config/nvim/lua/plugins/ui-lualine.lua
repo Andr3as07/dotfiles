@@ -5,20 +5,29 @@ return {
     opts = {
         sections = {
             lualine_a = { 'mode' },
-            lualine_b = { 'branch', 'diff', 'diagnostics' },
-            lualine_c = { 'filename' },
-            lualine_x = { 'encoding', 'fileformat', 'filetype' },
-            lualine_y = { 'searchcount', 'selectioncount' },
+            lualine_b = { 'branch', 'diff' },
+            lualine_c = { 'filename', 'diagnostics' },
+            lualine_x = {
+                {
+                    'encoding',
+                    cond = function()
+                        return vim.bo.fileencoding ~= 'utf-8'
+                    end
+                },
+                {
+                    'fileformat',
+                    cond = function()
+                        return vim.bo.fileformat ~= 'unix'
+                    end
+                },
+                'filetype'
+            },
+            lualine_y = { 'searchcount', 'selectioncount', 'lsp_status' },
             lualine_z = { 'location', 'progress' }
+        },
+        extensions = {
+            'lazy',
+            'neo-tree'
         }
     },
-    config = function(opts, _)
-        local lualine = require('lualine')
-        lualine.setup(opts)
-        -- vim.opt.laststatus = 0
-        vim.opt.showmode = false
-        vim.opt.ruler = false
-        vim.opt.showcmd = false
-        vim.opt.statusline = ''
-    end
 }
