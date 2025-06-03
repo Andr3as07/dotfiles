@@ -90,6 +90,7 @@ return {
                 ['<TAB>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
             }),
             sources = cmp.config.sources({
+		        { name = "luasnip" },
                 { name = "nvim_lsp" },
 		        -- { name = "codeium" },
                 { name = "buffer-lines"},
@@ -97,9 +98,8 @@ return {
                 { name = "scss variables" },
                 { name = "sass-variables" },
                 { name = "obsidian.nvim" },
-		        { name = "luasnip" },
                 -- { name = "cmp-yank" },
-                { name = "rg" },
+                -- { name = "rg" },
                 { name = "path" },
                 { name = "buffer" },
                 { name = "bufname" },
