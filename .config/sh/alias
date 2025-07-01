@@ -220,16 +220,16 @@ function b() {
 
     # Rad file and handle env variables
     file=$(eval "echo \"$(cat "$fpath")\"");
-    line=$(echo $file | grep "^$1:");
+    line=$(echo "$file" | grep "^$1:");
 
     if [ ! "$line" ]; then
-        echo "${RED}No bookmark with the name $1 found!${NC}";
+        echo -e "${RED}No bookmark with the name $1 found!${NC}";
         return 1;
     fi
 
     if (( $(grep -c . <<<"$line") > 1 )); then
         # line has more than one line
-        echo "${RED}Multiple bookmarks with the $1 name found!${NC}";
+        echo -e "${RED}Multiple bookmarks with the $1 name found!${NC}";
         return 1;
     fi
 
