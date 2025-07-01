@@ -5,9 +5,11 @@
 # =================================================================
 
 # dmenu
-. "${HOME}/.cache/wal/colors.sh"
-alias dmenu='dmenu -nb "$color0" -nf "$color15" -sb "$color1" -sf "$color15"'
-alias dmenushow='dmenushow -nb "$color0" -nf "$color15" -sb "$color1" -sf "$color15"'
+if [ -f ~/.cache/wal/colors.sh ]; then
+    . "${HOME}/.cache/wal/colors.sh"
+    alias dmenu='dmenu -nb "$color0" -nf "$color15" -sb "$color1" -sf "$color15"'
+    alias dmenushow='dmenushow -nb "$color0" -nf "$color15" -sb "$color1" -sf "$color15"'
+fi
 
 # ls
 alias ls="ls -T 0 --color=auto"
@@ -113,9 +115,11 @@ function autotex() {
   while inotifywait -e close_write $1; do pdflatex $1; done
 }
 
-# Dotfile management
-# credit: DistroTube [https://youtube.com/watch?v=tBoLDpTWVOM]
-alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
+if [ -d ~/.dotfiles ]; then
+    # Dotfile management
+    # credit: DistroTube [https://youtube.com/watch?v=tBoLDpTWVOM]
+    alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
+fi
 
 # Window swallowing
 if command -v devour > /dev/null; then
@@ -131,65 +135,69 @@ fi
 alias ledger="ledger -f $HOME/.local/share/ledger/finance.dat"
 
 # Git
-alias g='git'
-alias get='git'
-alias gut='git'
+if command -v git > /dev/null; then
+    alias g='git'
+    alias get='git'
+    alias gut='git'
 
-alias ga='git add'
-alias gap='git add --patch'
+    alias ga='git add'
+    alias gap='git add --patch'
 
-alias gb='git branch'
-alias gba='git branch --all'
-alias gbr='git branch --move'
+    alias gb='git branch'
+    alias gba='git branch --all'
+    alias gbr='git branch --move'
 
-alias gc='git commit -v'
-alias gcall='git commit -v -all'
-alias gcamd='git commit -v --amend -C HEAD'
+    alias gc='git commit -v'
+    alias gcall='git commit -v -all'
+    alias gcamd='git commit -v --amend -C HEAD'
 
-alias gcl='git clone'
+    alias gcl='git clone'
 
-alias gclean='git clean -fd'
+    alias gclean='git clean -fd'
 
-alias ghm='cd "$(git rev-parse --show-toplevel)"' # Git home
+    alias ghm='cd "$(git rev-parse --show-toplevel)"' # Git home
 
-alias gd='git diff'
-alias gds='git diff --staged'
+    alias gd='git diff'
+    alias gds='git diff --staged'
 
-alias gg='git log --graph --abbrev-commit --date=relative'
-alias ggf='git log --graph --date=short --pretty=format:'\''%C(auto)%h %Cgreen%an%Creset %Cblue%cd%Creset %C(auto)%d %s'\'''
-alias ggs='gg --stat'
-alias gll='git log --graph --pretty=oneline --abbrev-commit'
-alias gnew='git log HEAD@{1}..HEAD@{0}' # Show commits since last pull, see http://blogs.atlassian.com/2014/10/advanced-git-aliases/
-alias gwc='git whatchanged'
+    alias gg='git log --graph --abbrev-commit --date=relative'
+    alias ggf='git log --graph --date=short --pretty=format:'\''%C(auto)%h %Cgreen%an%Creset %Cblue%cd%Creset %C(auto)%d %s'\'''
+    alias ggs='gg --stat'
+    alias gll='git log --graph --pretty=oneline --abbrev-commit'
+    alias gnew='git log HEAD@{1}..HEAD@{0}' # Show commits since last pull, see http://blogs.atlassian.com/2014/10/advanced-git-aliases/
+    alias gwc='git whatchanged'
 
-alias gl='git pull'
+    alias gl='git pull'
 
-alias gr='git remote'
+    alias gr='git remote'
 
-alias gsu='git submodule update --init --recursive'
+    alias gsu='git submodule update --init --recursive'
 
-alias gsw='git switch'
+    alias gsw='git switch'
 
-alias gst='git status'
-alias gch='git checkout'
-alias gtree='git log --graph --oneline --all'
+    alias gst='git status'
+    alias gch='git checkout'
+    alias gtree='git log --graph --oneline --all'
 
-alias git-list-untracked='git fetch --prune && git branch -r | awk "{print \$1}" | grep -E -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk "{print \$1}"'
-alias git-remove-untracked='git fetch --prune && git branch -r | awk "{print \$1}" | grep -E -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk "{print \$1}" | xargs git branch -d'
-
-# Docker
-alias d='docker'
-alias dps="docker ps"
-alias dex="docker exec -it"
-
-if docker compose version >/dev/null 2>&1; then
-  alias dc='docker compose'
-else
-  alias dc='docker-compose'
+    alias git-list-untracked='git fetch --prune && git branch -r | awk "{print \$1}" | grep -E -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk "{print \$1}"'
+    alias git-remove-untracked='git fetch --prune && git branch -r | awk "{print \$1}" | grep -E -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk "{print \$1}" | xargs git branch -d'
 fi
 
-alias dcd="dc down"
-alias dcu="dc up"
+# Docker
+if command -v docker > /dev/null; then
+    alias d='docker'
+    alias dps="docker ps"
+    alias dex="docker exec -it"
+
+    if docker compose version >/dev/null 2>&1; then
+      alias dc='docker compose'
+    else
+      alias dc='docker-compose'
+    fi
+
+    alias dcd="dc down"
+    alias dcu="dc up"
+fi
 
 # SystemD
 alias sc='systemctl'
