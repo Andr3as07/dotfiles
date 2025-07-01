@@ -1,10 +1,12 @@
+@import '../../.cache/wal/colors-waybar.css';
+
 * {
   font-family: Material Design Icons, JetBrainsMono Nerd Font, FiraCode Nerd Font;
   font-size: 10px;
 }
 
 window#waybar {
-  background-color: #1c1d26;
+  background-color: transparent;
   color: #f8f8f2;
 }
 
@@ -13,7 +15,7 @@ window#waybar.hidden {
 }
 
 #window {
-  color: #64727d;
+  color: @color7;
 }
 
 @keyframes button_activate {
@@ -28,7 +30,7 @@ window#waybar.hidden {
 
 #workspaces button {
   border: none;
-  color: #bd93f9;
+  color: @color1;
   font-weight: bolder;
   padding: 3px;
   background: transparent;
@@ -36,17 +38,17 @@ window#waybar.hidden {
 }
 
 #workspaces button.active {
-  color: #bd93f9;
+  color: @color2;
   animation: button_activate .2s ease-in-out;
 }
 
 #workspaces button.urgent {
-  color: #ff8873;
+  color: @color13;
   background: radial-gradient(circle, rgba(25, 79, 255, 0.3) 20%, rgba(132, 129, 156, 0) 30%);
 }
 
 #workspaces button.persistent {
-  color: #a9ac88;
+  color: @color11;
 }
 
 #workspaces button.active:hover,
@@ -70,7 +72,8 @@ window#waybar.hidden {
 #idle_inhibitor,
 #bluetooth,
 #privacy {
-  background-color: #44475a;
+  background-color: @background;
+  color: @color5;
   padding: 0em 2em;
   padding-left: 7.5px;
   padding-right: 7.5px;
@@ -90,12 +93,11 @@ window#waybar.hidden {
 }
 
 #cpu {
-  color: #6c71c4;
   border-radius: 0 3px 3px 0;
 }
 
 #memory {
-  color: #2aa198;
+  color: @color5;
   border-radius: 3px 0 0 3px;
   margin-right: 0;
   padding-right: 0;
@@ -117,7 +119,6 @@ window#waybar.hidden {
 #bluetooth {
     border-radius: 0;
     margin-right: 0;
-    color: #1793d1;
     font-size: 15px;
 }
 
@@ -127,11 +128,10 @@ window#waybar.hidden {
   margin-left: 5px;
   font-size: 15px;
   border-radius: 3px 0px 0px 3px;
-  color: #bd93f9;
+  color: @foreground;
 }
 
 #pulseaudio {
-  color: #268bd2;
   padding-left: 10px;
   margin-right: 10px;
   font-size: 15px;
@@ -139,14 +139,13 @@ window#waybar.hidden {
 }
 
 #pulseaudio.muted {
-  color: #fb958b;
+  color: @color3;
   padding-left: 10px;
   font-size: 15px;
   border-radius: 3px;
 }
 
 #backlight {
-  color: #8a909e;
   padding-right: 5px;
   padding-left: 8px;
   font-size: 15px;
@@ -154,7 +153,6 @@ window#waybar.hidden {
 
 #network {
   padding-left: 0.2em;
-  color: #268bd2;
   border-radius: 3px;
   padding-left: 12px;
   padding-right: 14px;
@@ -163,11 +161,11 @@ window#waybar.hidden {
 }
 
 #network.disconnected {
-  color: #fb958b;
+  color: @color3;
 }
 
 #custom-powermenu {
-  color: #e78284;
+  color: @color3;
   margin-left: -12px;
   margin-right: 5px;
   padding-left: 12px;
@@ -187,14 +185,14 @@ window#waybar.hidden {
 #battery.warning,
 #battery.full,
 #battery.plugged {
-  color: #91ffc3;
+  color: @color9;
   padding-left: 6px;
   padding-right: 12px;
   font-size: 14px;
 }
 
 #battery.charging {
-  color: #87bb82;
+  color: @color7;
   font-size: 14px;
   padding-right: 13px;
   padding-left: 8px;
@@ -230,7 +228,7 @@ window#waybar.hidden {
 }
 
 #clock {
-  color: #f8f8f2;
+  color: @foreground;
   font-size: 12px;
   font-weight: bolder;
   margin-right: 10px;
@@ -239,16 +237,12 @@ window#waybar.hidden {
 tooltip {
   border-radius: 8px;
   padding: 15px;
-  background-color: #131822;
+  background-color: @background;
 }
 
 tooltip label {
   padding: 5px;
-  background-color: #131822;
-}
-
-label:focus {
-  background-color: #131822;
+  background-color: @background;
 }
 
 #tray {
@@ -268,10 +262,10 @@ label:focus {
 }
 
 #idle_inhibitor {
-  background-color: #131822;
+  background-color: @background;
 }
 
 #idle_inhibitor.activated {
-  background-color: #ecf0f1;
-  color: #2d3436;
+  background-color: @color1;
+  color: @foreground;
 }

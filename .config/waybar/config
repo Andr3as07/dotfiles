@@ -49,7 +49,8 @@
             "class<org.gnome.Nautilus>": "",
             "class<Code>": "󰨞",
             "class<obsidian>": "󰰥",
-            "alacritty": ""
+            "alacritty": "",
+            "kitty": ""
         },
         "format-icons": {
             "default": "",
@@ -85,6 +86,7 @@
         "separate-outputs": true,
         "icon": false,
         "rewrite": {
+            "(.*) — Zen Browser": " $1",
             "(.*) — Mozilla Firefox": " $1",
             "(.*) — LibreOffice Writer": "󰈭 $1",
             "(.*) — LibreOffice Impress": "󰈨 $1",
@@ -201,6 +203,6 @@
     "custom/powermenu": {
         "format": "⏻ ",
         "tooltip": false,
-        "on-click": "~/.config/rofi/powermenu/type-2/powermenu.sh &"
+        "on-click": "~/.local/bin/dmenuexit"
     }
 }
