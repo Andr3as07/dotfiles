@@ -245,13 +245,25 @@ function wiki() {
 }
 
 # ai-cli
-function shai() {
-  AI_RESPONSE=$(echo "$@" | ai write_shell_command)
-  echo -e "\e[31m- AI RESPONSE: ALWAYS VERIFY BEFORE RUNNING ----------------------------"
-  echo "$AI_RESPONSE"
-  echo -e "- PRESS Ctrl+K TO RUN --------------------------------------------------\e[0m"
-  AI_RESPONSE=$(printf "%q" "$AI_RESPONSE")
-  bind "\"\C-k\": \"$AI_RESPONSE\""
-}
+if command -v ai > /dev/null; then
+    function shai() {
+      local AI_CONTEXT="CWD: $(pwd)
+DISTRO: $(cat /etc/*-release | grep ID | head -n1 | cut -d '=' -f2)"
+      local AI_RESPONSE=$(echo "
+### CONTEXT
 
-alias '§'='shai'
+$AI_CONTEXT
+
+### PROMPT
+
+$@" | ai write_shell_command 2>/dev/null)
+
+      echo -e "\e[31m- AI RESPONSE: ALWAYS VERIFY BEFORE RUNNING ----------------------------\e[0m"
+      echo "$AI_RESPONSE"
+      echo -e "\e[31m- PRESS Ctrl+A TO RUN --------------------------------------------------\e[0m"
+      local AI_RESPONSE=$(printf "%q" "$AI_RESPONSE")
+      bind "\"\C-a\": \"$AI_RESPONSE\""
+    }
+
+    alias '§'='shai'
+fi
