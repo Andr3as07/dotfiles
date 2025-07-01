@@ -1,0 +1,33 @@
+gui:
+  showRandomTip: false
+  nerdFontsVersion: "3"
+  branchColorPatterns:
+    '^feat(ure)?/': '#4493F8'
+    '^task/': '#D29922'
+    '^(bugfix|bug|fix|hotfix)/': '#F85149'
+    '^(main|master)': '#3FB950'
+    '^release/': '#00E6C4'
+    '^dependabot/': '#0366d6'
+  showDivergenceFromBaseBranch: arrowAndNumber
+  filterMode: fuzzy
+git:
+  paging:
+    colorArg: always
+    pager: diff-so-fancy
+  commitPrefix:
+    - pattern: "^(bugfix|fix|bug|hotfix)/(\\w+)/.+"
+      replace : 'fix($2): '
+    - pattern: "^(feature|feat)/(\\w+)/.+"
+      replace : 'feat($2): '
+    - pattern: "^(\\w+)/(\\w+)/.+"
+      replace : '$1($2): '
+
+    - pattern: "^(bugfix|fix|bug|hotfix)/.+"
+      replace : 'fix: '
+    - pattern: "^(feature|feat)/.+"
+      replace : 'feat: '
+    - pattern: "^(\\w+)/.+"
+      replace : '$1: '
+
+    - pattern: "^(main|master)"
+      replace : 'WIP'
