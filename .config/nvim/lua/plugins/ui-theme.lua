@@ -11,6 +11,7 @@ return {
             theme.setup(opts)
         end
     },
+    { "AlphaTechnolog/pywal.nvim" },
     { "rose-pine/neovim", name = "rose-pine" },
     { "nyoom-engineering/oxocarbon.nvim" },
     { "catppuccin/nvim", name = "catppuccin" },
