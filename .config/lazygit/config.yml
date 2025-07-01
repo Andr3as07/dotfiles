@@ -10,6 +10,7 @@ gui:
     '^dependabot/': '#0366d6'
   showDivergenceFromBaseBranch: arrowAndNumber
   filterMode: fuzzy
+
 git:
   paging:
     colorArg: always
@@ -31,3 +32,5 @@ git:
 
     - pattern: "^(main|master)"
       replace : 'WIP'
+
+notARepository: 'quit'
