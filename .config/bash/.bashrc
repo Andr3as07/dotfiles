@@ -18,7 +18,22 @@ eval "$(starship init bash)"
 source $XDG_CONFIG_HOME/sh/alias
 
 # Colors
-# source $XDG_CONFIG_HOME/sh/color
+source $XDG_CONFIG_HOME/sh/color
+
+# Options
+HISTCONTROL=ignoredups
+HISTSIZE=20000
+HISTFILESIZE=20000
+shopt -s histappend
+
+shopt -s autocd
+shopt -s cdspell
+shopt -s dirspell
+shopt -s direxpand
+shopt -s histreedit
+shopt -s histverify
+
+shopt -u cdable_vars
 
 # Blesh
 source ~/.local/share/blesh/ble.sh
