@@ -1,9 +1,8 @@
 #!/bin/zsh
 
-# Terminal color definitions
-if [ -f $XDG_CONFIG_HOME/sh/colorscheme ]; then
-    (cat $XDG_CONFIG_HOME/sh/colorscheme &)
-fi
+# Pywal
+(cat ~/.cache/wal/sequences &)
+source ~/.cache/wal/colors-tty.sh
 
 # Dircolors
 if command -v dircolors > /dev/null; then

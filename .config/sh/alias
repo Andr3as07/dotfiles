@@ -4,6 +4,11 @@
 # Alias
 # =================================================================
 
+# dmenu
+. "${HOME}/.cache/wal/colors.sh"
+alias dmenu='dmenu -nb "$color0" -nf "$color15" -sb "$color1" -sf "$color15"'
+alias dmenushow='dmenushow -nb "$color0" -nf "$color15" -sb "$color1" -sf "$color15"'
+
 # ls
 alias ls="ls -T 0 --color=auto"
 alias ll="ls -AhlF"
