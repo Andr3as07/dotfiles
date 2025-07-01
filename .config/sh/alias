@@ -244,26 +244,4 @@ function wiki() {
   curl -s "https://en.wikipedia.org/api/rest_v1/page/summary/$1" | jq -r .extract
 }
 
-# ai-cli
-if command -v ai > /dev/null; then
-    function shai() {
-      local AI_CONTEXT="CWD: $(pwd)
-DISTRO: $(cat /etc/*-release | grep ID | head -n1 | cut -d '=' -f2)"
-      local AI_RESPONSE=$(echo "
-### CONTEXT
-
-$AI_CONTEXT
-
-### PROMPT
-
-$@" | ai write_shell_command 2>/dev/null)
-
-      echo -e "\e[31m- AI RESPONSE: ALWAYS VERIFY BEFORE RUNNING ----------------------------\e[0m"
-      echo "$AI_RESPONSE"
-      echo -e "\e[31m- PRESS Ctrl+A TO RUN --------------------------------------------------\e[0m"
-      local AI_RESPONSE=$(printf "%q" "$AI_RESPONSE")
-      bind "\"\C-a\": \"$AI_RESPONSE\""
-    }
-
-    alias '§'='shai'
-fi
+source "${XDG_CONFIG_HOME:-~/.config}/sh/alias-ai"
