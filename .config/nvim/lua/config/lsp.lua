@@ -1,13 +1,14 @@
 vim.lsp.enable({
     "lua_ls",
     "pylsp",
+    "clangd",
 })
 
 vim.diagnostic.config({
     virtual_lines = true,
     -- virtual_text = true,
-    -- underline = true,
-    update_in_insert = false,
+    underline = true,
+    update_in_insert = true,
     severity_sort = true,
     float = {
         border = "rounded",

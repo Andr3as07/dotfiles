@@ -1,5 +1,5 @@
 return {
-    cmp = {
+    cmd = {
         "pylsp",
     },
 	filetypes = {
