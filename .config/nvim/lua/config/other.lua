@@ -37,3 +37,6 @@ vim.o.splitright = true
 
 -- Keep undo history
 vim.o.undofile = true
+
+-- Hide cmdline
+vim.opt.cmdheight = 0
