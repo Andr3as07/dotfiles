@@ -14,6 +14,8 @@ return {
             ['!='] = '==',
             ['1'] = '0',
             ['0'] = '1',
+            ['in'] = 'out',
+            ['out'] = 'in',
             ['break'] = 'continue',
             ['continue'] = 'break',
             ['get'] = 'set',
@@ -32,6 +34,8 @@ return {
             ['--'] = '++',
             ['->'] = '.',
             ['.'] = '->',
+            ['and'] = 'or',
+            ['or'] = 'and',
         },
         remove_default_keybinds = false, -- default: <leader>i
         remove_default_inverses = true,
