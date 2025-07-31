@@ -66,8 +66,7 @@ alias ta="tmux attach -t "
 alias tl="tmux ls"
 
 tdir() {
-  local session_name
-  session_name=$(basename "$PWD" | tr '[:upper:]' '[:lower:]')
+  local session_name=$(basename "$PWD" | tr '[:upper:]' '[:lower:]')
   if tmux has-session -t "$session_name" 2>/dev/null; then
     tmux attach-session -t "$session_name"
   else
