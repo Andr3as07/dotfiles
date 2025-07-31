@@ -1,8 +1,10 @@
 #!/bin/zsh
 
 # Pywal
-(cat ~/.cache/wal/sequences &)
-source ~/.cache/wal/colors-tty.sh
+if [ -f ~/.cache/wal/sequences ]; then
+    (cat ~/.cache/wal/sequences &)
+    source ~/.cache/wal/colors-tty.sh
+fi
 
 # Dircolors
 if command -v dircolors > /dev/null; then
