@@ -24,9 +24,9 @@ family = "ComicShannsMono Nerd Font"
 style = "Bold"
 
 [font.bold_italic]
-family = "Monaspace Radon"
+family = "Monaspace Radon NF"
 style = "Bold Italic"
 
 [font.italic]
-family = "Monaspace Radon"
+family = "Monaspace Radon NF"
 style = "Italic"
