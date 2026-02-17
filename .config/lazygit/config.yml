@@ -1,4 +1,5 @@
 gui:
+  useHunkModeInStagingView: false
   showRandomTip: false
   nerdFontsVersion: "3"
   branchColorPatterns:
@@ -10,27 +11,23 @@ gui:
     '^dependabot/': '#0366d6'
   showDivergenceFromBaseBranch: arrowAndNumber
   filterMode: fuzzy
-
 git:
-  paging:
-    colorArg: always
-    pager: diff-so-fancy
+  pagers:
+    - colorArg: always
+      pager: diff-so-fancy
   commitPrefix:
     - pattern: "^(bugfix|fix|bug|hotfix)/(\\w+)/.+"
-      replace : 'fix($2): '
+      replace: 'fix($2): '
     - pattern: "^(feature|feat)/(\\w+)/.+"
-      replace : 'feat($2): '
+      replace: 'feat($2): '
     - pattern: "^(\\w+)/(\\w+)/.+"
-      replace : '$1($2): '
-
+      replace: '$1($2): '
     - pattern: "^(bugfix|fix|bug|hotfix)/.+"
-      replace : 'fix: '
+      replace: 'fix: '
     - pattern: "^(feature|feat)/.+"
-      replace : 'feat: '
+      replace: 'feat: '
     - pattern: "^(\\w+)/.+"
-      replace : '$1: '
-
+      replace: '$1: '
     - pattern: "^(main|master)"
-      replace : 'WIP'
-
+      replace: 'WIP'
 notARepository: 'quit'
