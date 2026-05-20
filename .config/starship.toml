@@ -36,7 +36,7 @@ truncation_symbol = ".../"
 truncation_length = 4
 truncate_to_repo = true # truncates directory to root folder if in github repo
 style = "bold italic blue"
-repo_root_style = 'bold italic cyan'
+#repo_root_style = 'bold italic cyan'
 
 [cmd_duration]
 min_time = 4000
