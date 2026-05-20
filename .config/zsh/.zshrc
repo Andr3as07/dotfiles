@@ -58,6 +58,8 @@ source $XDG_CONFIG_HOME/zsh/keybindings
 
 eval "$(zoxide init zsh)"
 
+eval "$(atuin init zsh)"
+
 # Syntax highlighting
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
