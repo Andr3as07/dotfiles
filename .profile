@@ -14,7 +14,7 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 #export XEDITOR="/usr/bin/emacs -no-site-file"
-#export EDITOR="/usr/bin/emacs -no-site-file"
+export EDITOR="/usr/bin/nvim"
 #export VISUAL="/usr/bin/emacs -no-site-file"
 #export TEXEDIT="/usr/bin/emacs -no-site-file +%d %s"
 #export MPEDIT="/usr/bin/emacs -no-site-file +%d %s"
