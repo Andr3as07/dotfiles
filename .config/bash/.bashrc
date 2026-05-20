@@ -38,6 +38,8 @@ shopt -u cdable_vars
 # Display colorscript
 #colorscript.sh -r
 
+eval "$(zoxide init bash)"
+
 eval "$(thefuck --alias)"
 # FIXME: This has some problems if we connect with ssh
 # bind "\"\C-f\": \"fuck\""
