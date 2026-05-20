@@ -11,7 +11,6 @@ export CLICOLOR=1
 export TERM=xterm-256color
 
 # Prompt
-#source $XDG_CONFIG_HOME/bash/prompt
 eval "$(starship init bash)"
 
 # Alias
