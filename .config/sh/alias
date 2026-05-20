@@ -26,6 +26,10 @@ alias ports="netstat -tulanp"
 alias myip="curl ifconfig.io"
 alias myip4="curl ifconfig.io -4"
 
+# PHP
+alias phplh="find . -name '*.php' -print0 | xargs -0 php -l"
+alias phpl="phplh > /dev/null"
+
 # ps
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 
@@ -120,6 +124,10 @@ if [ -d ~/.dotfiles ]; then
     alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 fi
 
+if [ -d ~/.config/composer ]; then
+    export PATH="$PATH:$HOME/.config/composer/vendor/bin/"
+fi
+
 # Window swallowing
 if command -v devour > /dev/null; then
    #alias mpv="devour mpv"
@@ -167,6 +175,7 @@ if command -v git > /dev/null; then
     alias gwc='git whatchanged'
 
     alias gl='git pull'
+    alias gpd='git log -p HEAD@{1}..HEAD'
 
     alias gr='git remote'
 
@@ -197,6 +206,10 @@ if command -v docker > /dev/null; then
     alias dcd="dc down"
     alias dcu="dc up"
 fi
+
+# Claude
+alias cc="claude"
+alias ccr="claude --resume"
 
 # SystemD
 alias sc='systemctl'
