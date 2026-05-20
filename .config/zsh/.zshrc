@@ -42,7 +42,6 @@ set -o notify
 set +o recexact
 
 # Prompt
-#source $XDG_CONFIG_HOME/zsh/prompt
 eval "$(starship init zsh)"
 
 # Alias
