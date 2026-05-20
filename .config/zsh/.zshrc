@@ -57,6 +57,8 @@ source $XDG_CONFIG_HOME/zsh/keybindings
 # Display colorscript
 #colorscript.sh -r
 
+eval "$(zoxide init zsh)"
+
 # Syntax highlighting
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
