@@ -1,7 +1,7 @@
 @import '../../.cache/wal/colors-waybar.css';
 
 * {
-  font-family: Material Design Icons, JetBrainsMono Nerd Font, FiraCode Nerd Font;
+  font-family: "Material Design Icons", "JetBrainsMono Nerd Font", "FiraCode Nerd Font";
   font-size: 10px;
 }
 
