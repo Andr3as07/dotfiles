@@ -13,11 +13,11 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-#export XEDITOR="/usr/bin/emacs -no-site-file"
-#export EDITOR="/usr/bin/emacs -no-site-file"
-#export VISUAL="/usr/bin/emacs -no-site-file"
-#export TEXEDIT="/usr/bin/emacs -no-site-file +%d %s"
-#export MPEDIT="/usr/bin/emacs -no-site-file +%d %s"
+if [ -d "$HOME/.cargo/bin" ] ; then
+    PATH="$HOME/.cargo/bin:$PATH"
+fi
+
+export EDITOR="/usr/bin/nvim"
 
 # Cleanup
 
@@ -57,3 +57,7 @@ alias wget="wget --hsts-file=\"$XDG_CACHE_HOME/wget-hsts\""
 # Setup askpass
 #export SUDO_ASKPASS=$HOME/.local/bin/dmenupass
 #export GPG_TTY=$(tty)
+
+# Added by Toolbox App
+export PATH="$PATH:${XDG_DATA_HOME:-$HOME/.local/share}/JetBrains/Toolbox/scripts"
+
