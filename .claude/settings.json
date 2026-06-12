@@ -1,0 +1,94 @@
+{
+  "enabledPlugins": {
+    "code-review@claude-plugins-official": true,
+    "commit-commands@claude-plugins-official": true,
+    "php-lsp@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true
+  },
+  "env": {
+    "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "75"
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "atuin hook claude-code",
+            "type": "command"
+          }
+        ],
+        "matcher": "Bash"
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "hooks": [
+          {
+            "command": "atuin hook claude-code",
+            "type": "command"
+          }
+        ],
+        "matcher": "Bash"
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "echo '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"allow\"}}'",
+            "timeout": 5,
+            "type": "command"
+          }
+        ],
+        "matcher": "WebFetch|WebSearch"
+      },
+      {
+        "hooks": [
+          {
+            "command": "bash -c 'echo \"{\\\"hookSpecificOutput\\\":{\\\"hookEventName\\\":\\\"PreToolUse\\\",\\\"permissionDecision\\\":\\\"allow\\\"}}\"'",
+            "type": "command"
+          }
+        ],
+        "matcher": "Read|Glob|Grep"
+      },
+      {
+        "hooks": [
+          {
+            "command": "input=$(cat); cmd=$(echo \"$input\" | jq -r '.tool_input.command'); if echo \"$cmd\" | grep -qE '^\\s*(grep|php -l|go test|phpcs|cat|head|tail|wc|stat|file|ls|which|type|pwd|realpath|dirname|basename|uname|id|env|printenv|jq|xmllint|yamllint|bat|fd|eza)\\b' && ! echo \"$cmd\" | grep -qE '[|;&]'; then echo '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"allow\"}}'; fi",
+            "type": "command"
+          }
+        ],
+        "matcher": "Bash"
+      },
+      {
+        "hooks": [
+          {
+            "command": "atuin hook claude-code",
+            "type": "command"
+          }
+        ],
+        "matcher": "Bash"
+      }
+    ]
+  },
+  "skipWorkflowUsageWarning": true,
+  "spinnerTipsEnabled": false,
+  "spinnerVerbs": {
+    "mode": "append",
+    "verbs": [
+      "Hallucinating responsibly",
+      "Pretending to think",
+      "Confidently guessing",
+      "Blaming the context window",
+      "Consulting my imagination",
+      "Speedrunning your tech debt",
+      "Overthinking this",
+      "Apologizing in advance",
+      "Vibing with your codebase",
+      "Submitting my best guess"
+    ]
+  },
+  "syntaxHighlightingDisabled": false
+}
