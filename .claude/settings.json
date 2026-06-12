@@ -1,4 +1,9 @@
 {
+  "theme": "auto",
+  "statusLine": {
+    "type": "command",
+    "command": "claude-powerline"
+  },
   "enabledPlugins": {
     "code-review@claude-plugins-official": true,
     "commit-commands@claude-plugins-official": true,
