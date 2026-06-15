@@ -10,6 +10,8 @@
 export CLICOLOR=1
 export TERM=xterm-256color
 
+source ~/.config/bash/bash-preexec.sh
+
 # Prompt
 eval "$(starship init bash)"
 
@@ -42,8 +44,6 @@ if command -v "atuin" > /dev/null 2>&1; then
 fi
 
 eval "$(zoxide init bash)"
-
-eval "$(atuin init bash)"
 
 eval "$(thefuck --alias)"
 # FIXME: This has some problems if we connect with ssh
