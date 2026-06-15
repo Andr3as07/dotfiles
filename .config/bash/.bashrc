@@ -43,7 +43,7 @@ if command -v "atuin" > /dev/null 2>&1; then
     eval "$(atuin init bash)"
 fi
 
-eval "$(zoxide init bash)"
+eval "$(zoxide init --cmd cd bash)"
 
 eval "$(thefuck --alias)"
 # FIXME: This has some problems if we connect with ssh

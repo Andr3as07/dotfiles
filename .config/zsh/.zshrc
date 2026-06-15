@@ -56,7 +56,7 @@ source $XDG_CONFIG_HOME/zsh/keybindings
 # Display colorscript
 #colorscript.sh -r
 
-eval "$(zoxide init zsh)"
+eval "$(zoxide init --cmd cd zsh)"
 
 eval "$(atuin init zsh)"
 
