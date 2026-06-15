@@ -1,5 +1,4 @@
 return {
-    { "folke/tokyonight.nvim" },
     {
         "Mofiqul/dracula.nvim",
         lazy = false,
@@ -12,9 +11,6 @@ return {
         end
     },
     { "AlphaTechnolog/pywal.nvim" },
-    { "rose-pine/neovim", name = "rose-pine" },
-    { "nyoom-engineering/oxocarbon.nvim" },
-    { "catppuccin/nvim", name = "catppuccin" },
     {
         'andrew-george/telescope-themes',
         dependencies = {
