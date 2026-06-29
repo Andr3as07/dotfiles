@@ -58,11 +58,7 @@ source $XDG_CONFIG_HOME/zsh/keybindings
 
 eval "$(zoxide init --cmd cd zsh)"
 
-eval "$(atuin init zsh)"
-
 # Syntax highlighting
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-. "$HOME/.atuin/bin/env"
 
 eval "$(atuin init zsh)"

@@ -39,9 +39,7 @@ shopt -u cdable_vars
 # Display colorscript
 #colorscript.sh -r
 
-if command -v "atuin" > /dev/null 2>&1; then
-    eval "$(atuin init bash)"
-fi
+eval "$(atuin init bash)"
 
 eval "$(zoxide init --cmd cd bash)"
 
