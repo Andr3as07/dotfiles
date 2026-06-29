@@ -3,6 +3,7 @@ vim.lsp.enable({
     "pylsp",
     "clangd",
     "gopls",
+    "php_lsp",
 })
 
 vim.diagnostic.config({
