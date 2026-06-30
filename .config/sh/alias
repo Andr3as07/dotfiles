@@ -12,10 +12,14 @@ if [ -f ~/.cache/wal/colors.sh ]; then
 fi
 
 # ls
-alias ls="ls -T 0 --color=auto"
+if command -v eza > /dev/null; then
+    alias ls="eza"
+else
+    alias ls="ls -T 0 --color=auto"
+fi
 alias ll="ls -AhlF"
 alias lv="ls -lhF"
-alias lh="ls -lAhFd .[^.]*"
+alias lh="ls -lAhd .[^.]* -F"
 
 # history
 alias h="history"
