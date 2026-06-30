@@ -21,6 +21,11 @@ alias ll="ls -AhlF"
 alias lv="ls -lhF"
 alias lh="ls -lAhd .[^.]* -F"
 
+# bat 
+if command -v bat > /dev/null; then
+    alias cat="bat"
+fi
+
 # history
 alias h="history"
 alias hg="history | grep "
