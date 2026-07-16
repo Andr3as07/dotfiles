@@ -61,21 +61,39 @@ config pull
 ### Using GNU Stow
 
 Clone the repository somewhere in your home directory and use stow to create
-symlinks to the actual files.
+symlinks to the actual files. The repository ships a `.stowrc` that enables
+`--no-folding`, so stow links every file individually instead of linking
+whole directories at once. This matters: with folding on, any file another
+tool later writes into a stowed directory (e.g. `pip install --user`,
+newsboat's cache, a plugin manager) lands as a real file inside this git
+repository instead of your home directory.
 
 ```sh
-git clone https://github.com/Andr3as07/dotfiles.git; cd dotfiles; stow . --adopt
+git clone https://github.com/Andr3as07/dotfiles.git; cd dotfiles; stow .
 ```
 
-This will adopt your current configuration into the one found in this
-repository.
+If you already have existing configuration files that would conflict, stow
+will refuse and list them. You can pass `--adopt` to pull those files into
+the repository instead of failing:
 
-**Warning:** This method does not create any backups of your old data, it just
-overrides everything.
-Only use this method if you are absolutely sure you know what you are doing.
+```sh
+stow . --adopt
+```
 
-To update later on, just navigate to the newly created *dotfiles* directory and
-run `git pull`.
+**Warning:** `--adopt` overwrites the *tracked files in this repository* with
+whatever is already on your machine, not the other way around. Always run
+`git diff` immediately after and review it before committing, or you risk
+silently replacing curated dotfiles with unrelated local config.
+**Make a backup of your all your important data.**
+
+To update later on, navigate to the *dotfiles* directory and run:
+
+```sh
+git pull; stow -R .
+```
+
+The `-R` (restow) re-links everything, which is needed whenever an update adds
+new files to a directory you've already stowed.
 
 ### Git-Free Install
 
