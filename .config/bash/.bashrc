@@ -41,8 +41,10 @@ shopt -u cdable_vars
 
 eval "$(atuin init bash)"
 
-eval "$(zoxide init --cmd cd bash)"
-
 eval "$(thefuck --alias)"
 # FIXME: This has some problems if we connect with ssh
 # bind "\"\C-f\": \"fuck\""
+
+# zoxide must be initialized last (its doctor warns otherwise)
+_ZO_DOCTOR=0
+eval "$(zoxide init --cmd cd bash)"

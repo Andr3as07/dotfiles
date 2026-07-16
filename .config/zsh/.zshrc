@@ -56,9 +56,11 @@ source $XDG_CONFIG_HOME/zsh/keybindings
 # Display colorscript
 #colorscript.sh -r
 
-eval "$(zoxide init --cmd cd zsh)"
-
 # Syntax highlighting
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 eval "$(atuin init zsh)"
+
+# zoxide must be initialized last (its doctor warns otherwise)
+_ZO_DOCTOR=0
+eval "$(zoxide init --cmd cd zsh)"
