@@ -12,15 +12,25 @@ return {
     },
     { "AlphaTechnolog/pywal.nvim" },
     {
-        'andrew-george/telescope-themes',
-        dependencies = {
-            'nvim-telescope/telescope.nvim'
-        },
+        "zaldih/themery.nvim",
+        lazy = false,
         keys = {
-            { "<leader>uT", "<CMD>Telescope themes<CR>", "Change Theme" }
+            { "<leader>uT", "<CMD>Themery<CR>", desc = "Change Theme" }
         },
         config = function()
-            require('telescope').load_extension('themes')
+            local themes = {}
+            local seen = {}
+            for _, f in ipairs(vim.fn.globpath(vim.fn.stdpath("data") .. "/lazy/*/colors", "*.{vim,lua}", false, true)) do
+                local name = vim.fn.fnamemodify(f, ":t:r")
+                if not seen[name] then
+                    seen[name] = true
+                    table.insert(themes, name)
+                end
+            end
+            require("themery").setup({
+                themes = themes,
+                livePreview = true
+            })
         end
     }
 }
