@@ -96,6 +96,7 @@ alias -- ..="cd .."
 
 # mkdir
 alias mkdir="mkdir -pv"
+function mkcd() { mkdir -p "$1" && cd "$1"; }
 
 # mv
 alias mv="mv -iv"
@@ -118,6 +119,45 @@ alias j="jobs -l"
 # find
 function f { find $1 -name '*'$2'*' | sort; }
 function fh { find . -name '*'$1'*' | sort; }
+
+# fd
+if command -v fd > /dev/null; then
+    alias fd='fd --follow'
+    alias fh='fd --hidden'
+    alias ft='fd --type f'
+fi
+
+# utility
+choose() { echo "${@:$((RANDOM % $# + 1)):1}"; }
+confirm() { read -p "$1 [y/N] " r; [[ $r =~ ^[Yy]$ ]]; }
+retry() { n=$1; shift; for i in $(seq $n); do "$@" && return; done; }
+genpass() { tr -dc 'A-Za-z0-9!@#$%^&*' < /dev/urandom | head -c "${1:-20}"; echo; }
+decolor() { sed 's/\x1b\[[0-9;]*m//g'; }
+notify() { "$@"; notify-send "Done" "$* finished"; }
+diffc() { diff <($1) <($2); }
+trash() { mv "$@" ~/.local/share/Trash/files/; }
+swap() { mv "$1" /tmp/_swap_tmp && mv "$2" "$1" && mv /tmp/_swap_tmp "$2"; }
+around() { grep -C "${2:-2}" "$1"; }
+scratch() { ${EDITOR} /tmp/scratch.${1:-txt}; }
+
+# extract
+extract() {
+  case "$1" in
+    *.tar.gz|*.tgz) tar xzf "$1" ;;
+    *.tar.bz2)      tar xjf "$1" ;;
+    *.tar.xz)       tar xJf "$1" ;;
+    *.tar)          tar xf  "$1" ;;
+    *.zip)          unzip   "$1" ;;
+    *.gz)           gunzip  "$1" ;;
+    *.bz2)          bunzip2 "$1" ;;
+    *.xz)           unxz    "$1" ;;
+    *)              echo "unknown archive: $1" ;;
+  esac
+}
+
+alias stopwatch='time read -p "Press enter to stop"'
+alias diff='diff --color=auto'
+alias reload='exec $SHELL -l'
 
 # wget
 alias wget="wget -c"
@@ -168,10 +208,12 @@ if command -v git > /dev/null; then
     alias gcamd='git commit -v --amend -C HEAD'
 
     alias gcl='git clone'
+    function gclcd() { local dir="${2:-$(basename "${1##*:}" .git)}"; git clone "$@" && cd "$dir"; }
 
     alias gclean='git clean -fd'
 
     alias ghm='cd "$(git rev-parse --show-toplevel)"' # Git home
+    alias groot='cd "$(git rev-parse --show-toplevel)"'
 
     alias gd='git diff'
     alias gds='git diff --staged'
@@ -184,6 +226,9 @@ if command -v git > /dev/null; then
     alias gwc='git whatchanged'
 
     alias gl='git pull'
+    alias gp='git push'
+    alias gpf='git push --force-with-lease'
+    alias gf='git fetch --all --prune'
     alias gpd='git log -p HEAD@{1}..HEAD'
 
     alias gr='git remote'
@@ -192,12 +237,21 @@ if command -v git > /dev/null; then
 
     alias gsw='git switch'
 
+    alias gwip='git add -A && git commit -m "wip"'
+    alias gunwip='git reset HEAD~1'
+
     alias gst='git status'
     alias gch='git checkout'
+    alias gco='git checkout'
     alias gtree='git log --graph --oneline --all'
 
     alias git-remove-untracked='git fetch --prune && git branch -r | awk "{print \$1}" | grep -E -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk "{print \$1}" | xargs git branch -d'
     alias gru='git-remove-untracked'
+fi
+
+# Lazygit
+if command -v lazygit > /dev/null; then
+    alias lg=lazygit
 fi
 
 # Docker
@@ -221,6 +275,15 @@ alias cc="claude --model claude-sonnet-4-6"
 alias ccr="cc --resume"
 alias ccc="cc --continue"
 
+# Clipboard
+if command -v wl-copy > /dev/null; then
+    alias pbcopy='wl-copy'
+    alias pbpaste='wl-paste'
+elif command -v xclip > /dev/null; then
+    alias pbcopy='xclip -selection clipboard'
+    alias pbpaste='xclip -selection clipboard -o'
+fi
+
 # SystemD
 alias sc='systemctl'
 alias sysctl='systemctl'
@@ -228,7 +291,7 @@ alias sysctl='systemctl'
 # Shell
 alias :q='exit'
 alias :wq='exit'
-alias please="sudo"
+please() { local cmd=$(fc -ln -1); echo "sudo $cmd"; eval "sudo $cmd"; }
 alias clear="clear && printf '\e[3J'"
 alias refresh="source ~/.bashrc"
 alias path='echo $PATH | tr ":" "\n"'
@@ -259,6 +322,27 @@ function b() {
 
     # Actualy cd
     cd "$dir";
+}
+
+# fun
+alias whereami='echo "$(whoami)@$(hostname) in $(pwd)"'
+alias coin='echo $((RANDOM % 2)) | sed "s/0/heads/ ; s/1/tails/"'
+alias d6='echo $((RANDOM % 6 + 1))'
+alias d20='echo $((RANDOM % 20 + 1))'
+
+# notes
+note() {
+  local dir="$HOME/Obsidian/Quicknotes"
+  local file="$dir/$(date +%Y-%m-%d_%H%M%S).md"
+  mkdir -p "$dir"
+  echo "# $(date +%Y-%m-%d\ %H:%M:%S)" > "$file"
+  echo "" >> "$file"
+  if [ $# -eq 0 ]; then
+    ${EDITOR} "$file"
+  else
+    echo "$*" >> "$file"
+    echo "saved: $file"
+  fi
 }
 
 # wikipedia
