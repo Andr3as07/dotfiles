@@ -11,6 +11,7 @@ if [ -x "/opt/homebrew/bin/brew" ] ; then
     export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 fi
 
+autoload -Uz compinit
 compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
 
 export CLICOLOR=1
