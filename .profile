@@ -17,7 +17,8 @@ if [ -d "$HOME/.cargo/bin" ] ; then
     PATH="$HOME/.cargo/bin:$PATH"
 fi
 
-export EDITOR="/usr/bin/nvim"
+export EDITOR=nvim
+export VISUAL=nvim
 
 # Cleanup
 
