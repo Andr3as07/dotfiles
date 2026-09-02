@@ -6,6 +6,10 @@ bindkey -s '\ex' '^e)^a $(^a'
 bindkey '\e[1;3D' backward-word
 bindkey '\e[1;3C' forward-word
 
+## make ctrl-left and ctrl-right jump over words:
+bindkey '\e[1;5D' backward-word
+bindkey '\e[1;5C' forward-word
+
 ## make del-key work for stupid systems:
 bindkey '\e[3~' delete-char
 
