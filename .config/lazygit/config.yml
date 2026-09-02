@@ -12,9 +12,9 @@ gui:
   showDivergenceFromBaseBranch: arrowAndNumber
   filterMode: fuzzy
 git:
-  pagers:
+  diffRenderers:
     - colorArg: always
-      pager: diff-so-fancy
+      command: diff-so-fancy
   commitPrefix:
     - pattern: "^(bugfix|fix|bug|hotfix)/(\\w+)/.+"
       replace: 'fix($2): '
