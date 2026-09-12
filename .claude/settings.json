@@ -39,7 +39,7 @@
     ]
   },
   "worktree": {
-      "bgIsolation": "none"
+    "bgIsolation": "none"
   },
   "enableArtifact": false,
   "statusLine": {
