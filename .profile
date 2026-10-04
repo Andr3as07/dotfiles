@@ -66,3 +66,6 @@ alias wget="wget --hsts-file=\"$XDG_CACHE_HOME/wget-hsts\""
 # Added by Toolbox App
 export PATH="$PATH:${XDG_DATA_HOME:-$HOME/.local/share}/JetBrains/Toolbox/scripts"
 
+# Private, untracked overrides (secrets, machine-specific env)
+if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/sh/.profile-private" ]; then . "${XDG_CONFIG_HOME:-$HOME/.config}/sh/.profile-private"; fi
+

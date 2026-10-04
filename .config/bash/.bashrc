@@ -45,6 +45,10 @@ eval "$(thefuck --alias)"
 # FIXME: This has some problems if we connect with ssh
 # bind "\"\C-f\": \"fuck\""
 
+# Private, untracked overrides
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/sh/.sh-private" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/sh/.sh-private"
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/bash/.bashrc-private" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/bash/.bashrc-private"
+
 # zoxide must be initialized last (its doctor warns otherwise)
 export _ZO_DOCTOR=0
 eval "$(zoxide init --cmd cd bash)"

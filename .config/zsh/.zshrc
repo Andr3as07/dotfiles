@@ -66,6 +66,10 @@ source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 eval "$(atuin init zsh)"
 
+# Private, untracked overrides
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/sh/.sh-private" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/sh/.sh-private"
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/.zshrc-private" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/.zshrc-private"
+
 # zoxide must be initialized last (its doctor warns otherwise)
 export _ZO_DOCTOR=0
 eval "$(zoxide init --cmd cd zsh)"
