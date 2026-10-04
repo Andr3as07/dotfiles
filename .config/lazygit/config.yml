@@ -31,3 +31,10 @@ git:
     - pattern: "^(main|master)"
       replace: 'WIP'
 notARepository: 'quit'
+customCommands:
+  - key: '<f5>'
+    context: 'global'
+    command: 'git pull --rebase'
+    description: 'Pull with rebase'
+    loadingText: 'Pulling with rebase...'
+    output: log
