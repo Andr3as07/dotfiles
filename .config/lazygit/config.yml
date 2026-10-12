@@ -1,16 +1,17 @@
 gui:
-  useHunkModeInStagingView: false
+  useHunkModeInDiffView: false
   showRandomTip: false
   nerdFontsVersion: "3"
-  branchColorPatterns:
-    '^feat(ure)?/': '#4493F8'
-    '^task/': '#D29922'
-    '^(bugfix|bug|fix|hotfix)/': '#F85149'
-    '^(main|master)': '#3FB950'
-    '^release/': '#00E6C4'
-    '^dependabot/': '#0366d6'
   showDivergenceFromBaseBranch: arrowAndNumber
   filterMode: fuzzy
+  theme:
+    branchColorPatterns:
+      '^feat(ure)?/': '#4493F8'
+      '^task/': '#D29922'
+      '^(bugfix|bug|fix|hotfix)/': '#F85149'
+      '^(main|master)': '#3FB950'
+      '^release/': '#00E6C4'
+      '^dependabot/': '#0366d6'
 git:
   diffRenderers:
     - colorArg: always
