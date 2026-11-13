@@ -42,9 +42,6 @@ alias phpl="phplh > /dev/null"
 # ps
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 
-# File Searching
-alias f="find . -type f -iname"
-
 # python
 alias py="python3"
 
