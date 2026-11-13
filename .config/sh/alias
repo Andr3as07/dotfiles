@@ -296,8 +296,13 @@ if command -v docker > /dev/null; then
     alias dcu="dc up"
 fi
 
+# Kubernetes
 if command -v kubectl > /dev/null; then
-    alias k="kubectl"
+    alias k='kubectl'
+    if [ -n "$BASH_VERSION" ]; then
+        source <(kubectl completion bash)
+        complete -o default -F __start_kubectl k
+    fi
 fi
 
 # Claude
