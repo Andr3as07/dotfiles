@@ -161,7 +161,7 @@ genpass() { tr -dc 'A-Za-z0-9!@#$%^&*' < /dev/urandom | head -c "${1:-20}"; echo
 decolor() { sed 's/\x1b\[[0-9;]*m//g'; }
 notify() { "$@"; notify-send "Done" "$* finished"; }
 diffc() { diff <($1) <($2); }
-trash() { mv "$@" ~/.local/share/Trash/files/; }
+trash() { gio trash "$@"; }
 swap() { mv "$1" /tmp/_swap_tmp && mv "$2" "$1" && mv /tmp/_swap_tmp "$2"; }
 around() { grep -C "${2:-2}" "$1"; }
 scratch() { ${EDITOR} /tmp/scratch.${1:-txt}; }
