@@ -18,6 +18,24 @@ eval "$(starship init bash)"
 # Alias
 source $XDG_CONFIG_HOME/sh/alias
 
+# alias-finder: list aliases that could replace the start of a command, best match first
+alias-finder() {
+  local cmd="$*" name value
+  for name in "${!BASH_ALIASES[@]}"; do
+    value=${BASH_ALIASES[$name]%" "}
+    [[ ${#value} -gt ${#name} && ( $cmd == "$value" || $cmd == "$value "* ) ]] &&
+      printf "%s\t%s='%s'\n" "${#value}" "$name" "$value"
+  done | sort -rn | cut -f2-
+}
+# Hint the best alias before running a typed command
+_alias_finder_hint() {
+  local hit
+  hit=$(alias-finder "$1" | head -1)
+  [ -n "$hit" ] && printf '\e[2malias: %s\e[0m\n' "$hit"
+  return 0
+}
+preexec_functions+=(_alias_finder_hint)
+
 # Colors
 # source $XDG_CONFIG_HOME/sh/color
 
