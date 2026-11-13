@@ -75,16 +75,17 @@ alias mi="make install"
 
 # tmux
 alias t="tmux"
-alias ta="tmux attach -t "
 alias tl="tmux ls"
 
+# Attach to a session, or switch to it when already inside tmux
+_tgo() { if [ -n "$TMUX" ]; then tmux switch-client -t "$1"; else tmux attach-session -t "$1"; fi; }
+ta() { _tgo "$1"; }
+
 tdir() {
-  local session_name=$(basename "$PWD" | tr '[:upper:]' '[:lower:]')
-  if tmux has-session -t "$session_name" 2>/dev/null; then
-    tmux attach-session -t "$session_name"
-  else
-    tmux new-session -s "$session_name"
-  fi
+  # tmux turns '.' and ':' into '_' in session names
+  local session_name=$(basename "$PWD" | tr '[:upper:]' '[:lower:]' | tr '.:' '__')
+  tmux has-session -t "=$session_name" 2>/dev/null || tmux new-session -d -s "$session_name" -c "$PWD"
+  _tgo "$session_name"
 }
 
 # title
