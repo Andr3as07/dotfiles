@@ -97,6 +97,13 @@ tz() { cd "$@" && tdir; }
 # Go back to the main session
 alias tm='ta main'
 
+# Kill a session (the current one if no name given), moving to main first
+tk() {
+  local s=${1:-$(tmux display -p '#S')}
+  [ -n "$TMUX" ] && [ "$s" = "$(tmux display -p '#S')" ] && tmux switch-client -t main
+  tmux kill-session -t "=$s"
+}
+
 # title
 title() { printf "\033]0;$*\007"; }
 
