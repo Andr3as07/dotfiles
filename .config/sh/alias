@@ -145,7 +145,6 @@ alias j="jobs -l"
 
 # find
 function f { find $1 -name '*'$2'*' | sort; }
-function fh { find . -name '*'$1'*' | sort; }
 
 # fd
 if command -v fd > /dev/null; then
