@@ -94,6 +94,9 @@ ts() { local s; s=$(tmux ls -F '#S' 2>/dev/null | fzf --height 40% --reverse) &&
 # Jump to a project and open its session in one step
 tz() { cd "$@" && tdir; }
 
+# Go back to the main session
+alias tm='ta main'
+
 # title
 title() { printf "\033]0;$*\007"; }
 
