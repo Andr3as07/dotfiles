@@ -88,6 +88,9 @@ tdir() {
   _tgo "$session_name"
 }
 
+# Fuzzy-pick a session and switch to it
+ts() { local s; s=$(tmux ls -F '#S' 2>/dev/null | fzf --height 40% --reverse) && _tgo "$s"; }
+
 # title
 title() { printf "\033]0;$*\007"; }
 
