@@ -316,7 +316,6 @@ fi
 
 # SystemD
 alias sc='systemctl'
-alias sysctl='systemctl'
 
 # Shell
 alias :q='exit'
