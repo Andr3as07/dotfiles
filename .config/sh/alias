@@ -104,6 +104,10 @@ tk() {
   tmux kill-session -t "=$s"
 }
 
+# Tab-complete session names for ta and tk
+_tsess() { COMPREPLY=($(compgen -W "$(tmux ls -F '#S' 2>/dev/null)" -- "$2")); }
+complete -F _tsess ta tk
+
 # title
 title() { printf "\033]0;$*\007"; }
 
