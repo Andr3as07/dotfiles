@@ -326,6 +326,7 @@ alias sc='systemctl'
 # Shell
 alias :q='exit'
 alias :wq='exit'
+alias v='$EDITOR'
 please() { local cmd=$(fc -ln -1); echo "sudo $cmd"; eval "sudo $cmd"; }
 alias clear="clear && printf '\e[3J'"
 alias refresh="source ~/.bashrc"
