@@ -54,6 +54,6 @@ export _ZO_DOCTOR=0
 eval "$(zoxide init --cmd cd bash)"
 
 # Every terminal joins the global "main" tmux session (detach to get a plain shell)
-if [[ $- == *i* && -z $TMUX && -z $SSH_CONNECTION && $TERM_PROGRAM != vscode ]] && command -v tmux >/dev/null; then
+if [[ $- == *i* && -t 1 && -z $TMUX && -z $SSH_CONNECTION && $TERM_PROGRAM != vscode ]] && command -v tmux >/dev/null; then
   tmux new-session -A -s main
 fi
