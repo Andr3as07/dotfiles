@@ -2,3 +2,4 @@
 *-private
 /.config/zsh/.zcompdump
 /.config/nvim/lazy-lock.json
+/.config/zsh/.zsh_history
