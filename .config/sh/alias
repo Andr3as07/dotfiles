@@ -103,6 +103,7 @@ tk() {
 
 # Tab-complete session names for ta and tk
 _tsess() { COMPREPLY=($(compgen -W "$(tmux ls -F '#S' 2>/dev/null)" -- "$2")); }
+[ -n "$ZSH_VERSION" ] && autoload -U +X bashcompinit && bashcompinit
 complete -F _tsess ta tk
 
 # title
