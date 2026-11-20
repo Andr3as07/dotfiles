@@ -238,6 +238,30 @@ if command -v git > /dev/null; then
     alias gcl='git clone'
     function gclcd() { local dir="${2:-$(basename "${1##*:}" .git)}"; git clone "$@" && cd "$dir"; }
 
+    # Clone into ~/git/<host>/<owner>/<repo> (https or git@ URLs).
+    # SSH aliases (Host x / HostName y) map to their real host for the path;
+    # for a real host with aliases, asks which one to use as the remote.
+    gclone() {
+        local url=$1 p=${1#*://}; p=${p#*@}; p=${p/://}; p=${p%.git}
+        local host=${p%%/*} rest=${p#*/}
+        local real=$(ssh -G "$host" 2>/dev/null | awk '$1=="hostname"{print $2}')
+        local dir=~/git/$real/$rest
+        [[ -e $dir ]] && { echo "gclone: $dir already exists" >&2; return 1; }
+        if [[ $real == "$host" ]]; then
+            local a aliases=()
+            # ponytail: reads only ~/.ssh/config, not Include'd files
+            for a in $(awk 'tolower($1)=="host"{for(i=2;i<=NF;i++) if($i!~/[*?!]/) print $i}' ~/.ssh/config); do
+                [[ $a != "$host" && $(ssh -G "$a" 2>/dev/null | awk '$1=="hostname"{print $2}') == "$host" ]] && aliases+=("$a")
+            done
+            if (( ${#aliases[@]} )); then
+                local PS3="Remote host for $rest: " c
+                select c in "$host" "${aliases[@]}"; do [[ -n $c ]] && break; done
+                [[ $c != "$host" ]] && url="git@$c:$rest.git"
+            fi
+        fi
+        command mkdir -p "${dir%/*}" && git clone "$url" "$dir" && cd "$dir"
+    }
+
     alias gclean='git clean -fd'
 
     alias ghm='cd "$(git rev-parse --show-toplevel)"' # Git home
