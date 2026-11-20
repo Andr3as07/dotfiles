@@ -102,13 +102,22 @@ function mkcd() { mkdir -p "$1" && cd "$1"; }
 alias mv="mv -iv"
 
 # chmod & chown
-alias chmod="chmod -c"
-alias -- +r="chmod -c +r"
-alias -- -r="chmod -c -r"
-alias -- +x="chmod -c +x"
-alias -- -x="chmod -c -x"
+# -c (report changes) is GNU-only; BSD/macOS falls back to -v
+if chmod --version > /dev/null 2>&1; then
+    alias chmod="chmod -c"
+else
+    alias chmod="chmod -v"
+fi
+alias -- +r="chmod +r"
+alias -- -r="chmod -r"
+alias -- +x="chmod +x"
+alias -- -x="chmod -x"
 
-alias chown="chown -c"
+if chown --version > /dev/null 2>&1; then
+    alias chown="chown -c"
+else
+    alias chown="chown -v"
+fi
 
 # pstree
 alias pstree="pstree -A"
